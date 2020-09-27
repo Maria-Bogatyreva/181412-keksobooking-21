@@ -1,6 +1,9 @@
 'use strict';
 const minY = 130;
 const maxY = 630;
+const PIN_HEIGHT = 40;
+const PIN_WIDTH = 40;
+const amountPins = 8;
 const checkinOptions = ['12:00', '13:00', '14:00'];
 const checkoutOptions = ['12:00', '13:00', '14:00'];
 const featuresList = [
@@ -17,6 +20,13 @@ const photosList = [
   "http://o0.github.io/assets/images/tokyo/hotel3.jpg"
 ];
 const typeList = ['palace', 'flat', 'house', 'bungalow'];
+
+const similarListPins = document.querySelector('.map__pins');
+const minX = similarListPins.getBoundingClientRect().x;
+const maxX = similarListPins.getBoundingClientRect().width;
+
+//Переключение карты из неактивного состояние в активное
+document.querySelector('.map').classList.remove('map--faded');
 
 //Функция для получения случайного числа в указанном диапазоне
 var getRandomNumber = function (min, max) {
@@ -39,11 +49,27 @@ var getRandomArray = function (primaryArray) {
   }
   return randomArray;
 }
+//Клонирование метки
+var getPins = function (pins) {
+  var similarPinTemplate = document.querySelector('#pin')
+    .content
+    .querySelector('.map__pin');
 
-var getPins = function () {
+  var pinElement = similarPinTemplate.cloneNode(true);
+
+  pinElement.style.left = pins.location.x - (PIN_WIDTH / 2) + 'px';
+  pinElement.top = pins.location.y - PIN_HEIGHT + 'px';
+  pinElement.querySelector('.img').src = pins.author.avatar;
+  pinElement.querySelector('.img').alt = pins.autor.offer.title;
+
+  return pinElement;
+}
+
+//Функция для генерации массива объектов меток
+var generatePins = function (amount) {
   var pinsArray = [];
 
-  for (var i = 0; i < 8; i++) {
+  for (let i = 0; i < amount; i++) {
       pinsArray[i] = {
         "author": {
           "avatar": 'img/avatars/user0' + (i + 1) + '.png'
@@ -62,7 +88,7 @@ var getPins = function () {
             "photos": getRandomArray(photosList)
           },
         "location": {
-            "x": 2,
+            "x": getRandomNumber(minX, maxX),
             "y": getRandomNumber(minY, maxY)
           }
       } //закончился объект
@@ -70,28 +96,6 @@ var getPins = function () {
   return pinsArray;
 }
 
-console.log(getPins());
-/*
-{
-    "author": {
-        "avatar": строка, адрес изображения вида img/avatars/user{{xx}}.png, где {{xx}} это число от 1 до 8 с ведущим нулём. Например, 01, 02 и т. д. Адреса изображений не повторяются
-    },
-    "offer": {
-        "title": 'Уютная студия у метро';
-        "address": '600, 350';
-        "price": 10000;
-        "type": строка с одним из четырёх фиксированных значений: palace, flat, house или bungalow
-        "rooms": 1;
-        "guests": 2;
-        "checkin": строка с одним из трёх фиксированных значений: 12:00, 13:00 или 14:00,
-        "checkout": строка с одним из трёх фиксированных значений: 12:00, 13:00 или 14:00
-        "features": массив строк случайной длины из ниже предложенных: "wifi", "dishwasher", "parking", "washer", "elevator", "conditioner",
-        "description": 'Хорошая квартира-студия для комфортного проживания',
-        "photos": массив строк случайной длины, содержащий адреса фотографий "http://o0.github.io/assets/images/tokyo/hotel1.jpg", "http://o0.github.io/assets/images/tokyo/hotel2.jpg", "http://o0.github.io/assets/images/tokyo/hotel3.jpg"
-    },
-    "location": {
-        "x": случайное число, координата x метки на карте. Значение ограничено размерами блока, в котором перетаскивается метка.
-        "y": случайное число, координата y метки на карте от 130 до 630.
-    }
-}
-*/
+
+
+console.log(generatePins(amountPins));
