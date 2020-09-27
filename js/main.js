@@ -50,17 +50,17 @@ var getRandomArray = function (primaryArray) {
   return randomArray;
 }
 //Клонирование метки
-var getPins = function (pins) {
+var getPins = function (arr) {
   var similarPinTemplate = document.querySelector('#pin')
     .content
     .querySelector('.map__pin');
 
   var pinElement = similarPinTemplate.cloneNode(true);
 
-  pinElement.style.left = pins.location.x - (PIN_WIDTH / 2) + 'px';
-  pinElement.top = pins.location.y - PIN_HEIGHT + 'px';
-  pinElement.querySelector('.img').src = pins.author.avatar;
-  pinElement.querySelector('.img').alt = pins.autor.offer.title;
+  pinElement.style.left = arr.location.x - (PIN_WIDTH / 2) + 'px';
+  pinElement.top = arr.location.y - PIN_HEIGHT + 'px';
+  pinElement.querySelector('img').src = arr.author.avatar;
+  pinElement.querySelector('img').alt = arr.offer.title;
 
   return pinElement;
 }
@@ -91,11 +91,20 @@ var generatePins = function (amount) {
             "x": getRandomNumber(minX, maxX),
             "y": getRandomNumber(minY, maxY)
           }
-      } //закончился объект
-  } //закончился  цикл
+      }
+  }
   return pinsArray;
+};
+ var pins = generatePins(amountPins);
+
+//Функция для добавления меток в карту
+var addPins = function () {
+  var fragment = document.createDocumentFragment();
+
+  for (let i = 0; i < 8; i++ ) {
+    fragment.appendChild(getPins(pins[i]));
+  }
+  similarListPins.appendChild(fragment);
 }
 
-
-
-console.log(generatePins(amountPins));
+addPins();
