@@ -1,8 +1,8 @@
 'use strict';
 const minY = 130;
 const maxY = 630;
-const PIN_HEIGHT = 40;
-const PIN_WIDTH = 40;
+const PIN_HEIGHT = 70;
+const PIN_WIDTH = 50;
 const amountPins = 8;
 const checkinOptions = ['12:00', '13:00', '14:00'];
 const checkoutOptions = ['12:00', '13:00', '14:00'];
@@ -19,7 +19,7 @@ const photosList = [
   "http://o0.github.io/assets/images/tokyo/hotel2.jpg",
   "http://o0.github.io/assets/images/tokyo/hotel3.jpg"
 ];
-const typeList = ['palace', 'flat', 'house', 'bungalow'];
+const typesList = ['palace', 'flat', 'house', 'bungalow'];
 
 const similarListPins = document.querySelector('.map__pins');
 const minX = similarListPins.getBoundingClientRect().x;
@@ -81,7 +81,7 @@ var generatePins = function (amount) {
           "title": 'Уютная студия у метро',
           "address": x + ',' + y,
           "price": 10000,
-          "type": getRandomElement(typeList),
+          "type": getRandomElement(typesList),
           "rooms": 1,
           "guests": 2,
           "checkin": getRandomElement(checkinOptions),
