@@ -30,7 +30,7 @@ const activateMap = function () {
 
 // Функция для получения случайного числа в указанном диапазоне
 const getRandomNumber = function (min, max) {
-  let rand = min - 0.5 + Math.random() * (max - min + 1);
+  const rand = min - 0.5 + Math.random() * (max - min + 1);
   return Math.round(rand);
 };
 
@@ -81,8 +81,8 @@ const generatePins = function (amount) {
   const pinsList = [];
 
   for (let i = 1; i <= amount; i++) {
-    let x = getRandomNumber(MIN_X, MAX_X);
-    let y = getRandomNumber(MIN_Y, MAX_Y);
+    const x = getRandomNumber(MIN_X, MAX_X);
+    const y = getRandomNumber(MIN_Y, MAX_Y);
 
     pinsList.push({
       "author": {
