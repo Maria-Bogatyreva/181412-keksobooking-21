@@ -50,17 +50,17 @@ var getRandomArray = function (primaryArray) {
   return randomArray;
 }
 //Клонирование метки
-var getPins = function (arr) {
+var getPin = function (templateObject) {
   var similarPinTemplate = document.querySelector('#pin')
     .content
     .querySelector('.map__pin');
 
   var pinElement = similarPinTemplate.cloneNode(true);
 
-  pinElement.style.left = arr.location.x - (PIN_WIDTH / 2) + 'px';
-  pinElement.top = arr.location.y - PIN_HEIGHT + 'px';
-  pinElement.querySelector('img').src = arr.author.avatar;
-  pinElement.querySelector('img').alt = arr.offer.title;
+  pinElement.style.left = templateObject.location.x - (PIN_WIDTH / 2) + 'px';
+  pinElement.style.top = templateObject.location.y - PIN_HEIGHT + 'px';
+  pinElement.querySelector('img').src = templateObject.author.avatar;
+  pinElement.querySelector('img').alt = templateObject.offer.title;
 
   return pinElement;
 }
@@ -69,40 +69,45 @@ var getPins = function (arr) {
 var generatePins = function (amount) {
   var pinsArray = [];
 
-  for (let i = 0; i < amount; i++) {
-      pinsArray[i] = {
-        "author": {
-          "avatar": 'img/avatars/user0' + (i + 1) + '.png'
-         },
-        "offer": {
-            "title": 'Уютная студия у метро',
-            "address": '600, 350',
-            "price": 10000,
-            "type": getRandomElement(typeList),
-            "rooms": 1,
-            "guests": 2,
-            "checkin": getRandomElement(checkinOptions),
-            "checkout": getRandomElement(checkoutOptions),
-            "features": getRandomArray(featuresList),
-            "description": 'Хорошая квартира-студия для комфортного проживания',
-            "photos": getRandomArray(photosList)
-          },
-        "location": {
-            "x": getRandomNumber(minX, maxX),
-            "y": getRandomNumber(minY, maxY)
-          }
-      }
+  for (let i = 1; i <= amount; i++) {
+    let x = getRandomNumber(minX, maxX);
+    let y = getRandomNumber(minY, maxY);
+
+    pinsArray.push({
+      "author": {
+        "avatar": 'img/avatars/user0' + i + '.png'
+       },
+      "offer": {
+          "title": 'Уютная студия у метро',
+          "address": x + ',' + y,
+          "price": 10000,
+          "type": getRandomElement(typeList),
+          "rooms": 1,
+          "guests": 2,
+          "checkin": getRandomElement(checkinOptions),
+          "checkout": getRandomElement(checkoutOptions),
+          "features": getRandomArray(featuresList),
+          "description": 'Хорошая квартира-студия для комфортного проживания',
+          "photos": getRandomArray(photosList)
+        },
+      "location": {
+          "x": x,
+          "y": y
+        }
+    });
   }
   return pinsArray;
+
 };
  var pins = generatePins(amountPins);
+ console.log(pins);
 
 //Функция для добавления меток в карту
 var addPins = function () {
   var fragment = document.createDocumentFragment();
 
   for (let i = 0; i < 8; i++ ) {
-    fragment.appendChild(getPins(pins[i]));
+    fragment.appendChild(getPin(pins[i]));
   }
   similarListPins.appendChild(fragment);
 }
