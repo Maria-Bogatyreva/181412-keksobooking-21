@@ -23,47 +23,48 @@ const photosList = [
 ];
 const typesList = ['palace', 'flat', 'house', 'bungalow'];
 
-//Функция для переключения карты из неактивного состояние в активное
+// Функция для переключения карты из неактивного состояние в активное
 const activateMap = function () {
   document.querySelector('.map').classList.remove('map--faded');
 };
 
-//Функция для получения случайного числа в указанном диапазоне
+// Функция для получения случайного числа в указанном диапазоне
 const getRandomNumber = function (min, max) {
   let rand = min - 0.5 + Math.random() * (max - min + 1);
   return Math.round(rand);
-}
+};
 
-//Функция для получения случайного элемента массива
+// Функция для получения случайного элемента массива
 const getRandomElement = function (elements) {
   return elements[Math.floor(Math.random() * elements.length)];
-}
+};
 
-//Функция для получения массива случайной длины
+// Функция для получения массива случайной длины
 const getRandomArray = function (primaryElements) {
-  //Перетасовываем исходный массив
-    let j, temp;
-    for(let i = primaryElements.length - 1; i > 0; i--){
-      j = Math.floor(Math.random()*(i + 1));
-      temp = primaryElements[i];
-      primaryElements[i] = primaryElements[j];
-      primaryElements[j] = temp;
-    }
-  //Отрезаем кусок случайной длины
-    const randomLengthElements = [];
-    const randomLength = Math.floor(Math.random() * primaryElements.length);
+// Перетасовываем исходный массив
+  let j;
+  let temp;
+  for (let i = primaryElements.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    temp = primaryElements[i];
+    primaryElements[i] = primaryElements[j];
+    primaryElements[j] = temp;
+  }
+  // Отрезаем кусок случайной длины
+  const randomLengthElements = [];
+  const randomLength = Math.floor(Math.random() * primaryElements.length);
 
-    for (let i = 0; i <= randomLength; i++ ) {
+  for (let i = 0; i <= randomLength; i++) {
     randomLengthElements[i] = primaryElements[i];
   }
   return randomLengthElements;
-}
+};
 
-//Клонирование метки
+// Клонирование метки
 const getPin = function (templateObject) {
   const similarPinTemplate = document.querySelector('#pin')
-    .content
-    .querySelector('.map__pin');
+  .content
+  .querySelector('.map__pin');
 
   const pinElement = similarPinTemplate.cloneNode(true);
 
@@ -73,45 +74,44 @@ const getPin = function (templateObject) {
   pinElement.querySelector('img').alt = templateObject.offer.title;
 
   return pinElement;
-}
+};
 
-//Функция для генерации массива объектов меток
+// Функция для генерации массива объектов меток
 const generatePins = function (amount) {
-  let pins = [];
+  const pinsList = [];
 
   for (let i = 1; i <= amount; i++) {
     let x = getRandomNumber(MIN_X, MAX_X);
     let y = getRandomNumber(MIN_Y, MAX_Y);
 
-    pins.push({
+    pinsList.push({
       "author": {
         "avatar": 'img/avatars/user0' + i + '.png'
-       },
+      },
       "offer": {
-          "title": 'Уютная студия у метро',
-          "address": x + ',' + y,
-          "price": 10000,
-          "type": getRandomElement(typesList),
-          "rooms": 1,
-          "guests": 2,
-          "checkin": getRandomElement(checkinOptions),
-          "checkout": getRandomElement(checkoutOptions),
-          "features": getRandomArray(featuresList),
-          "description": 'Хорошая квартира-студия для комфортного проживания',
-          "photos": getRandomArray(photosList)
-        },
+        "title": 'Уютная студия у метро',
+        "address": x + ',' + y,
+        "price": 10000,
+        "type": getRandomElement(typesList),
+        "rooms": 1,
+        "guests": 2,
+        "checkin": getRandomElement(checkinOptions),
+        "checkout": getRandomElement(checkoutOptions),
+        "features": getRandomArray(featuresList),
+        "description": 'Хорошая квартира-студия для комфортного проживания',
+        "photos": getRandomArray(photosList)
+      },
       "location": {
-          "x": x,
-          "y": y
-        }
+        "x": x,
+        "y": y
+      }
     });
   }
-  return pins;
+  return pinsList;
 };
- const pins = generatePins(AMOUNT_PINS);
- console.log(pins);
+const pins = generatePins(AMOUNT_PINS);
 
-//Функция для добавления меток в карту
+// Функция для добавления меток на карту
 const addPins = function (arrPins) {
   const similarListPins = document.querySelector('.map__pins');
   const fragment = document.createDocumentFragment();
@@ -123,6 +123,6 @@ const addPins = function (arrPins) {
   similarListPins.appendChild(fragment);
 
   activateMap();
-}
+};
 
 addPins(pins);
