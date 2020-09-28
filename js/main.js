@@ -24,23 +24,23 @@ const photosList = [
 const typesList = ['palace', 'flat', 'house', 'bungalow'];
 
 //Функция для переключения карты из неактивного состояние в активное
-var activateMap = function () {
+const activateMap = function () {
   document.querySelector('.map').classList.remove('map--faded');
 };
 
 //Функция для получения случайного числа в указанном диапазоне
-var getRandomNumber = function (min, max) {
+const getRandomNumber = function (min, max) {
   let rand = min - 0.5 + Math.random() * (max - min + 1);
   return Math.round(rand);
 }
 
 //Функция для получения случайного элемента массива
-var getRandomElement = function (elements) {
+const getRandomElement = function (elements) {
   return elements[Math.floor(Math.random() * elements.length)];
 }
 
 //Функция для получения массива случайной длины
-var getRandomArray = function (primaryElements) {
+const getRandomArray = function (primaryElements) {
   //Перетасовываем исходный массив
     let j, temp;
     for(let i = primaryElements.length - 1; i > 0; i--){
@@ -50,8 +50,8 @@ var getRandomArray = function (primaryElements) {
       primaryElements[j] = temp;
     }
   //Отрезаем кусок случайной длины
-    var randomLengthElements = [];
-    var randomLength = Math.floor(Math.random() * primaryElements.length);
+    const randomLengthElements = [];
+    const randomLength = Math.floor(Math.random() * primaryElements.length);
 
     for (let i = 0; i <= randomLength; i++ ) {
     randomLengthElements[i] = primaryElements[i];
@@ -60,12 +60,12 @@ var getRandomArray = function (primaryElements) {
 }
 
 //Клонирование метки
-var getPin = function (templateObject) {
-  var similarPinTemplate = document.querySelector('#pin')
+const getPin = function (templateObject) {
+  const similarPinTemplate = document.querySelector('#pin')
     .content
     .querySelector('.map__pin');
 
-  var pinElement = similarPinTemplate.cloneNode(true);
+  const pinElement = similarPinTemplate.cloneNode(true);
 
   pinElement.style.left = templateObject.location.x - (PIN_WIDTH / 2) + 'px';
   pinElement.style.top = templateObject.location.y - PIN_HEIGHT + 'px';
@@ -75,10 +75,9 @@ var getPin = function (templateObject) {
   return pinElement;
 }
 
-
 //Функция для генерации массива объектов меток
-var generatePins = function (amount) {
-  var pinsArray = [];
+const generatePins = function (amount) {
+  const pinsArray = [];
 
   for (let i = 1; i <= amount; i++) {
     let x = getRandomNumber(MIN_X, MAX_X);
@@ -109,15 +108,15 @@ var generatePins = function (amount) {
   }
   return pinsArray;
 };
- var pins = generatePins(AMOUNT_PINS);
+ const pins = generatePins(AMOUNT_PINS);
  console.log(pins);
 
 //Функция для добавления меток в карту
-var addPins = function () {
+const addPins = function (arrPins) {
   const similarListPins = document.querySelector('.map__pins');
-  var fragment = document.createDocumentFragment();
+  const fragment = document.createDocumentFragment();
 
-  pins.forEach(function (element) {
+  arrPins.forEach(function (element) {
     fragment.appendChild(getPin(element));
   });
 
@@ -126,4 +125,4 @@ var addPins = function () {
   activateMap();
 }
 
-addPins();
+addPins(pins);
