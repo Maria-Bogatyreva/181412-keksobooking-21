@@ -1,9 +1,9 @@
 'use strict';
-const minY = 130;
-const maxY = 630;
+const MIN_Y = 130;
+const MAX_Y = 630;
 const PIN_HEIGHT = 70;
 const PIN_WIDTH = 50;
-const amountPins = 8;
+const AMOUNT_PINS = 8;
 const checkinOptions = ['12:00', '13:00', '14:00'];
 const checkoutOptions = ['12:00', '13:00', '14:00'];
 const featuresList = [
@@ -71,7 +71,7 @@ var generatePins = function (amount) {
 
   for (let i = 1; i <= amount; i++) {
     let x = getRandomNumber(minX, maxX);
-    let y = getRandomNumber(minY, maxY);
+    let y = getRandomNumber(MIN_Y, MAX_Y);
 
     pinsArray.push({
       "author": {
@@ -99,7 +99,7 @@ var generatePins = function (amount) {
   return pinsArray;
 
 };
- var pins = generatePins(amountPins);
+ var pins = generatePins(AMOUNT_PINS);
  console.log(pins);
 
 //Функция для добавления меток в карту
