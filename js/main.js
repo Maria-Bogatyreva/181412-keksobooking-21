@@ -40,15 +40,25 @@ var getRandomElement = function (elements) {
 }
 
 //Функция для получения массива случайной длины
-var getRandomArray = function (primaryArray) {
-  var randomArray = [];
-  var randomLength = Math.floor(Math.random() * primaryArray.length);
+var getRandomArray = function (primaryElements) {
+  //Перетасовываем исходный массив
+    let j, temp;
+    for(let i = primaryElements.length - 1; i > 0; i--){
+      j = Math.floor(Math.random()*(i + 1));
+      temp = primaryElements[i];
+      primaryElements[i] = primaryElements[j];
+      primaryElements[j] = temp;
+    }
+  //Отрезаем кусок случайной длины
+    var randomLengthElements = [];
+    var randomLength = Math.floor(Math.random() * primaryElements.length);
 
-  for (var i = 0; i <= randomLength; i++ ) {
-    randomArray[i] = primaryArray[i];
+    for (let i = 0; i <= randomLength; i++ ) {
+    randomLengthElements[i] = primaryElements[i];
   }
-  return randomArray;
+  return randomLengthElements;
 }
+
 //Клонирование метки
 var getPin = function (templateObject) {
   var similarPinTemplate = document.querySelector('#pin')
@@ -64,6 +74,7 @@ var getPin = function (templateObject) {
 
   return pinElement;
 }
+
 
 //Функция для генерации массива объектов меток
 var generatePins = function (amount) {
@@ -97,10 +108,9 @@ var generatePins = function (amount) {
     });
   }
   return pinsArray;
-
 };
  var pins = generatePins(AMOUNT_PINS);
- //console.log(pins);
+ console.log(pins);
 
 //Функция для добавления меток в карту
 var addPins = function () {
