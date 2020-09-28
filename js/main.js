@@ -25,8 +25,10 @@ const similarListPins = document.querySelector('.map__pins');
 const minX = similarListPins.getBoundingClientRect().x;
 const maxX = similarListPins.getBoundingClientRect().width;
 
-//Переключение карты из неактивного состояние в активное
-document.querySelector('.map').classList.remove('map--faded');
+//Функция для переключения карты из неактивного состояние в активное
+var activateMap = function () {
+  document.querySelector('.map').classList.remove('map--faded');
+};
 
 //Функция для получения случайного числа в указанном диапазоне
 var getRandomNumber = function (min, max) {
@@ -110,6 +112,8 @@ var addPins = function () {
     fragment.appendChild(getPin(pins[i]));
   }
   similarListPins.appendChild(fragment);
+
+  activateMap();
 }
 
 addPins();
