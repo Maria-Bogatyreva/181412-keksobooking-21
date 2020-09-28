@@ -100,16 +100,17 @@ var generatePins = function (amount) {
 
 };
  var pins = generatePins(AMOUNT_PINS);
- console.log(pins);
+ //console.log(pins);
 
 //Функция для добавления меток в карту
 var addPins = function () {
   const similarListPins = document.querySelector('.map__pins');
   var fragment = document.createDocumentFragment();
 
-  for (let i = 0; i < 8; i++ ) {
-    fragment.appendChild(getPin(pins[i]));
-  }
+  pins.forEach(function (element) {
+    fragment.appendChild(getPin(element));
+  });
+
   similarListPins.appendChild(fragment);
 
   activateMap();
