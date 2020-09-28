@@ -1,6 +1,8 @@
 'use strict';
 const MIN_Y = 130;
 const MAX_Y = 630;
+const MIN_X = 0;
+const MAX_X = 1200;
 const PIN_HEIGHT = 70;
 const PIN_WIDTH = 50;
 const AMOUNT_PINS = 8;
@@ -20,10 +22,6 @@ const photosList = [
   "http://o0.github.io/assets/images/tokyo/hotel3.jpg"
 ];
 const typesList = ['palace', 'flat', 'house', 'bungalow'];
-
-const similarListPins = document.querySelector('.map__pins');
-const minX = similarListPins.getBoundingClientRect().x;
-const maxX = similarListPins.getBoundingClientRect().width;
 
 //Функция для переключения карты из неактивного состояние в активное
 var activateMap = function () {
@@ -72,7 +70,7 @@ var generatePins = function (amount) {
   var pinsArray = [];
 
   for (let i = 1; i <= amount; i++) {
-    let x = getRandomNumber(minX, maxX);
+    let x = getRandomNumber(MIN_X, MAX_X);
     let y = getRandomNumber(MIN_Y, MAX_Y);
 
     pinsArray.push({
@@ -106,6 +104,7 @@ var generatePins = function (amount) {
 
 //Функция для добавления меток в карту
 var addPins = function () {
+  const similarListPins = document.querySelector('.map__pins');
   var fragment = document.createDocumentFragment();
 
   for (let i = 0; i < 8; i++ ) {
