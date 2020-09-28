@@ -77,13 +77,13 @@ const getPin = function (templateObject) {
 
 //Функция для генерации массива объектов меток
 const generatePins = function (amount) {
-  const pinsArray = [];
+  let pins = [];
 
   for (let i = 1; i <= amount; i++) {
     let x = getRandomNumber(MIN_X, MAX_X);
     let y = getRandomNumber(MIN_Y, MAX_Y);
 
-    pinsArray.push({
+    pins.push({
       "author": {
         "avatar": 'img/avatars/user0' + i + '.png'
        },
@@ -106,7 +106,7 @@ const generatePins = function (amount) {
         }
     });
   }
-  return pinsArray;
+  return pins;
 };
  const pins = generatePins(AMOUNT_PINS);
  console.log(pins);
