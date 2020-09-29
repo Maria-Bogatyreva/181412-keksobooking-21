@@ -109,7 +109,6 @@ const generatePins = function (amount) {
   }
   return pinsList;
 };
-const pins = generatePins(AMOUNT_PINS);
 
 // Функция для добавления меток на карту
 const addPins = function (preparedPins) {
@@ -123,4 +122,5 @@ const addPins = function (preparedPins) {
   similarListPins.appendChild(fragment);
 };
 activateMap(); // Функция активирует карту
+const pins = generatePins(AMOUNT_PINS);
 addPins(pins); // Функция добавляет пины на карту
