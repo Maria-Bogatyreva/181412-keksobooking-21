@@ -112,17 +112,15 @@ const generatePins = function (amount) {
 const pins = generatePins(AMOUNT_PINS);
 
 // Функция для добавления меток на карту
-const addPins = function (arrPins) {
+const addPins = function (preparedPins) {
   const similarListPins = document.querySelector('.map__pins');
   const fragment = document.createDocumentFragment();
 
-  arrPins.forEach(function (element) {
+  preparedPins.forEach(function (element) {
     fragment.appendChild(getPin(element));
   });
 
   similarListPins.appendChild(fragment);
-
-  activateMap();
 };
-
-addPins(pins);
+activateMap(); // Функция активирует карту
+addPins(pins); // Функция добавляет пины на карту
