@@ -41,23 +41,19 @@ const getRandomElement = function (elements) {
 
 // Функция для получения массива случайной длины
 const getRandomArray = function (primaryElements) {
-// Перетасовываем исходный массив
+  // Клонируем исходный массив
+  const copyElements = primaryElements.slice();
+  // Перетасовываем клон-массив
   let j;
   let temp;
-  for (let i = primaryElements.length - 1; i > 0; i--) {
+  for (let i = copyElements.length - 1; i > 0; i--) {
     j = Math.floor(Math.random() * (i + 1));
-    temp = primaryElements[i];
-    primaryElements[i] = primaryElements[j];
-    primaryElements[j] = temp;
+    temp = copyElements[i];
+    copyElements[i] = copyElements[j];
+    copyElements[j] = temp;
   }
-  // Отрезаем кусок случайной длины
-  const randomLengthElements = [];
-  const randomLength = Math.floor(Math.random() * primaryElements.length);
-
-  for (let i = 0; i <= randomLength; i++) {
-    randomLengthElements[i] = primaryElements[i];
-  }
-  return randomLengthElements;
+  //Отрезаем кусок случайной длины
+  return copyElements.slice(getRandomNumber(0, copyElements.length));
 };
 
 // Клонирование метки
