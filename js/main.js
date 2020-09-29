@@ -52,7 +52,7 @@ const getRandomArray = function (primaryElements) {
     copyElements[i] = copyElements[j];
     copyElements[j] = temp;
   }
-  //Отрезаем кусок случайной длины
+  //  Отрезаем кусок случайной длины
   return copyElements.slice(getRandomNumber(0, copyElements.length));
 };
 
