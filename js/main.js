@@ -161,6 +161,20 @@ const getCard = function (templateCard) {
   };
   photosBlock.appendChild(fragmentPhotos);
 
+//Для добавления удобств
+  const featuresBlock = cardElement.querySelector('.popup__features'); //Блок с преимуществами
+  const featuresItem = featuresBlock.querySelector('.popup__feature'); //Преимущество
+  const features = templateCard.offer.features; //Массив вставляемых удобств
+  featuresBlock.innerHTML = '';
+  const fragmentFeatures = document.createDocumentFragment();
+
+  for (let i = 0; i < features.length; i++) {
+    let copyFeaturesItem = featuresItem.cloneNode(true);
+    copyFeaturesItem.classList.add('popup__feature--' + templateCard.offer.features[i]);
+    fragmentFeatures.appendChild(copyFeaturesItem);
+  }
+  featuresBlock.appendChild(fragmentFeatures);
+
 
   map.insertBefore(cardElement, mapFiltersContainer);
 
