@@ -53,7 +53,7 @@ const getRandomArray = function (primaryElements) {
     copyElements[j] = temp;
   }
   //  Отрезаем кусок случайной длины
-  return copyElements.slice(getRandomNumber(0, copyElements.length));
+  return copyElements.slice(getRandomNumber(0, copyElements.length - 1));
 };
 
 // Клонирование метки
@@ -89,7 +89,7 @@ const generatePins = function (amount) {
         "address": x + ',' + y,
         "price": 10000,
         "type": getRandomElement(typesList),
-        "rooms": 1,
+        "rooms": 2,
         "guests": 2,
         "checkin": getRandomElement(checkinOptions),
         "checkout": getRandomElement(checkoutOptions),
@@ -120,3 +120,5 @@ const addPins = function (preparedPins) {
 activateMap(); // Функция активирует карту
 const pins = generatePins(AMOUNT_PINS);
 addPins(pins); // Функция добавляет пины на карту
+
+/*КОНЕЦ ПЕРВОЙ ЧАСТИ*/
