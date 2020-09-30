@@ -140,10 +140,27 @@ const getCard = function (templateCard) {
   cardElement.querySelector('.popup__description').textContent = templateCard.offer.description;
   cardElement.querySelector('.popup__avatar').src = templateCard.author.avatar;
 
+  //Для добавления фото
+  const photosBlock = cardElement.querySelector('.popup__photos'); //Блок, куда вставляем фото
+  const photoItem = photosBlock.querySelector('.popup__photo'); //Фото
+  const photos = templateCard.offer.photos; //Массив вставляемых фото
 
+  photoItem.src = templateCard.offer.photos[0];
+  const fragmentPhotos = document.createDocumentFragment();
+
+  for (let i = 1; i < photos.length; i++) {
+    let copyPhotoItem = photoItem.cloneNode(true);
+    copyPhotoItem.src = templateCard.offer.photos[i];
+    fragmentPhotos.appendChild(copyPhotoItem);
+  };
+  photosBlock.appendChild(fragmentPhotos);
 
 
   map.insertBefore(cardElement, mapFiltersContainer);
+
 }
 
 getCard(pins[0]);
+
+
+
