@@ -53,7 +53,7 @@ const getRandomArray = function (primaryElements) {
     copyElements[j] = temp;
   }
   //  Отрезаем кусок случайной длины
-  return copyElements.slice(getRandomNumber(0, copyElements.length - 1));
+  return copyElements.slice(getRandomNumber(0, copyElements.length));
 };
 
 // Клонирование метки
@@ -147,6 +147,9 @@ const getCard = function (templateCard) {
   cardElement.querySelector('.popup__avatar').src = templateCard.author.avatar;
 
   //Для добавления фото
+  if (templateCard.offer.photos > 0) {
+    cardElement.querySelector(`.popup__photos`).style.display="none";
+  } else {
   const photosBlock = cardElement.querySelector('.popup__photos'); //Блок, куда вставляем фото
   const photoItem = photosBlock.querySelector('.popup__photo'); //Фото
   const photos = templateCard.offer.photos; //Массив вставляемых фото
@@ -160,7 +163,7 @@ const getCard = function (templateCard) {
     fragmentPhotos.appendChild(copyPhotoItem);
   };
   photosBlock.appendChild(fragmentPhotos);
-
+}
 //Для добавления удобств
   const featuresBlock = cardElement.querySelector('.popup__features'); //Блок с преимуществами
   const featuresItem = featuresBlock.querySelector('.popup__feature'); //Преимущество
