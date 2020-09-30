@@ -122,3 +122,28 @@ const pins = generatePins(AMOUNT_PINS);
 addPins(pins); // Функция добавляет пины на карту
 
 /*КОНЕЦ ПЕРВОЙ ЧАСТИ*/
+const getCard = function (templateCard) {
+  const map = document.querySelector('.map');
+  const mapFiltersContainer = map.querySelector('.map__filters-container');
+  const similarCardTemplate = document.querySelector('#card')
+  .content
+  .querySelector('.map__card');
+
+  const cardElement = similarCardTemplate.cloneNode(true);
+
+  cardElement.querySelector('.popup__title').textContent = templateCard.offer.title;
+  cardElement.querySelector('.popup__text--address').textContent = templateCard.offer.address;
+  cardElement.querySelector('.popup__text--price').textContent = `${templateCard.offer.price}₽/ночь`;
+  cardElement.querySelector('.popup__type').textContent = templateCard.offer.type;
+  cardElement.querySelector('.popup__text--capacity').textContent = `${templateCard.offer.rooms} комнаты для ${templateCard.offer.guests} гостей`;
+  cardElement.querySelector('.popup__text--time').textContent = `Заезд после ${templateCard.offer.checkin}, выезд до ${templateCard.offer.checkout}`;
+  cardElement.querySelector('.popup__description').textContent = templateCard.offer.description;
+  cardElement.querySelector('.popup__avatar').src = templateCard.author.avatar;
+
+
+
+
+  map.insertBefore(cardElement, mapFiltersContainer);
+}
+
+getCard(pins[0]);
