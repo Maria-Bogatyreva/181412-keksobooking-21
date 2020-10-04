@@ -124,14 +124,14 @@ const pins = generatePins(AMOUNT_PINS);
 // activateMap(pins);
 
 
-//ЗАДАНИЕ 10
+//  ЗАДАНИЕ 10
 const mapPin = document.querySelector('.map__pin--main'); // Метка на карте
 const MAP_PIN_WIDTH = 65;
 const MAP_PIN_HEIGHT = 84;
 const MAP_PIN_X = parseInt(mapPin.style.left, 10); // Нач. коорд. X
 const MAP_PIN_Y = parseInt(mapPin.style.top, 10); // Нач. коорд. Y
 
-const mapFilter = document.querySelector ('.map__filters-container'); // Фильтр на карте
+const mapFilter = document.querySelector('.map__filters-container'); // Фильтр на карте
 const adForm = document.querySelector('.ad-form'); // Форма добавления объявления
 const inputAdress = adForm.querySelector('#address'); // Адрес в форме
 
@@ -139,7 +139,7 @@ const inputAdress = adForm.querySelector('#address'); // Адрес в форм�
 const blockForm = function (form, classFormElements) {
   const formElements = form.querySelectorAll(classFormElements);
   formElements.forEach((element) => {
-  element.setAttribute('disabled', 'disabled')
+    element.setAttribute('disabled', 'disabled');
   });
 };
 
@@ -147,15 +147,15 @@ const blockForm = function (form, classFormElements) {
 const unblockForm = function (form, classFormElements) {
   const formElements = form.querySelectorAll(classFormElements);
   formElements.forEach((element) => {
-  element.removeAttribute('disabled', 'disabled')
+    element.removeAttribute('disabled', 'disabled');
   });
 };
 //  Функция для получения значения адреса
 const getInitialAdressValue = function () {
   inputAdress.value = `${MAP_PIN_X + Math.round(MAP_PIN_WIDTH / 2)}, ${MAP_PIN_Y + MAP_PIN_HEIGHT}`;
-}
+};
 
-blockForm(adForm,'.ad-form__element'); //Заблокировали форму объявления
+blockForm(adForm, '.ad-form__element'); // Заблокировали форму объявления
 blockForm(mapFilter, 'select'); // Заблокировали фильтр на карте
 
 //  Адрес на неактивной карте- коорд. центра КРУГЛОЙ метки
@@ -165,7 +165,7 @@ inputAdress.value = `${MAP_PIN_X + Math.round(MAP_PIN_WIDTH / 2)}, ${MAP_PIN_Y +
 mapPin.addEventListener('mousedown', function () {
   if (event.button === 0) {
     activateMap(pins);
-    unblockForm(adForm,'.ad-form__element');
+    unblockForm(adForm, '.ad-form__element');
     unblockForm(mapFilter, 'select');
     getInitialAdressValue();
   }
@@ -174,9 +174,21 @@ mapPin.addEventListener('mousedown', function () {
 mapPin.addEventListener('keydown', function (evt) {
   if (evt.key === "Enter") {
     activateMap(pins);
-    unblockForm(adForm,'.ad-form__element');
+    unblockForm(adForm, '.ad-form__element');
     unblockForm(mapFilter, 'select');
-    getInitialAdressValue()
+    getInitialAdressValue();
   }
 });
 
+//  ВАЛИДАЦИЯ ФОРМЫ
+const inputCapacity = adForm.querySelector('#capacity');
+const inputRoomNumber = adForm.querySelector('#room_number');
+
+inputCapacity.addEventListener('change', function () {
+  if (inputCapacity.value !== inputRoomNumber.value) {
+    inputCapacity.setCustomValidity('Количество комнат = количество гостей!');
+  } else {
+    inputCapacity.setCustomValidity('');
+  }
+  inputCapacity.reportValidity;
+});
