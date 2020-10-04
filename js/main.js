@@ -154,10 +154,10 @@ const getCard = function (templateCard) {
     const photoItem = photosBlock.querySelector('.popup__photo'); //Фото
     const photos = templateCard.offer.photos; //Массив вставляемых фото
 
-    photoItem.src = templateCard.offer.photos[0];
+    photosBlock.innerHTML = '';
     const fragmentPhotos = document.createDocumentFragment();
 
-    for (let i = 1; i < photos.length; i++) {
+    for (let i = 0; i < photos.length; i++) {
       let copyPhotoItem = photoItem.cloneNode(true);
       copyPhotoItem.src = templateCard.offer.photos[i];
       fragmentPhotos.appendChild(copyPhotoItem);
