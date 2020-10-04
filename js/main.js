@@ -157,7 +157,7 @@ const createCard = function (templateCard) {
     photosBlock.innerHTML = '';
     const fragmentPhotos = document.createDocumentFragment();
 
-    photos.forEach (function(element) {
+    photos.forEach(function (element) {
       const copyPhotoItem = photoItem.cloneNode(true);
       copyPhotoItem.src = element;
       fragmentPhotos.appendChild(copyPhotoItem);
@@ -178,9 +178,9 @@ const createCard = function (templateCard) {
       const copyFeaturesItem = featuresItem.cloneNode(true);
       copyFeaturesItem.classList.add(`popup__feature--${value}`);
       fragmentFeatures.appendChild(copyFeaturesItem);
-    })
+    });
     featuresBlock.appendChild(fragmentFeatures);
-  };
+  }
 
   map.insertBefore(cardElement, mapFiltersContainer);
 };
