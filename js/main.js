@@ -115,6 +115,7 @@ const addPins = function (preparedPins) {
 // Функция активации карты (и отрисовки похожих объявлений)
 const activateMap = function (elements) {
   document.querySelector('.map').classList.remove('map--faded');
+  document.querySelector('.ad-form').classList.remove('ad-form--disabled');
   addPins(elements);
 };
 
@@ -123,19 +124,37 @@ const pins = generatePins(AMOUNT_PINS);
 // activateMap(pins);
 
 //ЗАДАНИЕ 10
-//Блокировка заполнения формы
-const adForm = document.querySelector('.ad-form');
-const adFormFieldsets = adForm.querySelectorAll('.ad-form__element');
+const mapFilter = document.querySelector ('.map__filters-container'); // Фильтр на карте
+const adForm = document.querySelector('.ad-form'); // Форма добавления объявления
 
-adFormFieldsets.forEach ((element) => {
+//Функция для блокировки формы
+const blockForm = function (form, classFormElements) {
+  const formElements = form.querySelectorAll(classFormElements);
+  formElements.forEach((element) => {
   element.setAttribute('disabled', 'disabled')
-});
-//Блокировка заполнения фильтра
-const mapFilter = document.querySelector ('.map__filters-container');
-const mapFilterSelects = mapFilter.querySelectorAll('select');
+  });
+};
+//Функция для разблокировки формы
+const unblockForm = function (form, classFormElements) {
+  const formElements = form.querySelectorAll(classFormElements);
+  formElements.forEach((element) => {
+  element.removeAttribute('disabled', 'disabled')
+  });
+};
 
-mapFilterSelects.forEach((element) => {
-  element.setAttribute('disabled', 'disabled')
-});
 
+blockForm(adForm,'.ad-form__element'); //Заблокировали форму объявления
+blockForm(mapFilter, 'select'); // Заблокировали фильтр на карте
+
+//Активация страницы
+const mapPin = document.querySelector('.map__pin--main');
+
+mapPin.addEventListener('mousedown', function () {
+  console.log('событие случилось!');
+  if (event.button === 0) {
+    activateMap(pins);
+    unblockForm(adForm,'.ad-form__element');
+    unblockForm(mapFilter, 'select');
+  }
+})
 
