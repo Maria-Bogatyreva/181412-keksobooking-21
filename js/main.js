@@ -121,13 +121,13 @@ activateMap(); // Функция активирует карту
 const pins = generatePins(AMOUNT_PINS);
 addPins(pins); // Функция добавляет пины на карту
 
-/*КОНЕЦ ПЕРВОЙ ЧАСТИ*/
+/*  КОНЕЦ ПЕРВОЙ ЧАСТИ  */
 const typesListRus = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
   house: 'Дом',
   palace: 'Дворец'
-}
+};
 const getCard = function (templateCard) {
   const map = document.querySelector('.map');
   const mapFiltersContainer = map.querySelector('.map__filters-container');
@@ -146,13 +146,13 @@ const getCard = function (templateCard) {
   cardElement.querySelector('.popup__description').textContent = templateCard.offer.description;
   cardElement.querySelector('.popup__avatar').src = templateCard.author.avatar;
 
-  //Для добавления фото
+  //  Для добавления фото
   if (templateCard.offer.photos < 0) {
-    cardElement.querySelector(`.popup__photos`).style.display="none";
+    cardElement.querySelector(`.popup__photos`).style.display = "none";
   } else {
-    const photosBlock = cardElement.querySelector('.popup__photos'); //Блок, куда вставляем фото
-    const photoItem = photosBlock.querySelector('.popup__photo'); //Фото
-    const photos = templateCard.offer.photos; //Массив вставляемых фото
+    const photosBlock = cardElement.querySelector('.popup__photos'); // Блок, куда вставляем фото
+    const photoItem = photosBlock.querySelector('.popup__photo'); // Фото
+    const photos = templateCard.offer.photos; // Массив вставляемых фото
 
     photosBlock.innerHTML = '';
     const fragmentPhotos = document.createDocumentFragment();
@@ -161,16 +161,16 @@ const getCard = function (templateCard) {
       let copyPhotoItem = photoItem.cloneNode(true);
       copyPhotoItem.src = templateCard.offer.photos[i];
       fragmentPhotos.appendChild(copyPhotoItem);
-    };
+    }
     photosBlock.appendChild(fragmentPhotos);
-}
-//Для добавления удобств
+  }
+  //  Для добавления удобств
   if (templateCard.offer.photos < 0) {
-    cardElement.querySelector(`.popup__features`).style.display="none";
+    cardElement.querySelector(`.popup__features`).style.display = "none";
   } else {
-    const featuresBlock = cardElement.querySelector('.popup__features'); //Блок с преимуществами
-    const featuresItem = featuresBlock.querySelector('.popup__feature'); //Преимущество
-    const features = templateCard.offer.features; //Массив вставляемых удобств
+    const featuresBlock = cardElement.querySelector('.popup__features'); // Блок с преимуществами
+    const featuresItem = featuresBlock.querySelector('.popup__feature'); // Преимущество
+    const features = templateCard.offer.features; // Массив вставляемых удобств
     featuresBlock.innerHTML = '';
     const fragmentFeatures = document.createDocumentFragment();
 
@@ -187,6 +187,3 @@ const getCard = function (templateCard) {
 };
 
 getCard(pins[0]);
-
-
-
