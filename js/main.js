@@ -190,5 +190,5 @@ inputCapacity.addEventListener('change', function () {
   } else {
     inputCapacity.setCustomValidity('');
   }
-  inputCapacity.reportValidity;
+  inputCapacity.reportValidity();
 });
