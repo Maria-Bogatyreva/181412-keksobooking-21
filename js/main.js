@@ -147,41 +147,44 @@ const getCard = function (templateCard) {
   cardElement.querySelector('.popup__avatar').src = templateCard.author.avatar;
 
   //Для добавления фото
-  if (templateCard.offer.photos > 0) {
+  if (templateCard.offer.photos < 0) {
     cardElement.querySelector(`.popup__photos`).style.display="none";
   } else {
-  const photosBlock = cardElement.querySelector('.popup__photos'); //Блок, куда вставляем фото
-  const photoItem = photosBlock.querySelector('.popup__photo'); //Фото
-  const photos = templateCard.offer.photos; //Массив вставляемых фото
+    const photosBlock = cardElement.querySelector('.popup__photos'); //Блок, куда вставляем фото
+    const photoItem = photosBlock.querySelector('.popup__photo'); //Фото
+    const photos = templateCard.offer.photos; //Массив вставляемых фото
 
-  photoItem.src = templateCard.offer.photos[0];
-  const fragmentPhotos = document.createDocumentFragment();
+    photoItem.src = templateCard.offer.photos[0];
+    const fragmentPhotos = document.createDocumentFragment();
 
-  for (let i = 1; i < photos.length; i++) {
-    let copyPhotoItem = photoItem.cloneNode(true);
-    copyPhotoItem.src = templateCard.offer.photos[i];
-    fragmentPhotos.appendChild(copyPhotoItem);
-  };
-  photosBlock.appendChild(fragmentPhotos);
+    for (let i = 1; i < photos.length; i++) {
+      let copyPhotoItem = photoItem.cloneNode(true);
+      copyPhotoItem.src = templateCard.offer.photos[i];
+      fragmentPhotos.appendChild(copyPhotoItem);
+    };
+    photosBlock.appendChild(fragmentPhotos);
 }
 //Для добавления удобств
-  const featuresBlock = cardElement.querySelector('.popup__features'); //Блок с преимуществами
-  const featuresItem = featuresBlock.querySelector('.popup__feature'); //Преимущество
-  const features = templateCard.offer.features; //Массив вставляемых удобств
-  featuresBlock.innerHTML = '';
-  const fragmentFeatures = document.createDocumentFragment();
+  if (templateCard.offer.photos < 0) {
+    cardElement.querySelector(`.popup__features`).style.display="none";
+  } else {
+    const featuresBlock = cardElement.querySelector('.popup__features'); //Блок с преимуществами
+    const featuresItem = featuresBlock.querySelector('.popup__feature'); //Преимущество
+    const features = templateCard.offer.features; //Массив вставляемых удобств
+    featuresBlock.innerHTML = '';
+    const fragmentFeatures = document.createDocumentFragment();
 
-  for (let i = 0; i < features.length; i++) {
-    let copyFeaturesItem = featuresItem.cloneNode(true);
-    copyFeaturesItem.classList.add('popup__feature--' + templateCard.offer.features[i]);
-    fragmentFeatures.appendChild(copyFeaturesItem);
+    for (let i = 0; i < features.length; i++) {
+      let copyFeaturesItem = featuresItem.cloneNode(true);
+      copyFeaturesItem.classList.add('popup__feature--' + templateCard.offer.features[i]);
+      fragmentFeatures.appendChild(copyFeaturesItem);
+    }
+    featuresBlock.appendChild(fragmentFeatures);
   }
-  featuresBlock.appendChild(fragmentFeatures);
-
 
   map.insertBefore(cardElement, mapFiltersContainer);
 
-}
+};
 
 getCard(pins[0]);
 
