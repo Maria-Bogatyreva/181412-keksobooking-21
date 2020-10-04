@@ -121,14 +121,14 @@ activateMap(); // Функция активирует карту
 const pins = generatePins(AMOUNT_PINS);
 addPins(pins); // Функция добавляет пины на карту
 
-/*  КОНЕЦ ПЕРВОЙ ЧАСТИ  */
+/*  8. Личный проект: больше деталей (часть 2)  */
 const typesListRus = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
   house: 'Дом',
   palace: 'Дворец'
 };
-const getCard = function (templateCard) {
+const createCard = function (templateCard) {
   const map = document.querySelector('.map');
   const mapFiltersContainer = map.querySelector('.map__filters-container');
   const similarCardTemplate = document.querySelector('#card')
@@ -147,7 +147,7 @@ const getCard = function (templateCard) {
   cardElement.querySelector('.popup__avatar').src = templateCard.author.avatar;
 
   //  Для добавления фото
-  if (templateCard.offer.photos < 0) {
+  if (templateCard.offer.photos.length === 0) {
     cardElement.querySelector(`.popup__photos`).style.display = "none";
   } else {
     const photosBlock = cardElement.querySelector('.popup__photos'); // Блок, куда вставляем фото
@@ -157,15 +157,15 @@ const getCard = function (templateCard) {
     photosBlock.innerHTML = '';
     const fragmentPhotos = document.createDocumentFragment();
 
-    for (let i = 0; i < photos.length; i++) {
-      let copyPhotoItem = photoItem.cloneNode(true);
-      copyPhotoItem.src = templateCard.offer.photos[i];
+    photos.forEach (function(element) {
+      const copyPhotoItem = photoItem.cloneNode(true);
+      copyPhotoItem.src = element;
       fragmentPhotos.appendChild(copyPhotoItem);
-    }
+    });
     photosBlock.appendChild(fragmentPhotos);
   }
   //  Для добавления удобств
-  if (templateCard.offer.photos < 0) {
+  if (templateCard.offer.photos.length === 0) {
     cardElement.querySelector(`.popup__features`).style.display = "none";
   } else {
     const featuresBlock = cardElement.querySelector('.popup__features'); // Блок с преимуществами
@@ -174,16 +174,15 @@ const getCard = function (templateCard) {
     featuresBlock.innerHTML = '';
     const fragmentFeatures = document.createDocumentFragment();
 
-    for (let i = 0; i < features.length; i++) {
-      let copyFeaturesItem = featuresItem.cloneNode(true);
-      copyFeaturesItem.classList.add('popup__feature--' + templateCard.offer.features[i]);
+    features.forEach(function (value) {
+      const copyFeaturesItem = featuresItem.cloneNode(true);
+      copyFeaturesItem.classList.add(`popup__feature--${value}`);
       fragmentFeatures.appendChild(copyFeaturesItem);
-    }
+    })
     featuresBlock.appendChild(fragmentFeatures);
-  }
+  };
 
   map.insertBefore(cardElement, mapFiltersContainer);
-
 };
 
-getCard(pins[0]);
+createCard(pins[0]);
