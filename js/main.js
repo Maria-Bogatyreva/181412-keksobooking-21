@@ -23,11 +23,6 @@ const photosList = [
 ];
 const typesList = ['palace', 'flat', 'house', 'bungalow'];
 
-// Функция для переключения карты из неактивного состояние в активное
-const activateMap = function () {
-  document.querySelector('.map').classList.remove('map--faded');
-};
-
 // Функция для получения случайного числа в указанном диапазоне
 const getRandomNumber = function (min, max) {
   const rand = min - 0.5 + Math.random() * (max - min + 1);
@@ -106,7 +101,7 @@ const generatePins = function (amount) {
   return pinsList;
 };
 
-// Функция для добавления меток на карту
+// Функция для добавления меток на карту - Отрисовка похожих объявлений на карте
 const addPins = function (preparedPins) {
   const similarListPins = document.querySelector('.map__pins');
   const fragment = document.createDocumentFragment();
@@ -117,6 +112,14 @@ const addPins = function (preparedPins) {
 
   similarListPins.appendChild(fragment);
 };
-activateMap(); // Функция активирует карту
+// Функция для переключения карты из неактивного состояние в активное
+const activateMap = function (elements) {
+  document.querySelector('.map').classList.remove('map--faded');
+  addPins(elements);
+};
+
 const pins = generatePins(AMOUNT_PINS);
-addPins(pins); // Функция добавляет пины на карту
+
+activateMap(pins); // Функция активирует карту и отрисовывает похожие объвления на карте
+
+
