@@ -123,38 +123,60 @@ const pins = generatePins(AMOUNT_PINS);
 // Функция активирует карту и отрисовывает похожие объвления на карте
 // activateMap(pins);
 
+
 //ЗАДАНИЕ 10
+const mapPin = document.querySelector('.map__pin--main'); // Метка на карте
+const MAP_PIN_WIDTH = 65;
+const MAP_PIN_HEIGHT = 84;
+const MAP_PIN_X = parseInt(mapPin.style.left, 10); // Нач. коорд. X
+const MAP_PIN_Y = parseInt(mapPin.style.top, 10); // Нач. коорд. Y
+
 const mapFilter = document.querySelector ('.map__filters-container'); // Фильтр на карте
 const adForm = document.querySelector('.ad-form'); // Форма добавления объявления
+const inputAdress = adForm.querySelector('#address'); // Адрес в форме
 
-//Функция для блокировки формы
+//  Функция для блокировки формы
 const blockForm = function (form, classFormElements) {
   const formElements = form.querySelectorAll(classFormElements);
   formElements.forEach((element) => {
   element.setAttribute('disabled', 'disabled')
   });
 };
-//Функция для разблокировки формы
+
+//  Функция для разблокировки формы
 const unblockForm = function (form, classFormElements) {
   const formElements = form.querySelectorAll(classFormElements);
   formElements.forEach((element) => {
   element.removeAttribute('disabled', 'disabled')
   });
 };
-
+//  Функция для получения значения адреса
+const getInitialAdressValue = function () {
+  inputAdress.value = `${MAP_PIN_X + Math.round(MAP_PIN_WIDTH / 2)}, ${MAP_PIN_Y + MAP_PIN_HEIGHT}`;
+}
 
 blockForm(adForm,'.ad-form__element'); //Заблокировали форму объявления
 blockForm(mapFilter, 'select'); // Заблокировали фильтр на карте
 
-//Активация страницы
-const mapPin = document.querySelector('.map__pin--main');
+//  Адрес на неактивной карте- коорд. центра КРУГЛОЙ метки
+inputAdress.value = `${MAP_PIN_X + Math.round(MAP_PIN_WIDTH / 2)}, ${MAP_PIN_Y + Math.round(MAP_PIN_WIDTH / 2)}`;
 
+//  Активация страницы
 mapPin.addEventListener('mousedown', function () {
-  console.log('событие случилось!');
   if (event.button === 0) {
     activateMap(pins);
     unblockForm(adForm,'.ad-form__element');
     unblockForm(mapFilter, 'select');
+    getInitialAdressValue();
   }
-})
+});
+
+mapPin.addEventListener('keydown', function (evt) {
+  if (evt.key === "Enter") {
+    activateMap(pins);
+    unblockForm(adForm,'.ad-form__element');
+    unblockForm(mapFilter, 'select');
+    getInitialAdressValue()
+  }
+});
 
