@@ -112,14 +112,30 @@ const addPins = function (preparedPins) {
 
   similarListPins.appendChild(fragment);
 };
-// Функция для переключения карты из неактивного состояние в активное
+// Функция активации карты (и отрисовки похожих объявлений)
 const activateMap = function (elements) {
   document.querySelector('.map').classList.remove('map--faded');
   addPins(elements);
 };
 
 const pins = generatePins(AMOUNT_PINS);
+// Функция активирует карту и отрисовывает похожие объвления на карте
+// activateMap(pins);
 
-activateMap(pins); // Функция активирует карту и отрисовывает похожие объвления на карте
+//ЗАДАНИЕ 10
+//Блокировка заполнения формы
+const adForm = document.querySelector('.ad-form');
+const adFormFieldsets = adForm.querySelectorAll('.ad-form__element');
+
+adFormFieldsets.forEach ((element) => {
+  element.setAttribute('disabled', 'disabled')
+});
+//Блокировка заполнения фильтра
+const mapFilter = document.querySelector ('.map__filters-container');
+const mapFilterSelects = mapFilter.querySelectorAll('select');
+
+mapFilterSelects.forEach((element) => {
+  element.setAttribute('disabled', 'disabled')
+});
 
 
