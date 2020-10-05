@@ -184,8 +184,6 @@ createCard(pins[0]);
 const mapPin = document.querySelector('.map__pin--main'); // Метка на карте
 const MAP_PIN_WIDTH = 65;
 const MAP_PIN_HEIGHT = 84;
-const MAP_PIN_X = parseInt(mapPin.style.left, 10); // Нач. коорд. X
-const MAP_PIN_Y = parseInt(mapPin.style.top, 10); // Нач. коорд. Y
 
 const mapFilter = document.querySelector('.map__filters-container'); // Фильтр на карте
 const adForm = document.querySelector('.ad-form'); // Форма добавления объявления
@@ -199,17 +197,27 @@ const blockForm = function (form, classFormElements) {
   });
 };
 
-//  Функция для разблокировки формы
+//  Функция для РАЗблокировки формы
 const unblockForm = function (form, classFormElements) {
   const formElements = form.querySelectorAll(classFormElements);
   formElements.forEach((element) => {
     element.removeAttribute('disabled', 'disabled');
   });
 };
-//  Функция для получения значения адреса
-const getInitialAdressValue = function () {
+//  Функция для получения значения адреса _активной_ карты
+const getActiveMapAdressValue = function () {
+  const MAP_PIN_X = parseInt(mapPin.style.left, 10); // Нач. коорд. X
+  const MAP_PIN_Y = parseInt(mapPin.style.top, 10); // Нач. коорд. Y
   inputAdress.value = `${MAP_PIN_X + Math.round(MAP_PIN_WIDTH / 2)}, ${MAP_PIN_Y + MAP_PIN_HEIGHT}`;
 };
+//  Функция для получения значения адреса _НЕактивной_ карты
+const getDeactiveMapAdressValue = function () {
+  const MAP_PIN_X = parseInt(mapPin.style.left, 10); // Нач. коорд. X
+  const MAP_PIN_Y = parseInt(mapPin.style.top, 10); // Нач. коорд. Y
+  //  Адрес на неактивной карте- коорд. центра КРУГЛОЙ метки
+  inputAdress.value = `${MAP_PIN_X + Math.round(MAP_PIN_WIDTH / 2)}, ${MAP_PIN_Y + Math.round(MAP_PIN_WIDTH / 2)}`
+};
+
 // ФУНКЦИЯ ДЛЯ АКТИВАЦИИ СТРАНИЦЫ (и отрисовки похожих объявлений)
 const activateMap = function () {
   document.querySelector('.map').classList.remove('map--faded');
@@ -219,16 +227,14 @@ const activateMap = function () {
 
   unblockForm(adForm, '.ad-form__element');
   unblockForm(mapFilter, 'select');
-  getInitialAdressValue();
+  getActiveMapAdressValue();
 };
 
-
-blockForm(adForm, '.ad-form__element'); // Заблокировали форму объявления
-blockForm(mapFilter, 'select'); // Заблокировали фильтр на карте
-
-//  Адрес на неактивной карте- коорд. центра КРУГЛОЙ метки
-inputAdress.value = `${MAP_PIN_X + Math.round(MAP_PIN_WIDTH / 2)}, ${MAP_PIN_Y + Math.round(MAP_PIN_WIDTH / 2)}`;
-
+const deactivateMap = function () {
+  blockForm(adForm, '.ad-form__element'); // Заблокировали форму объявления
+  blockForm(mapFilter, 'select'); // Заблокировали фильтр на карте
+  getDeactiveMapAdressValue();
+}
 
 //Функция для включения карты по движению мыши
 const onMapPinMousedown = function (evt) {
@@ -242,7 +248,7 @@ const onMapPinEnterPress = function (evt) {
     activateMap();
   }
 };
-
+deactivateMap();
 mapPin.addEventListener('mousedown', onMapPinMousedown, {once: true});
 mapPin.addEventListener('keydown', onMapPinEnterPress, {once: true});
 
