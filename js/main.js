@@ -112,16 +112,10 @@ const addPins = function (preparedPins) {
 
   similarListPins.appendChild(fragment);
 };
-// Функция активации карты (и отрисовки похожих объявлений)
-const activateMap = function (elements) {
-  document.querySelector('.map').classList.remove('map--faded');
-  document.querySelector('.ad-form').classList.remove('ad-form--disabled');
-  addPins(elements);
-};
 
-const pins = generatePins(AMOUNT_PINS);
+const pins = generatePins(AMOUNT_PINS); //Сгененировали массив пинов
 
-/*  8. Личный проект: больше деталей (часть 2). Отображение карточки объявления*/
+//  8. Личный проект: больше деталей (часть 2). Отображение карточки объявления*
 const typesListRus = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
@@ -182,10 +176,9 @@ const createCard = function (templateCard) {
     featuresBlock.appendChild(fragmentFeatures);
   }
 
-  map.insertBefore(cardElement, mapFiltersContainer);
+  //map.insertBefore(cardElement, mapFiltersContainer);
 };
-//createCard(pins[0]);
-
+createCard(pins[0]);
 
 //  10. Личный проект: доверяй, но проверяй (часть 1). Активация карты. Валидация формы
 const mapPin = document.querySelector('.map__pin--main'); // Метка на карте
@@ -217,6 +210,18 @@ const unblockForm = function (form, classFormElements) {
 const getInitialAdressValue = function () {
   inputAdress.value = `${MAP_PIN_X + Math.round(MAP_PIN_WIDTH / 2)}, ${MAP_PIN_Y + MAP_PIN_HEIGHT}`;
 };
+// ФУНКЦИЯ ДЛЯ АКТИВАЦИИ СТРАНИЦЫ (и отрисовки похожих объявлений)
+const activateMap = function () {
+  document.querySelector('.map').classList.remove('map--faded');
+  document.querySelector('.ad-form').classList.remove('ad-form--disabled');
+
+  addPins(pins);
+
+  unblockForm(adForm, '.ad-form__element');
+  unblockForm(mapFilter, 'select');
+  getInitialAdressValue();
+};
+
 
 blockForm(adForm, '.ad-form__element'); // Заблокировали форму объявления
 blockForm(mapFilter, 'select'); // Заблокировали фильтр на карте
@@ -224,24 +229,25 @@ blockForm(mapFilter, 'select'); // Заблокировали фильтр на 
 //  Адрес на неактивной карте- коорд. центра КРУГЛОЙ метки
 inputAdress.value = `${MAP_PIN_X + Math.round(MAP_PIN_WIDTH / 2)}, ${MAP_PIN_Y + Math.round(MAP_PIN_WIDTH / 2)}`;
 
-//  Активация страницы
-mapPin.addEventListener('mousedown', function () {
-  if (event.button === 0) {
-    activateMap(pins);
-    unblockForm(adForm, '.ad-form__element');
-    unblockForm(mapFilter, 'select');
-    getInitialAdressValue();
-  }
-});
 
-mapPin.addEventListener('keydown', function (evt) {
-  if (evt.key === "Enter") {
-    activateMap(pins);
-    unblockForm(adForm, '.ad-form__element');
-    unblockForm(mapFilter, 'select');
-    getInitialAdressValue();
+//Функция для включения карты по движению мыши
+const onMapPinMousedown = function (evt) {
+  if (evt.button === 0) {
+    activateMap();
   }
-});
+};
+//Функция для включения карты по нажатию Enter
+const onMapPinEnterPress = function (evt) {
+  if (evt.key === "Enter") {
+    activateMap();
+  }
+};
+
+mapPin.addEventListener('mousedown', onMapPinMousedown, {once: true});
+mapPin.addEventListener('keydown', onMapPinEnterPress, {once: true});
+
+
+
 
 //  ВАЛИДАЦИЯ ФОРМЫ
 const inputCapacity = adForm.querySelector('#capacity');
