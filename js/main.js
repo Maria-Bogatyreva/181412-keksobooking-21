@@ -101,7 +101,7 @@ const generatePins = function (amount) {
   return pinsList;
 };
 
-// Функция для добавления меток на карту - Отрисовка похожих объявлений на карте
+//  Функция для добавления меток на карту - Отрисовка похожих объявлений на карте
 const addPins = function (preparedPins) {
   const similarListPins = document.querySelector('.map__pins');
   const fragment = document.createDocumentFragment();
@@ -113,7 +113,7 @@ const addPins = function (preparedPins) {
   similarListPins.appendChild(fragment);
 };
 
-const pins = generatePins(AMOUNT_PINS); //Сгененировали массив пинов
+const pins = generatePins(AMOUNT_PINS); // Сгененировали массив пинов
 
 //  8. Личный проект: больше деталей (часть 2). Отображение карточки объявления*
 const typesListRus = {
@@ -175,10 +175,9 @@ const createCard = function (templateCard) {
     });
     featuresBlock.appendChild(fragmentFeatures);
   }
-
-  //map.insertBefore(cardElement, mapFiltersContainer);
+  map.insertBefore(cardElement, mapFiltersContainer);
 };
-createCard(pins[0]);
+// createCard(pins[0]);
 
 //  10. Личный проект: доверяй, но проверяй (часть 1). Активация карты. Валидация формы
 const mapPin = document.querySelector('.map__pin--main'); // Метка на карте
@@ -198,9 +197,9 @@ const blockForm = function (form) {
 };
 
 //  Функция для РАЗблокировки формы
-const unblockForm = function (form, classFormElements) {
+const unblockForm = function (form) {
   const formElements = Array.from(form.children);
-  formElements.forEach( (element) => {
+  formElements.forEach((element) => {
     element.removeAttribute('disabled', 'disabled');
   });
 };
@@ -215,7 +214,7 @@ const getDeactiveMapAdressValue = function () {
   const MAP_PIN_X = parseInt(mapPin.style.left, 10); // Нач. коорд. X
   const MAP_PIN_Y = parseInt(mapPin.style.top, 10); // Нач. коорд. Y
   //  Адрес на неактивной карте- коорд. центра КРУГЛОЙ метки
-  inputAdress.value = `${MAP_PIN_X + Math.round(MAP_PIN_WIDTH / 2)}, ${MAP_PIN_Y + Math.round(MAP_PIN_WIDTH / 2)}`
+  inputAdress.value = `${MAP_PIN_X + Math.round(MAP_PIN_WIDTH / 2)}, ${MAP_PIN_Y + Math.round(MAP_PIN_WIDTH / 2)}`;
 };
 
 // ФУНКЦИЯ ДЛЯ АКТИВАЦИИ СТРАНИЦЫ (и отрисовки похожих объявлений)
@@ -234,15 +233,15 @@ const deactivateMap = function () {
   blockForm(adForm); // Заблокировали форму объявления
   blockForm(mapFilter); // Заблокировали фильтр на карте
   getDeactiveMapAdressValue();
-}
+};
 
-//Функция для включения карты по движению мыши
+//  Функция для включения карты по движению мыши
 const onMapPinMousedown = function (evt) {
   if (evt.button === 0) {
     activateMap();
   }
 };
-//Функция для включения карты по нажатию Enter
+//  Функция для включения карты по нажатию Enter
 const onMapPinEnterPress = function (evt) {
   if (evt.key === "Enter") {
     activateMap();
@@ -251,9 +250,6 @@ const onMapPinEnterPress = function (evt) {
 deactivateMap();
 mapPin.addEventListener('mousedown', onMapPinMousedown, {once: true});
 mapPin.addEventListener('keydown', onMapPinEnterPress, {once: true});
-
-
-
 
 //  ВАЛИДАЦИЯ ФОРМЫ
 const inputCapacity = adForm.querySelector('#capacity');
@@ -267,6 +263,3 @@ inputCapacity.addEventListener('change', function () {
   }
   inputCapacity.reportValidity();
 });
-
-
-
