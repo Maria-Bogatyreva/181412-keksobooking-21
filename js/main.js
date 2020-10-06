@@ -190,8 +190,8 @@ const adForm = document.querySelector('.ad-form'); // Форма добавле�
 const inputAdress = adForm.querySelector('#address'); // Адрес в форме
 
 //  Функция для блокировки формы
-const blockForm = function (form, classFormElements) {
-  const formElements = form.querySelectorAll(classFormElements);
+const blockForm = function (form) {
+  const formElements = Array.from(form.children);
   formElements.forEach((element) => {
     element.setAttribute('disabled', 'disabled');
   });
@@ -199,8 +199,8 @@ const blockForm = function (form, classFormElements) {
 
 //  Функция для РАЗблокировки формы
 const unblockForm = function (form, classFormElements) {
-  const formElements = form.querySelectorAll(classFormElements);
-  formElements.forEach((element) => {
+  const formElements = Array.from(form.children);
+  formElements.forEach( (element) => {
     element.removeAttribute('disabled', 'disabled');
   });
 };
@@ -225,14 +225,14 @@ const activateMap = function () {
 
   addPins(pins);
 
-  unblockForm(adForm, '.ad-form__element');
-  unblockForm(mapFilter, 'select');
+  unblockForm(adForm);
+  unblockForm(mapFilter);
   getActiveMapAdressValue();
 };
 
 const deactivateMap = function () {
-  blockForm(adForm, '.ad-form__element'); // Заблокировали форму объявления
-  blockForm(mapFilter, 'select'); // Заблокировали фильтр на карте
+  blockForm(adForm); // Заблокировали форму объявления
+  blockForm(mapFilter); // Заблокировали фильтр на карте
   getDeactiveMapAdressValue();
 }
 
