@@ -239,17 +239,21 @@ const deactivateMap = function () {
 const onMapPinMousedown = function (evt) {
   if (evt.button === 0) {
     activateMap();
+    mapPin.removeEventListener('mousedown', onMapPinMousedown);
+    mapPin.removeEventListener('keydown', onMapPinEnterPress);
   }
 };
 //  Функция для включения карты по нажатию Enter
 const onMapPinEnterPress = function (evt) {
   if (evt.key === "Enter") {
     activateMap();
+    mapPin.removeEventListener('mousedown', onMapPinMousedown);
+    mapPin.removeEventListener('keydown', onMapPinEnterPress);
   }
 };
 deactivateMap();
-mapPin.addEventListener('mousedown', onMapPinMousedown, {once: true});
-mapPin.addEventListener('keydown', onMapPinEnterPress, {once: true});
+mapPin.addEventListener('mousedown', onMapPinMousedown);
+mapPin.addEventListener('keydown', onMapPinEnterPress);
 
 //  ВАЛИДАЦИЯ ФОРМЫ
 const inputRoomNumber = adForm.querySelector('#room_number'); // Количество комнат
