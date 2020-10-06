@@ -175,9 +175,9 @@ const createCard = function (templateCard) {
     });
     featuresBlock.appendChild(fragmentFeatures);
   }
-  map.insertBefore(cardElement, mapFiltersContainer);
+  //map.insertBefore(cardElement, mapFiltersContainer);
 };
-// createCard(pins[0]);
+createCard(pins[0]);
 
 //  10. Личный проект: доверяй, но проверяй (часть 1). Активация карты. Валидация формы
 const mapPin = document.querySelector('.map__pin--main'); // Метка на карте
