@@ -175,7 +175,7 @@ const createCard = function (templateCard) {
     });
     featuresBlock.appendChild(fragmentFeatures);
   }
-  //map.insertBefore(cardElement, mapFiltersContainer);
+  // map.insertBefore(cardElement, mapFiltersContainer);
 };
 createCard(pins[0]);
 
