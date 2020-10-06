@@ -205,16 +205,16 @@ const unblockForm = function (form) {
 };
 //  Функция для получения значения адреса _активной_ карты
 const getActiveMapAdressValue = function () {
-  const MAP_PIN_X = parseInt(mapPin.style.left, 10); // Нач. коорд. X
-  const MAP_PIN_Y = parseInt(mapPin.style.top, 10); // Нач. коорд. Y
-  inputAdress.value = `${MAP_PIN_X + Math.round(MAP_PIN_WIDTH / 2)}, ${MAP_PIN_Y + MAP_PIN_HEIGHT}`;
+  const mapPinX = parseInt(mapPin.style.left, 10); // Нач. коорд. X
+  const mapPinY = parseInt(mapPin.style.top, 10); // Нач. коорд. Y
+  inputAdress.value = `${mapPinX + Math.round(MAP_PIN_WIDTH / 2)}, ${mapPinY + MAP_PIN_HEIGHT}`;
 };
 //  Функция для получения значения адреса _НЕактивной_ карты
 const getDeactiveMapAdressValue = function () {
-  const MAP_PIN_X = parseInt(mapPin.style.left, 10); // Нач. коорд. X
-  const MAP_PIN_Y = parseInt(mapPin.style.top, 10); // Нач. коорд. Y
+  const mapPinX = parseInt(mapPin.style.left, 10); // Нач. коорд. X
+  const mapPinY = parseInt(mapPin.style.top, 10); // Нач. коорд. Y
   //  Адрес на неактивной карте- коорд. центра КРУГЛОЙ метки
-  inputAdress.value = `${MAP_PIN_X + Math.round(MAP_PIN_WIDTH / 2)}, ${MAP_PIN_Y + Math.round(MAP_PIN_WIDTH / 2)}`;
+  inputAdress.value = `${mapPinX + Math.round(MAP_PIN_WIDTH / 2)}, ${mapPinY + Math.round(MAP_PIN_WIDTH / 2)}`;
 };
 
 // ФУНКЦИЯ ДЛЯ АКТИВАЦИИ СТРАНИЦЫ (и отрисовки похожих объявлений)
