@@ -84,7 +84,7 @@ const generatePins = function (amount) {
         "address": x + ',' + y,
         "price": 10000,
         "type": getRandomElement(typesList),
-        "rooms": 1,
+        "rooms": 2,
         "guests": 2,
         "checkin": getRandomElement(checkinOptions),
         "checkout": getRandomElement(checkoutOptions),
@@ -114,8 +114,8 @@ const addPins = function (preparedPins) {
 };
 
 const pins = generatePins(AMOUNT_PINS); // Сгененировали массив пинов
-
 //  8. Личный проект: больше деталей (часть 2). Отображение карточки объявления*
+
 const typesListRus = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
