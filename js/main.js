@@ -227,6 +227,9 @@ const activateMap = function () {
   unblockForm(adForm);
   unblockForm(mapFilter);
   getActiveMapAdressValue();
+
+  mapPin.removeEventListener('mousedown', onMapPinMousedown);
+  mapPin.removeEventListener('keydown', onMapPinEnterPress);
 };
 
 const deactivateMap = function () {
@@ -239,16 +242,12 @@ const deactivateMap = function () {
 const onMapPinMousedown = function (evt) {
   if (evt.button === 0) {
     activateMap();
-    mapPin.removeEventListener('mousedown', onMapPinMousedown);
-    mapPin.removeEventListener('keydown', onMapPinEnterPress);
   }
 };
 //  Функция для включения карты по нажатию Enter
 const onMapPinEnterPress = function (evt) {
   if (evt.key === "Enter") {
     activateMap();
-    mapPin.removeEventListener('mousedown', onMapPinMousedown);
-    mapPin.removeEventListener('keydown', onMapPinEnterPress);
   }
 };
 deactivateMap();
