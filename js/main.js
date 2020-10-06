@@ -252,14 +252,47 @@ mapPin.addEventListener('mousedown', onMapPinMousedown, {once: true});
 mapPin.addEventListener('keydown', onMapPinEnterPress, {once: true});
 
 //  ВАЛИДАЦИЯ ФОРМЫ
-const inputCapacity = adForm.querySelector('#capacity');
-const inputRoomNumber = adForm.querySelector('#room_number');
+const inputRoomNumber = adForm.querySelector('#room_number'); // Количество комнат
+const inputCapacity = adForm.querySelector('#capacity'); // Количество гостей
+const formSubmit = adForm.querySelector('.ad-form__submit');
 
-inputCapacity.addEventListener('change', function () {
-  if (inputCapacity.value !== inputRoomNumber.value) {
-    inputCapacity.setCustomValidity('Количество комнат = количество гостей!');
+const checkValidityRoomCapasity = function () {
+  if ((inputRoomNumber.value === '1') && (inputCapacity.value !== '1')) {
+    inputRoomNumber.setCustomValidity('1 комната только для 1 гостя');
+  } else if ((inputRoomNumber.value === '2') && ((inputCapacity.value === '3') || (inputCapacity.value === '0'))) {
+    inputRoomNumber.setCustomValidity('Для 2 и менее гостей');
+  } else if ((inputRoomNumber.value === '3') && (inputCapacity.value === '0')) {
+    inputRoomNumber.setCustomValidity('Для 3 или менее гостей');
+  } else if ((inputRoomNumber.value === '100') && (inputCapacity.value !== '0')) {
+    inputRoomNumber.setCustomValidity('Не для гостей');
   } else {
-    inputCapacity.setCustomValidity('');
+    inputRoomNumber.setCustomValidity('');
   }
-  inputCapacity.reportValidity();
-});
+  inputRoomNumber.reportValidity();
+};
+
+const onSubmitCheckValidityRoomCapasity = function (evt) {
+  if ((inputRoomNumber.value === '1') && (inputCapacity.value !== '1')) {
+    inputRoomNumber.setCustomValidity('1 комната только для 1 гостя');
+    evt.preventDefault();
+  } else if ((inputRoomNumber.value === '2') && ((inputCapacity.value === '3') || (inputCapacity.value === '0'))) {
+    inputRoomNumber.setCustomValidity('Для 2 и менее гостей');
+    evt.preventDefault();
+  } else if ((inputRoomNumber.value === '3') && (inputCapacity.value === '0')) {
+    inputRoomNumber.setCustomValidity('Для 3 или менее гостей');
+    evt.preventDefault();
+  } else if ((inputRoomNumber.value === '100') && (inputCapacity.value !== '0')) {
+    inputRoomNumber.setCustomValidity('Не для гостей');
+    evt.preventDefault();
+  } else {
+    inputRoomNumber.setCustomValidity('');
+  }
+  inputRoomNumber.reportValidity();
+};
+
+
+inputCapacity.addEventListener(`change`, checkValidityRoomCapasity);
+
+inputRoomNumber.addEventListener(`change`, checkValidityRoomCapasity);
+
+formSubmit.addEventListener(`click`, onSubmitCheckValidityRoomCapasity);
