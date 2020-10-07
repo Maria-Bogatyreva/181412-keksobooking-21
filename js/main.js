@@ -23,11 +23,6 @@ const photosList = [
 ];
 const typesList = ['palace', 'flat', 'house', 'bungalow'];
 
-// Функция для переключения карты из неактивного состояние в активное
-const activateMap = function () {
-  document.querySelector('.map').classList.remove('map--faded');
-};
-
 // Функция для получения случайного числа в указанном диапазоне
 const getRandomNumber = function (min, max) {
   const rand = min - 0.5 + Math.random() * (max - min + 1);
@@ -106,7 +101,7 @@ const generatePins = function (amount) {
   return pinsList;
 };
 
-// Функция для добавления меток на карту
+//  Функция для добавления меток на карту - Отрисовка похожих объявлений на карте
 const addPins = function (preparedPins) {
   const similarListPins = document.querySelector('.map__pins');
   const fragment = document.createDocumentFragment();
@@ -117,11 +112,10 @@ const addPins = function (preparedPins) {
 
   similarListPins.appendChild(fragment);
 };
-activateMap(); // Функция активирует карту
-const pins = generatePins(AMOUNT_PINS);
-addPins(pins); // Функция добавляет пины на карту
 
-/*  8. Личный проект: больше деталей (часть 2)  */
+const pins = generatePins(AMOUNT_PINS); // Сгененировали массив пинов
+//  8. Личный проект: больше деталей (часть 2). Отображение карточки объявления*
+
 const typesListRus = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
@@ -181,8 +175,103 @@ const createCard = function (templateCard) {
     });
     featuresBlock.appendChild(fragmentFeatures);
   }
+  // map.insertBefore(cardElement, mapFiltersContainer);
+};
+createCard(pins[0]);
 
-  map.insertBefore(cardElement, mapFiltersContainer);
+//  10. Личный проект: доверяй, но проверяй (часть 1). Активация карты. Валидация формы
+const mapPin = document.querySelector('.map__pin--main'); // Метка на карте
+const MAP_PIN_WIDTH = 65;
+const MAP_PIN_HEIGHT = 84;
+
+const mapFilter = document.querySelector('.map__filters-container'); // Фильтр на карте
+const adForm = document.querySelector('.ad-form'); // Форма добавления объявления
+const inputAdress = adForm.querySelector('#address'); // Адрес в форме
+
+//  Функция для блокировки формы
+const blockForm = function (form) {
+  const formElements = Array.from(form.children);
+  formElements.forEach((element) => {
+    element.setAttribute('disabled', 'disabled');
+  });
 };
 
-createCard(pins[0]);
+//  Функция для РАЗблокировки формы
+const unblockForm = function (form) {
+  const formElements = Array.from(form.children);
+  formElements.forEach((element) => {
+    element.removeAttribute('disabled', 'disabled');
+  });
+};
+//  Функция для получения значения адреса _активной_ карты
+const getActiveMapAdressValue = function () {
+  const mapPinX = parseInt(mapPin.style.left, 10); // Нач. коорд. X
+  const mapPinY = parseInt(mapPin.style.top, 10); // Нач. коорд. Y
+  inputAdress.value = `${mapPinX + Math.round(MAP_PIN_WIDTH / 2)}, ${mapPinY + MAP_PIN_HEIGHT}`;
+};
+//  Функция для получения значения адреса _НЕактивной_ карты
+const getDeactiveMapAdressValue = function () {
+  const mapPinX = parseInt(mapPin.style.left, 10); // Нач. коорд. X
+  const mapPinY = parseInt(mapPin.style.top, 10); // Нач. коорд. Y
+  //  Адрес на неактивной карте- коорд. центра КРУГЛОЙ метки
+  inputAdress.value = `${mapPinX + Math.round(MAP_PIN_WIDTH / 2)}, ${mapPinY + Math.round(MAP_PIN_WIDTH / 2)}`;
+};
+
+// ФУНКЦИЯ ДЛЯ АКТИВАЦИИ СТРАНИЦЫ (и отрисовки похожих объявлений)
+const activateMap = function () {
+  document.querySelector('.map').classList.remove('map--faded');
+  document.querySelector('.ad-form').classList.remove('ad-form--disabled');
+
+  addPins(pins);
+
+  unblockForm(adForm);
+  unblockForm(mapFilter);
+  getActiveMapAdressValue();
+
+  mapPin.removeEventListener('mousedown', onMapPinMousedown);
+  mapPin.removeEventListener('keydown', onMapPinEnterPress);
+};
+
+const deactivateMap = function () {
+  blockForm(adForm); // Заблокировали форму объявления
+  blockForm(mapFilter); // Заблокировали фильтр на карте
+  getDeactiveMapAdressValue();
+};
+
+//  Функция для включения карты по движению мыши
+const onMapPinMousedown = function (evt) {
+  if (evt.button === 0) {
+    activateMap();
+  }
+};
+//  Функция для включения карты по нажатию Enter
+const onMapPinEnterPress = function (evt) {
+  if (evt.key === "Enter") {
+    activateMap();
+  }
+};
+deactivateMap();
+mapPin.addEventListener('mousedown', onMapPinMousedown);
+mapPin.addEventListener('keydown', onMapPinEnterPress);
+
+//  ВАЛИДАЦИЯ ФОРМЫ
+const inputRoomNumber = adForm.querySelector('#room_number'); // Количество комнат
+const inputCapacity = adForm.querySelector('#capacity'); // Количество гостей
+
+const onSelectChange = function () {
+  if ((inputRoomNumber.value === '1') && (inputCapacity.value !== '1')) {
+    inputRoomNumber.setCustomValidity('1 комната только для 1 гостя');
+  } else if ((inputRoomNumber.value === '2') && ((inputCapacity.value === '3') || (inputCapacity.value === '0'))) {
+    inputRoomNumber.setCustomValidity('Для 2 и менее гостей');
+  } else if ((inputRoomNumber.value === '3') && (inputCapacity.value === '0')) {
+    inputRoomNumber.setCustomValidity('Для 3 или менее гостей');
+  } else if ((inputRoomNumber.value === '100') && (inputCapacity.value !== '0')) {
+    inputRoomNumber.setCustomValidity('Не для гостей');
+  } else {
+    inputRoomNumber.setCustomValidity('');
+  }
+  inputRoomNumber.reportValidity();
+};
+
+inputCapacity.addEventListener(`change`, onSelectChange);
+inputRoomNumber.addEventListener(`change`, onSelectChange);
