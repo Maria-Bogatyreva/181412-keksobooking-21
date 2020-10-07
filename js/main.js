@@ -258,7 +258,7 @@ mapPin.addEventListener('keydown', onMapPinEnterPress);
 const inputRoomNumber = adForm.querySelector('#room_number'); // Количество комнат
 const inputCapacity = adForm.querySelector('#capacity'); // Количество гостей
 
-const checkValidityRoomCapasity = function () {
+const onSelectChange = function () {
   if ((inputRoomNumber.value === '1') && (inputCapacity.value !== '1')) {
     inputRoomNumber.setCustomValidity('1 комната только для 1 гостя');
   } else if ((inputRoomNumber.value === '2') && ((inputCapacity.value === '3') || (inputCapacity.value === '0'))) {
@@ -273,5 +273,5 @@ const checkValidityRoomCapasity = function () {
   inputRoomNumber.reportValidity();
 };
 
-inputCapacity.addEventListener(`change`, checkValidityRoomCapasity);
-inputRoomNumber.addEventListener(`change`, checkValidityRoomCapasity);
+inputCapacity.addEventListener(`change`, onSelectChange);
+inputRoomNumber.addEventListener(`change`, onSelectChange);
