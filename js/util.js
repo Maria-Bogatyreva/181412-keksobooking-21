@@ -29,8 +29,6 @@
     return copyElements.slice(window.util.getRandomNumber(0, copyElements.length));
   };
 
-
-
   window.util = {
     getRandomNumber: getRandomNumber,
     getRandomElement: getRandomElement,

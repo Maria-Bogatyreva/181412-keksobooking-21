@@ -51,8 +51,8 @@
     return pinsList;
   };
 
-window.data = {
-  generatePins: generatePins
+  window.data = {
+    generatePins: generatePins
 }
 
 
