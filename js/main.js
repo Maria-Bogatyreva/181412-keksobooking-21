@@ -24,23 +24,6 @@
   ];
   const typesList = ['palace', 'flat', 'house', 'bungalow'];
 
-  // Функция для получения массива случайной длины
-  const getRandomArray = function (primaryElements) {
-    // Клонируем исходный массив
-    const copyElements = primaryElements.slice();
-    // Перетасовываем клон-массив
-    let j;
-    let temp;
-    for (let i = copyElements.length - 1; i > 0; i--) {
-      j = Math.floor(Math.random() * (i + 1));
-      temp = copyElements[i];
-      copyElements[i] = copyElements[j];
-      copyElements[j] = temp;
-    }
-    //  Отрезаем кусок случайной длины
-    return copyElements.slice(window.util.getRandomNumber(0, copyElements.length));
-  };
-
   // Клонирование метки
   const getPin = function (templateObject) {
     const similarPinTemplate = document.querySelector('#pin')
@@ -78,9 +61,9 @@
           "guests": 2,
           "checkin": window.util.getRandomElement(checkinOptions),
           "checkout": window.util.getRandomElement(checkoutOptions),
-          "features": getRandomArray(featuresList),
+          "features": window.util.getRandomArray(featuresList),
           "description": 'Хорошая квартира-студия для комфортного проживания',
-          "photos": getRandomArray(photosList)
+          "photos": window.util.getRandomArray(photosList)
         },
         "location": {
           "x": x,
@@ -170,14 +153,13 @@
   };
   createCard(pins[0]);
 
-  //  10. Личный проект: доверяй, но проверяй (часть 1). Активация карты. Валидация формы
+  //  10. Личный проект: доверяй, но проверяй (часть 1). Активация карты
   const mapPin = document.querySelector('.map__pin--main'); // Метка на карте
   const MAP_PIN_WIDTH = 65;
   const MAP_PIN_HEIGHT = 84;
 
   const mapFilter = document.querySelector('.map__filters-container'); // Фильтр на карте
-  const adForm = document.querySelector('.ad-form'); // Форма добавления объявления
-  const inputAdress = adForm.querySelector('#address'); // Адрес в форме
+  const inputAdress = window.constant.adForm.querySelector('#address'); // Адрес в форме
 
   //  Функция для блокировки формы
   const blockForm = function (form) {
@@ -215,7 +197,7 @@
 
     addPins(pins);
 
-    unblockForm(adForm);
+    unblockForm(window.constant.adForm);
     unblockForm(mapFilter);
     getActiveMapAdressValue();
 
@@ -224,7 +206,7 @@
   };
 
   const deactivateMap = function () {
-    blockForm(adForm); // Заблокировали форму объявления
+    blockForm(window.constant.adForm); // Заблокировали форму объявления
     blockForm(mapFilter); // Заблокировали фильтр на карте
     getDeactiveMapAdressValue();
   };
@@ -245,25 +227,4 @@
   mapPin.addEventListener('mousedown', onMapPinMousedown);
   mapPin.addEventListener('keydown', onMapPinEnterPress);
 
-  //  ВАЛИДАЦИЯ ФОРМЫ
-  const inputRoomNumber = adForm.querySelector('#room_number'); // Количество комнат
-  const inputCapacity = adForm.querySelector('#capacity'); // Количество гостей
-
-  const onSelectChange = function () {
-    if ((inputRoomNumber.value === '1') && (inputCapacity.value !== '1')) {
-      inputRoomNumber.setCustomValidity('1 комната только для 1 гостя');
-    } else if ((inputRoomNumber.value === '2') && ((inputCapacity.value === '3') || (inputCapacity.value === '0'))) {
-      inputRoomNumber.setCustomValidity('Для 2 и менее гостей');
-    } else if ((inputRoomNumber.value === '3') && (inputCapacity.value === '0')) {
-      inputRoomNumber.setCustomValidity('Для 3 или менее гостей');
-    } else if ((inputRoomNumber.value === '100') && (inputCapacity.value !== '0')) {
-      inputRoomNumber.setCustomValidity('Не для гостей');
-    } else {
-      inputRoomNumber.setCustomValidity('');
-    }
-    inputRoomNumber.reportValidity();
-  };
-
-  inputCapacity.addEventListener(`change`, onSelectChange);
-  inputRoomNumber.addEventListener(`change`, onSelectChange);
-  })();
+})();
