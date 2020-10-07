@@ -39,7 +39,7 @@
     document.querySelector('.map').classList.remove('map--faded');
     document.querySelector('.ad-form').classList.remove('ad-form--disabled');
 
-    window.pin.addPins(pins);
+    window.pin.addPins(window.data.pins);
 
     unblockForm(window.constant.adForm);
     unblockForm(window.constant.mapFilter);
@@ -73,7 +73,5 @@
     deactivateMap: deactivateMap,
     onMapPinMousedown: onMapPinMousedown,
     onMapPinEnterPress: onMapPinEnterPress
-  }
-
-
+  };
 })();

@@ -17,6 +17,7 @@
     "http://o0.github.io/assets/images/tokyo/hotel2.jpg",
     "http://o0.github.io/assets/images/tokyo/hotel3.jpg"
   ];
+  const AMOUNT_PINS = 8;
 
   const generatePins = function (amount) {
     const pinsList = [];
@@ -50,10 +51,13 @@
     }
     return pinsList;
   };
+  const pins = generatePins(AMOUNT_PINS); // Сгенерировали массив пинов
+
 
   window.data = {
-    generatePins: generatePins
-}
+    generatePins: generatePins,
+    pins: pins
+  };
 
 
 })();

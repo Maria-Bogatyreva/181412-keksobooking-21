@@ -4,7 +4,7 @@
   const PIN_HEIGHT = 70;
   const PIN_WIDTH = 50;
 
-    // Клонирование метки
+  // Клонирование метки
   const getPin = function (templateObject) {
     const similarPinTemplate = document.querySelector('#pin')
     .content
@@ -34,6 +34,5 @@
 
   window.pin = {
     addPins: addPins
-  }
-
+  };
 })();

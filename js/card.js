@@ -2,7 +2,7 @@
 
 (function () {
   // Отображение карточки объявления (первой)
-    const typesListRus = {
+  const typesListRus = {
     flat: 'Квартира',
     bungalow: 'Бунгало',
     house: 'Дом',
@@ -67,7 +67,5 @@
 
   window.card = {
     createCard: createCard
-  }
-
-
+  };
 })();
