@@ -26,7 +26,7 @@
       copyElements[j] = temp;
     }
     //  Отрезаем кусок случайной длины
-    return copyElements.slice(window.util.getRandomNumber(0, copyElements.length));
+    return copyElements.slice(getRandomNumber(0, copyElements.length));
   };
 
   window.util = {

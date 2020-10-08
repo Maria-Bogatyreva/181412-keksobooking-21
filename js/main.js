@@ -1,7 +1,17 @@
 'use strict';
 (function () {
-  window.card.createCard(window.data.pins[0]); // Отображение на карте карточки объявления (первой)
-  window.map.deactivateMap();
-  window.constant.mapPin.addEventListener('mousedown', window.map.onMapPinMousedown);
-  window.constant.mapPin.addEventListener('keydown', window.map.onMapPinEnterPress);
+  // Импортируемые данные
+  const pins = window.data.pins;
+  const mapPin = window.constant.mapPin;
+  const createCard = window.card.createCard;
+  const deactivateMap = window.map.deactivateMap;
+  const onMapPinMousedown = window.map.onMapPinMousedown;
+  const onMapPinEnterPress = window.map.onMapPinEnterPress;
+
+
+
+  createCard(pins[0]); // Отображение на карте карточки объявления (первой)
+  deactivateMap();
+  mapPin.addEventListener('mousedown', onMapPinMousedown);
+  mapPin.addEventListener('keydown', onMapPinEnterPress);
 })();

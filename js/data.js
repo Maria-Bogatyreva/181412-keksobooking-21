@@ -1,5 +1,14 @@
 'use strict';
 (function () {
+  // Импортируемые данные
+  const getRandomNumber = window.util.getRandomNumber;
+  const getRandomElement = window.util.getRandomElement;
+  const getRandomArray = window.util.getRandomArray;
+  const MIN_X = window.constant.MIN_X;
+  const MAX_X = window.constant.MAX_X;
+  const MIN_Y = window.constant.MIN_Y;
+  const MAX_Y = window.constant.MAX_Y;
+
   // Функция для генерации массива объектов меток
   const typesList = ['palace', 'flat', 'house', 'bungalow'];
   const checkinOptions = ['12:00', '13:00', '14:00'];
@@ -23,8 +32,8 @@
     const pinsList = [];
 
     for (let i = 1; i <= amount; i++) {
-      const x = window.util.getRandomNumber(window.constant.MIN_X, window.constant.MAX_X);
-      const y = window.util.getRandomNumber(window.constant.MIN_Y, window.constant.MAX_Y);
+      const x = getRandomNumber(MIN_X, MAX_X);
+      const y = getRandomNumber(MIN_Y, MAX_Y);
 
       pinsList.push({
         "author": {
@@ -34,14 +43,14 @@
           "title": 'Уютная студия у метро',
           "address": x + ',' + y,
           "price": 10000,
-          "type": window.util.getRandomElement(typesList),
+          "type": getRandomElement(typesList),
           "rooms": 2,
           "guests": 2,
-          "checkin": window.util.getRandomElement(checkinOptions),
-          "checkout": window.util.getRandomElement(checkoutOptions),
-          "features": window.util.getRandomArray(featuresList),
+          "checkin": getRandomElement(checkinOptions),
+          "checkout": getRandomElement(checkoutOptions),
+          "features": getRandomArray(featuresList),
           "description": 'Хорошая квартира-студия для комфортного проживания',
-          "photos": window.util.getRandomArray(photosList)
+          "photos": getRandomArray(photosList)
         },
         "location": {
           "x": x,
@@ -55,7 +64,6 @@
 
 
   window.data = {
-    generatePins: generatePins,
     pins: pins
   };
 
