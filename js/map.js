@@ -5,7 +5,7 @@
   const mapPin = window.constant.mapPin;
   const adForm = window.constant.adForm;
   const mapFilter = window.constant.mapFilter;
-  const addPins = window.pin.addPins;
+  const addPins = window.pin.add;
   const pins = window.data.pins;
 
 
@@ -78,7 +78,7 @@
   };
 
   window.map = {
-    deactivateMap: deactivateMap,
+    deactivate: deactivateMap,
     onMapPinMousedown: onMapPinMousedown,
     onMapPinEnterPress: onMapPinEnterPress
   };

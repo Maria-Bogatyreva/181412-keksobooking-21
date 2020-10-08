@@ -33,6 +33,6 @@
   };
 
   window.pin = {
-    addPins: addPins
+    add: addPins
   };
 })();
