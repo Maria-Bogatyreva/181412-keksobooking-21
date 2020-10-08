@@ -9,7 +9,6 @@
   const onMapPinEnterPress = window.map.onMapPinEnterPress;
 
 
-
   createCard(pins[0]); // Отображение на карте карточки объявления (первой)
   deactivateMap();
   mapPin.addEventListener('mousedown', onMapPinMousedown);
