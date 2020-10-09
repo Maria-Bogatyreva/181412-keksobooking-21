@@ -9,8 +9,8 @@
   const mapFilter = window.constant.mapFilter;
   const addPins = window.pin.add;
   const pins = window.data.pins;
-
-  const inputAdress = adForm.querySelector('#address'); // Адрес в форме
+  const onMousedown = window.move.onMousedown;
+  const inputAdress = window.constant.inputAdress;
 
   //  Функция для блокировки формы
   const blockForm = function (form) {
@@ -54,6 +54,7 @@
 
     mapPin.removeEventListener('mousedown', onMapPinMousedown);
     mapPin.removeEventListener('keydown', onMapPinEnterPress);
+    mapPin.addEventListener('mousedown', onMousedown);
   };
 
   const deactivateMap = function () {
@@ -79,6 +80,7 @@
   window.map = {
     deactivate: deactivateMap,
     onMousedown: onMapPinMousedown,
-    onEnterPress: onMapPinEnterPress
+    onEnterPress: onMapPinEnterPress,
+    inputAdress: inputAdress
   };
 })();

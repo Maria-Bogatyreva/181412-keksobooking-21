@@ -1,16 +1,16 @@
 'use strict';
 (function () {
 
-  const MAP_PIN_WIDTH = 65;
-  const MAP_PIN_HEIGHT = 84;
-  const MIN_Y = window.constant.MIN_Y;
-  const MAX_Y = window.constant.MAX_Y;
-  const MIN_X = window.constant.MIN_X;
-  const MAX_X = window.constant.MAX_Y;
+  const MAP_PIN_WIDTH = window.constant.MAP_PIN_WIDTH;
+  const MAP_PIN_HEIGHT = window.constant.MAP_PIN_HEIGHT;
+  const MIN_Y = window.constant.MIN_Y; // 130
+  const MAX_Y = window.constant.MAX_Y; // 630
+  const MIN_X = window.constant.MIN_X; // 0
+  const MAX_X = window.constant.MAX_X; // 1200
   const mapPin = window.constant.mapPin;
-  const inputAdress = window.map.inputAdress;
+  const inputAdress = window.constant.inputAdress;
 
-  mapPin.addEventListener('mousedown', function (evt) {
+  const onMousedown = function (evt) {
     evt.preventDefault();
 
     let startCoords = {
@@ -31,29 +31,37 @@
         y: moveEvt.clientY
       };
 
-
-      // Ограничиваем передвижение
-
-      if ((mapPin.offsetTop - shift.y) <= 130) {
-        mapPin.style.top = 130 + 'px';
+      // Ограничиваем передвижение по Y, по вертикали
+      if ((mapPin.offsetTop - shift.y) <= MIN_Y) {
+        mapPin.style.top = (MAX_Y + MAP_PIN_HEIGHT) + 'px';
       } else {
         mapPin.style.top = (mapPin.offsetTop - shift.y) + 'px';
       }
 
+      if ((mapPin.offsetTop - shift.y) >= MAX_Y) {
+        mapPin.style.top = (MAX_Y - MAP_PIN_HEIGHT) + 'px';
+      } else {
+        mapPin.style.top = (mapPin.offsetTop - shift.y) + 'px';
+      };
 
-      // mapPin.style.top = (mapPin.offsetTop - shift.y) + 'px'; // верх, от 130 до 630
-      mapPin.style.left = (mapPin.offsetLeft - shift.x) + 'px'; // горизонталь от 0 до 1200
+      // Ограничиваем передвижение по X, по горизонтали
+      if ((mapPin.offsetLeft - shift.x) <= MIN_X) {
+        mapPin.style.left = (MIN_X + Math.round(MAP_PIN_WIDTH / 2)) + 'px';
+      } else {
+        mapPin.style.left = (mapPin.offsetLeft - shift.x) + 'px';
+      }
 
+      if ((mapPin.offsetLeft - shift.x) >= MAX_X) {
+        mapPin.style.left = (MAX_X - Math.round(MAP_PIN_WIDTH / 2)) + 'px';
+      } else {
+        mapPin.style.left = (mapPin.offsetLeft - shift.x) + 'px';
+      }
 
-
-
-
+      inputAdress.value = `${(parseInt(mapPin.style.left, 10)) + Math.round(MAP_PIN_WIDTH / 2)}, ${(parseInt(mapPin.style.top, 10)) + MAP_PIN_HEIGHT}`;
     };
 
     const onMouseUp = function (upEvt) {
       upEvt.preventDefault();
-
-      inputAdress.value = `${(parseInt(mapPin.style.left, 10)) + Math.round(MAP_PIN_WIDTH / 2)}, ${(parseInt(mapPin.style.top, 10)) + MAP_PIN_HEIGHT}`;
 
       document.removeEventListener('mousemove', onMouseMove);
       document.addEventListener('mouseup', onMouseUp);
@@ -61,6 +69,10 @@
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
-  });
+  };
+
+  window.move = {
+    onMousedown: onMousedown
+  }
 })();
 

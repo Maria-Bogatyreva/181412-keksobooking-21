@@ -10,6 +10,7 @@
   const adForm = document.querySelector('.ad-form'); // Форма добавления объявления
   const mapPin = document.querySelector('.map__pin--main'); // Главная метка на карте
   const mapFilter = document.querySelector('.map__filters-container'); // Фильтр на карте
+  const inputAdress = adForm.querySelector('#address'); // Адрес в форме
 
   window.constant = {
     adForm: adForm,
@@ -19,6 +20,7 @@
     MAX_X: MAX_X,
     mapPin: mapPin,
     mapFilter: mapFilter,
+    inputAdress: inputAdress,
     MAP_PIN_WIDTH: MAP_PIN_WIDTH,
     MAP_PIN_HEIGHT: MAP_PIN_HEIGHT
   };
