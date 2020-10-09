@@ -42,7 +42,7 @@
         mapPin.style.top = (MAX_Y - MAP_PIN_HEIGHT) + 'px';
       } else {
         mapPin.style.top = (mapPin.offsetTop - shift.y) + 'px';
-      };
+      }
 
       // Ограничиваем передвижение по X, по горизонтали
       if ((mapPin.offsetLeft - shift.x) <= MIN_X) {
@@ -73,6 +73,6 @@
 
   window.move = {
     onMousedown: onMousedown
-  }
+  };
 })();
 
