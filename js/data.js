@@ -1,13 +1,13 @@
 'use strict';
 (function () {
   // Импортируемые данные
-  const getRandomNumber = window.util.getRandomNumber;
-  const getRandomElement = window.util.getRandomElement;
-  const getRandomArray = window.util.getRandomArray;
   const MIN_X = window.constant.MIN_X;
   const MAX_X = window.constant.MAX_X;
   const MIN_Y = window.constant.MIN_Y;
   const MAX_Y = window.constant.MAX_Y;
+  const getRandomNumber = window.util.getRandomNumber;
+  const getRandomElement = window.util.getRandomElement;
+  const getRandomArray = window.util.getRandomArray;
 
   // Функция для генерации массива объектов меток
   const typesList = ['palace', 'flat', 'house', 'bungalow'];
