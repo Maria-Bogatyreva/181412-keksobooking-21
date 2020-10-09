@@ -5,8 +5,8 @@
   const mapPin = window.constant.mapPin;
   const createCard = window.card.create;
   const deactivateMap = window.map.deactivate;
-  const onMapPinMousedown = window.map.onMapPinMousedown;
-  const onMapPinEnterPress = window.map.onMapPinEnterPress;
+  const onMapPinMousedown = window.map.onMousedown;
+  const onMapPinEnterPress = window.map.onPinEnterPress;
 
 
   createCard(pins[0]); // Отображение на карте карточки объявления (первой)

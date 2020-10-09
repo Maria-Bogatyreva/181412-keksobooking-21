@@ -79,7 +79,7 @@
 
   window.map = {
     deactivate: deactivateMap,
-    onMapPinMousedown: onMapPinMousedown,
-    onMapPinEnterPress: onMapPinEnterPress
+    onMousedown: onMapPinMousedown,
+    onEnterPress: onMapPinEnterPress
   };
 })();
