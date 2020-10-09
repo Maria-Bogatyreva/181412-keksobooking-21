@@ -2,15 +2,14 @@
 
 (function () {
   // Импортируемые данные
+  const MAP_PIN_WIDTH = window.constant.MAP_PIN_WIDTH;
+  const MAP_PIN_HEIGHT = window.constant.MAP_PIN_HEIGHT;
   const mapPin = window.constant.mapPin;
   const adForm = window.constant.adForm;
   const mapFilter = window.constant.mapFilter;
   const addPins = window.pin.add;
   const pins = window.data.pins;
 
-
-  const MAP_PIN_WIDTH = 65;
-  const MAP_PIN_HEIGHT = 84;
   const inputAdress = adForm.querySelector('#address'); // Адрес в форме
 
   //  Функция для блокировки формы
