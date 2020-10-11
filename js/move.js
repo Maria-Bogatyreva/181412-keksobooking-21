@@ -33,7 +33,7 @@
 
       // Ограничиваем передвижение по Y, по вертикали
       if ((mapPin.offsetTop - shift.y) < (MIN_Y - MAP_PIN_HEIGHT)) {
-        mapPin.style.top = (MIN_Y + MAP_PIN_HEIGHT) + 'px';
+        mapPin.style.top = (MIN_Y - MAP_PIN_HEIGHT) + 'px';
       } else if (((mapPin.offsetTop - shift.y) > (MAX_Y - MAP_PIN_HEIGHT))) {
         mapPin.style.top = (MAX_Y - MAP_PIN_HEIGHT) + 'px';
       } else {
@@ -42,7 +42,7 @@
 
       // Ограничиваем передвижение по X, по горизонтали
       if ((mapPin.offsetLeft - shift.x) < (MIN_X - Math.round(MAP_PIN_WIDTH / 2))) {
-        mapPin.style.left = (MIN_X + Math.round(MAP_PIN_WIDTH / 2)) + 'px';
+        mapPin.style.left = (MIN_X - Math.round(MAP_PIN_WIDTH / 2)) + 'px';
       } else if (((mapPin.offsetLeft - shift.x) > (MAX_X - Math.round(MAP_PIN_WIDTH / 2)))) {
         mapPin.style.left = (MAX_X - Math.round(MAP_PIN_WIDTH / 2)) + 'px';
       } else {
