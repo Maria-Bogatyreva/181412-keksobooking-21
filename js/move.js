@@ -32,26 +32,18 @@
       };
 
       // Ограничиваем передвижение по Y, по вертикали
-      if ((mapPin.offsetTop - shift.y) <= MIN_Y) {
-        mapPin.style.top = (MAX_Y + MAP_PIN_HEIGHT) + 'px';
-      } else {
-        mapPin.style.top = (mapPin.offsetTop - shift.y) + 'px';
-      }
-
-      if ((mapPin.offsetTop - shift.y) >= MAX_Y) {
+      if ((mapPin.offsetTop - shift.y) < (MIN_Y - MAP_PIN_HEIGHT)) {
+        mapPin.style.top = (MIN_Y + MAP_PIN_HEIGHT) + 'px';
+      } else if (((mapPin.offsetTop - shift.y) > (MAX_Y - MAP_PIN_HEIGHT))) {
         mapPin.style.top = (MAX_Y - MAP_PIN_HEIGHT) + 'px';
       } else {
         mapPin.style.top = (mapPin.offsetTop - shift.y) + 'px';
       }
 
       // Ограничиваем передвижение по X, по горизонтали
-      if ((mapPin.offsetLeft - shift.x) <= MIN_X) {
+      if ((mapPin.offsetLeft - shift.x) < (MIN_X - Math.round(MAP_PIN_WIDTH / 2))) {
         mapPin.style.left = (MIN_X + Math.round(MAP_PIN_WIDTH / 2)) + 'px';
-      } else {
-        mapPin.style.left = (mapPin.offsetLeft - shift.x) + 'px';
-      }
-
-      if ((mapPin.offsetLeft - shift.x) >= MAX_X) {
+      } else if (((mapPin.offsetLeft - shift.x) > (MAX_X - Math.round(MAP_PIN_WIDTH / 2)))) {
         mapPin.style.left = (MAX_X - Math.round(MAP_PIN_WIDTH / 2)) + 'px';
       } else {
         mapPin.style.left = (mapPin.offsetLeft - shift.x) + 'px';
