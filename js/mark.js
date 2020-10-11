@@ -5,34 +5,34 @@
   const PIN_WIDTH = 50;
 
   // Клонирование метки
-  const getPin = function (templateObject) {
+  const getMark = function (pin) {
     const similarPinTemplate = document.querySelector('#pin')
     .content
     .querySelector('.map__pin');
 
     const pinElement = similarPinTemplate.cloneNode(true);
 
-    pinElement.style.left = templateObject.location.x - (PIN_WIDTH / 2) + 'px';
-    pinElement.style.top = templateObject.location.y - PIN_HEIGHT + 'px';
-    pinElement.querySelector('img').src = templateObject.author.avatar;
-    pinElement.querySelector('img').alt = templateObject.offer.title;
+    pinElement.style.left = pin.location.x - (PIN_WIDTH / 2) + 'px';
+    pinElement.style.top = pin.location.y - PIN_HEIGHT + 'px';
+    pinElement.querySelector('img').src = pin.author.avatar;
+    pinElement.querySelector('img').alt = pin.offer.title;
 
     return pinElement;
   };
 
   //  Функция для добавления меток на карту - Отрисовка похожих объявлений на карте
-  const addPins = function (preparedPins) {
+  const addMarks = function (pins) {
     const similarListPins = document.querySelector('.map__pins');
     const fragment = document.createDocumentFragment();
 
-    preparedPins.forEach(function (element) {
-      fragment.appendChild(getPin(element));
+    pins.forEach(function (element) {
+      fragment.appendChild(getMark(element));
     });
 
     similarListPins.appendChild(fragment);
   };
 
-  window.pin = {
-    add: addPins
+  window.mark = {
+    add: addMarks
   };
 })();
