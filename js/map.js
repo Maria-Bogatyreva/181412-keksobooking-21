@@ -2,16 +2,15 @@
 
 (function () {
   // Импортируемые данные
+  const MAP_PIN_WIDTH = window.constant.MAP_PIN_WIDTH;
+  const MAP_PIN_HEIGHT = window.constant.MAP_PIN_HEIGHT;
   const mapPin = window.constant.mapPin;
   const adForm = window.constant.adForm;
   const mapFilter = window.constant.mapFilter;
   const addPins = window.pin.add;
   const pins = window.data.pins;
-
-
-  const MAP_PIN_WIDTH = 65;
-  const MAP_PIN_HEIGHT = 84;
-  const inputAdress = adForm.querySelector('#address'); // Адрес в форме
+  const onMousedown = window.move.onMousedown;
+  const inputAdress = window.constant.inputAdress;
 
   //  Функция для блокировки формы
   const blockForm = function (form) {
@@ -55,6 +54,7 @@
 
     mapPin.removeEventListener('mousedown', onMapPinMousedown);
     mapPin.removeEventListener('keydown', onMapPinEnterPress);
+    mapPin.addEventListener('mousedown', onMousedown);
   };
 
   const deactivateMap = function () {
@@ -80,6 +80,7 @@
   window.map = {
     deactivate: deactivateMap,
     onMousedown: onMapPinMousedown,
-    onEnterPress: onMapPinEnterPress
+    onEnterPress: onMapPinEnterPress,
+    inputAdress: inputAdress
   };
 })();
