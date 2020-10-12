@@ -11,6 +11,7 @@
   const mapPin = document.querySelector('.map__pin--main'); // Главная метка на карте
   const mapFilter = document.querySelector('.map__filters-container'); // Фильтр на карте
   const inputAdress = adForm.querySelector('#address'); // Адрес в форме
+  const map = document.querySelector('.map');
 
   window.constant = {
     adForm: adForm,
@@ -21,6 +22,8 @@
     mapPin: mapPin,
     mapFilter: mapFilter,
     inputAdress: inputAdress,
+    map: map,
+
     MAP_PIN_WIDTH: MAP_PIN_WIDTH,
     MAP_PIN_HEIGHT: MAP_PIN_HEIGHT
   };

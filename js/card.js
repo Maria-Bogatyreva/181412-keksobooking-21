@@ -1,7 +1,9 @@
 'use strict';
 
 (function () {
-  // Отображение карточки объявления (первой)
+  // Импортируемые данные
+  const map = window.constant.map;
+
   const typesListRus = {
     flat: 'Квартира',
     bungalow: 'Бунгало',
@@ -10,7 +12,6 @@
   };
 
   const createCard = function (templateCard) {
-    const map = document.querySelector('.map');
     const mapFiltersContainer = map.querySelector('.map__filters-container');
     const similarCardTemplate = document.querySelector('#card')
     .content
@@ -62,7 +63,7 @@
       });
       featuresBlock.appendChild(fragmentFeatures);
     }
-    // map.insertBefore(cardElement, mapFiltersContainer);
+    map.insertBefore(cardElement, mapFiltersContainer);
   };
 
   window.card = {

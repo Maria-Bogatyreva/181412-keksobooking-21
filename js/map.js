@@ -7,7 +7,7 @@
   const mapPin = window.constant.mapPin;
   const adForm = window.constant.adForm;
   const mapFilter = window.constant.mapFilter;
-  const addPins = window.pin.add;
+  const addMarks = window.mark.add;
   const pins = window.data.pins;
   const onMousedown = window.move.onMousedown;
   const inputAdress = window.constant.inputAdress;
@@ -46,7 +46,7 @@
     document.querySelector('.map').classList.remove('map--faded');
     document.querySelector('.ad-form').classList.remove('ad-form--disabled');
 
-    addPins(pins);
+    addMarks(pins);
 
     unblockForm(adForm);
     unblockForm(mapFilter);
