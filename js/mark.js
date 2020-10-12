@@ -33,8 +33,6 @@
       const card = map.querySelector('.map__card');
       if (card) {
         map.removeChild(card);
-        mark.removeEventListener('click', onMarkClick);
-        mark.removeEventListener('keydown', onMarkEnterClick);
         card.querySelector('.popup__close').removeEventListener('click', closeCard);
         document.removeEventListener('keydown', onCardEscPress);
       }

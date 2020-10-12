@@ -68,15 +68,19 @@
     if ((type.value === `bungalow`) && (price.value < 0)) {
       price.setCustomValidity('Для бунгало минимальная цена за ночь 0р');
       price.setAttribute('placeholder', '0');
+      price.setAttribute('min', '0');
     } else if ((type.value === `flat`) && (price.value < 1000)) {
       price.setCustomValidity('Для квартиры минимальная цена за ночь 1000р');
       price.setAttribute('placeholder', '1000');
+      price.setAttribute('min', '1000');
     } else if ((type.value === `house`) && (price.value < 5000)) {
       price.setCustomValidity('Для дома минимальная цена за ночь 5000р');
       price.setAttribute('placeholder', '5000');
+      price.setAttribute('min', '5000');
     } else if ((type.value === `palace`) && (price.value < 10000)) {
       price.setCustomValidity('Для дворца минимальная цена за ночь 10000р');
       price.setAttribute('placeholder', '10000');
+      price.setAttribute('min', '10000');
     } else {
       price.setCustomValidity('');
     }
