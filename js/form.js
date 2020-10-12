@@ -91,7 +91,7 @@
   type.addEventListener('change', onTypePriceChange);
 
   // Валидация адреса
-  address.setAttribute('disabled', 'disabled');
+  address.setAttribute('readonly', 'readonly');
 
   // Валидация Время заезда - Время выезда
   const onTimeinChange = function () {

@@ -25,17 +25,23 @@
       closeCard();
       createCard(pin);
       const card = map.querySelector('.map__card');
-      card.querySelector('.popup__close').addEventListener('click', closeCard);
+      const cardClose = card.querySelector('.popup__close');
+      cardClose.addEventListener('click', onCardCloseClick);
       document.addEventListener('keydown', onCardEscPress);
     };
     // Закрытие карточки
     const closeCard = function () {
       const card = map.querySelector('.map__card');
       if (card) {
+        const cardClose = card.querySelector('.popup__close');
         map.removeChild(card);
-        card.querySelector('.popup__close').removeEventListener('click', closeCard);
+        cardClose.removeEventListener('click', onCardCloseClick);
         document.removeEventListener('keydown', onCardEscPress);
       }
+    };
+
+    const onCardCloseClick = function () {
+      closeCard();
     };
 
     const onCardEscPress = function (evt) {
