@@ -52,6 +52,7 @@
   title.addEventListener('input', onTitleInput);
 
   // Валидация максимальной цены
+  price.setAttribute('max', '1000000');
   const onPriceInput = function () {
     const MAX_PRICE_VALUE = 1000000;
     if (price.value > MAX_PRICE_VALUE) {
