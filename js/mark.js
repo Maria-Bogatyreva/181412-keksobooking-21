@@ -65,18 +65,6 @@
     return mark;
   };
 
-  //  Функция для добавления меток на карту
-  const addMarks = function (pins) {
-    const similarListPins = document.querySelector('.map__pins');
-    const fragment = document.createDocumentFragment();
-
-    pins.forEach(function (element) {
-      fragment.appendChild(getMark(element));
-    });
-
-    similarListPins.appendChild(fragment);
-  };
-
   // Функция, если данные с сервера пришли успешно
     const successHandler =  function(pins) {
       const similarListPins = document.querySelector('.map__pins');
@@ -89,7 +77,7 @@
       similarListPins.appendChild(fragment);
     };
 
-          // Функция, в случае ошибки
+  // Функция, если при загрузке произошла ошибка
   const errorHandler = function (errorMessage) {
     const node = document.createElement('div');
     node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
@@ -103,8 +91,6 @@
   }
 
   window.mark = {
-    add: addMarks,
-    getMark: getMark,
     successHandler: successHandler,
     errorHandler: errorHandler
   };

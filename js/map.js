@@ -7,12 +7,9 @@
   const mapPin = window.constant.mapPin;
   const adForm = window.constant.adForm;
   const mapFilter = window.constant.mapFilter;
-  const addMarks = window.mark.add;
-  const pins = window.data.pins;
   const onMousedown = window.move.onMousedown;
   const inputAdress = window.constant.inputAdress;
   const load = window.backend.load;
-  const getMark = window.mark.getMark;
   const successHandler = window.mark.successHandler;
   const errorHandler = window.mark.errorHandler;
 
