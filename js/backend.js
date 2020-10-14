@@ -34,6 +34,6 @@
 
   window.backend = {
     load: load
-  }
+  };
 
 })();

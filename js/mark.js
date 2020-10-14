@@ -66,16 +66,16 @@
   };
 
   // Функция, если данные с сервера пришли успешно
-    const successHandler =  function(pins) {
-      const similarListPins = document.querySelector('.map__pins');
-      const fragment = document.createDocumentFragment();
+  const successHandler = function (pins) {
+    const similarListPins = document.querySelector('.map__pins');
+    const fragment = document.createDocumentFragment();
 
-      pins.forEach(function (element) {
-        fragment.appendChild(getMark(element));
-      });
+    pins.forEach(function (element) {
+      fragment.appendChild(getMark(element));
+    });
 
-      similarListPins.appendChild(fragment);
-    };
+    similarListPins.appendChild(fragment);
+  };
 
   // Функция, если при загрузке произошла ошибка
   const errorHandler = function (errorMessage) {
@@ -88,7 +88,7 @@
 
     node.textContent = errorMessage;
     document.body.insertAdjacentElement('afterbegin', node);
-  }
+  };
 
   window.mark = {
     successHandler: successHandler,
