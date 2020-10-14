@@ -11,6 +11,8 @@
   const pins = window.data.pins;
   const onMousedown = window.move.onMousedown;
   const inputAdress = window.constant.inputAdress;
+  const load = window.backend.load;
+  const getMark = window.mark.getMark;
 
   //  Функция для блокировки формы
   const blockForm = function (form) {
@@ -46,7 +48,20 @@
     document.querySelector('.map').classList.remove('map--faded');
     document.querySelector('.ad-form').classList.remove('ad-form--disabled');
 
-    addMarks(pins);
+    //addMarks(pins);
+    load(function (pins) {
+      const similarListPins = document.querySelector('.map__pins');
+    const fragment = document.createDocumentFragment();
+
+    pins.forEach(function (element) {
+      fragment.appendChild(getMark(element));
+    });
+
+    similarListPins.appendChild(fragment);
+
+    }, function() {});
+
+
 
     unblockForm(adForm);
     unblockForm(mapFilter);

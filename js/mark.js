@@ -78,6 +78,7 @@
   };
 
   window.mark = {
-    add: addMarks
+    add: addMarks,
+    getMark: getMark
   };
 })();
