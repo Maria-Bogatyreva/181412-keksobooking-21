@@ -77,8 +77,35 @@
     similarListPins.appendChild(fragment);
   };
 
+  // Функция, если данные с сервера пришли успешно
+    const successHandler =  function(pins) {
+      const similarListPins = document.querySelector('.map__pins');
+      const fragment = document.createDocumentFragment();
+
+      pins.forEach(function (element) {
+        fragment.appendChild(getMark(element));
+      });
+
+      similarListPins.appendChild(fragment);
+    };
+
+          // Функция, в случае ошибки
+  const errorHandler = function (errorMessage) {
+    const node = document.createElement('div');
+    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+    node.style.position = 'absolute';
+    node.style.left = 0;
+    node.style.right = 0;
+    node.style.fontSize = '30px';
+
+    node.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', node);
+  }
+
   window.mark = {
     add: addMarks,
-    getMark: getMark
+    getMark: getMark,
+    successHandler: successHandler,
+    errorHandler: errorHandler
   };
 })();

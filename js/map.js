@@ -13,6 +13,8 @@
   const inputAdress = window.constant.inputAdress;
   const load = window.backend.load;
   const getMark = window.mark.getMark;
+  const successHandler = window.mark.successHandler;
+  const errorHandler = window.mark.errorHandler;
 
   //  Функция для блокировки формы
   const blockForm = function (form) {
@@ -43,25 +45,12 @@
     inputAdress.value = `${mapPinX + Math.round(MAP_PIN_WIDTH / 2)}, ${mapPinY + Math.round(MAP_PIN_WIDTH / 2)}`;
   };
 
-  // ФУНКЦИЯ ДЛЯ АКТИВАЦИИ СТРАНИЦЫ (и отрисовки похожих объявлений)
+  // ФУНКЦИЯ ДЛЯ АКТИВАЦИИ СТРАНИЦЫ (и отрисовки меток объявлений)
   const activateMap = function () {
     document.querySelector('.map').classList.remove('map--faded');
     document.querySelector('.ad-form').classList.remove('ad-form--disabled');
-
-    //addMarks(pins);
-    load(function (pins) {
-      const similarListPins = document.querySelector('.map__pins');
-    const fragment = document.createDocumentFragment();
-
-    pins.forEach(function (element) {
-      fragment.appendChild(getMark(element));
-    });
-
-    similarListPins.appendChild(fragment);
-
-    }, function() {});
-
-
+    //  Загрузка объявлений на карту
+    load(successHandler, errorHandler);
 
     unblockForm(adForm);
     unblockForm(mapFilter);
@@ -77,7 +66,6 @@
     blockForm(mapFilter); // Заблокировали фильтр на карте
     getDeactiveMapAdressValue();
   };
-
 
   //  Функция для включения карты по движению мыши
   const onMapPinMousedown = function (evt) {
