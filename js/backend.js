@@ -1,10 +1,11 @@
 'use strict';
 (function () {
   const URL = 'https://21.javascript.pages.academy/keksobooking/data';
+  const TIMEOUT_IN_MS = 10000;
   const StatusCode = {
     OK: 200
   };
-  const TIMEOUT_IN_MS = 10000;
+
 
   //  Функция для ПОЛУЧЕНИЯ данных с сервера
   const load = function (onSuccess, onError) {
