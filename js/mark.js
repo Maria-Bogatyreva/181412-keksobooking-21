@@ -65,8 +65,8 @@
     return mark;
   };
 
-  // Функция, если данные с сервера пришли успешно
-  const successHandler = function (pins) {
+  //  Функция для добавления меток на карту
+  const addMarks = function (pins) {
     const similarListPins = document.querySelector('.map__pins');
     const fragment = document.createDocumentFragment();
 
@@ -75,6 +75,11 @@
     });
 
     similarListPins.appendChild(fragment);
+  };
+
+  // Функция, если данные с сервера пришли успешно
+  const successHandler = function (pins) {
+    addMarks(pins);
   };
 
   // Функция, если при загрузке произошла ошибка
