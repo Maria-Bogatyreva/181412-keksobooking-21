@@ -7,29 +7,60 @@
 
   // Успешное сообщение
   const successNoticeTemplate = document.querySelector('#success')
-    .content
-    .querySelector('.success');
+  .content
+  .querySelector('.success');
   const successNotice = successNoticeTemplate.cloneNode(true);
 
-  // Действия при нажатии Esc на успешном объявлени
-  const onSuccessNoticeEscPress = function (evt) {
-      if (evt.key === 'Escape') {
-       evt.preventDefault();
-       successNotice.remove();
+  // Ошибочное сообщение
+  const errorNoticeTemplate = document.querySelector('#error')
+  .content
+  .querySelector('.error');
+  const errorNotice = errorNoticeTemplate.cloneNode(true);
+
+  // Действия при нажатии Esc на объявлени
+  const onNoticeEscPress = function (evt) {
+    if (evt.key === 'Escape') {
+     evt.preventDefault();
+      if (successNotice) {
+        successNotice.remove();
       };
-    }
+      if (errorNotice) {
+        errorNotice.remove();
+      }
+    };
+  };
+
+  // Функция для показа ошибочного объявления
+  const showErrorNotice = function () {
+    document.querySelector('main').insertAdjacentElement('afterbegin', errorNotice);
+
+    document.addEventListener('keydown', onNoticeEscPress);
+    document.addEventListener('click', hideErrorNotice);
+    errorNotice.querySelector('.error__button').addEventListener('click', hideErrorNotice);
+  };
+
+  // Функция для скрытия ошибочного объявления
+  const hideErrorNotice = function () {
+    errorNotice.remove();
+
+    document.removeEventListener('keydown', onNoticeEscPress);
+    document.removeEventListener('click', hideErrorNotice);
+    errorNotice.querySelector('.error__button').removeEventListener('click', hideErrorNotice);
+  }
+
+
   // Функция для показа успешного объявления
   const showSuccessNotice = function () {
     document.body.insertAdjacentElement('afterbegin', successNotice);
 
-    document.addEventListener('keydown', onSuccessNoticeEscPress);
+    document.addEventListener('keydown', onNoticeEscPress);
     document.addEventListener('click', hideSuccessNotice);
   };
 
-  // Функция для сокрытия успешного объявления
+  // Функция для скрытия успешного объявления
   const hideSuccessNotice = function () {
     successNotice.remove();
-    document.removeEventListener('keydown', onSuccessNoticeEscPress);
+    document.removeEventListener('keydown', onNoticeEscPress);
     document.removeEventListener('click', hideSuccessNotice);
   };
 
@@ -40,10 +71,15 @@
     adForm.reset(); // Очистили форму
     showSuccessNotice(); // Вывели успешное сообщение
   };
-  //  ОТПРАВКА ДАННЫХ ФОРМЫ
-  adForm.addEventListener('submit', function (evt) {
+  const errorHandler = function () {
+    showErrorNotice();
+  }
+
+  const submitHandler = function (evt) {
       evt.preventDefault();
-      save(saveHandler, function () {}, new FormData(adForm));
-    });
+      save(saveHandler, errorHandler, new FormData(adForm));
+  };
+  //  ОТПРАВКА ДАННЫХ ФОРМЫ
+  adForm.addEventListener('submit', submitHandler);
 
 })();
