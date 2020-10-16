@@ -8,7 +8,7 @@
 //  ОТПРАВКА ДАННЫХ ФОРМЫ
 adForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    save(function () {}, function () {}, new FormData(adForm));
+    save(saveHandler, function () {}, new FormData(adForm));
 
 
 })();

@@ -59,8 +59,12 @@
   };
 
   const deactivateMap = function () {
+    document.querySelector('.map').classList.add('map--faded');
+    document.querySelector('.ad-form').classList.add('ad-form--disabled');
+
     blockForm(adForm); // Заблокировали форму объявления
     blockForm(mapFilter); // Заблокировали фильтр на карте
+
     getDeactiveMapAdressValue();
   };
 

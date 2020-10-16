@@ -4,6 +4,9 @@
   // Импортируемые данные
   const address = window.constant.inputAdress;
   const adForm = window.constant.adForm;
+  const deactivateMap = window.map.deactivate;
+  const save = window.backend.save;
+  const deleteMarks = window.mark.deleteMarks;
 
   const roomNumber = adForm.querySelector('#room_number'); // Количество комнат
   const capacity = adForm.querySelector('#capacity'); // Количество гостей
@@ -52,8 +55,8 @@
   title.addEventListener('input', onTitleInput);
 
   // Валидация максимальной цены
-  price.setAttribute('required', 'required');
   price.setAttribute('max', '1000000');
+  price.setAttribute('required', 'required');
   const onPriceInput = function () {
     const MAX_PRICE_VALUE = 1000000;
     if (price.value > MAX_PRICE_VALUE) {
@@ -107,4 +110,4 @@
   // Валидация "Ваша фотография" и "Фотография жилья"
   avatar.setAttribute('accept', 'image/*');
   images.setAttribute('accept', 'image/*');
-})();
+  })();
