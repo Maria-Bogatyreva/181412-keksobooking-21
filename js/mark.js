@@ -77,6 +77,16 @@
     similarListPins.appendChild(fragment);
   };
 
+  // Функция для удаления меток с карты
+  const deleteMarks = function () {
+    const marks = document.querySelectorAll('.map__pin');
+
+    marks.forEach(function (element) {
+      if (!element.classList.contains('map__pin--main'))
+      element.remove();
+    })
+  };
+
   // Функция, если данные с сервера пришли успешно
   const successHandler = function (pins) {
     addMarks(pins);
@@ -96,6 +106,8 @@
   };
 
   window.mark = {
+    add: addMarks,
+    delete: deleteMarks,
     successHandler: successHandler,
     errorHandler: errorHandler
   };
