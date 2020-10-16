@@ -4,9 +4,6 @@
   // Импортируемые данные
   const address = window.constant.inputAdress;
   const adForm = window.constant.adForm;
-  const deactivateMap = window.map.deactivate;
-  const save = window.backend.save;
-  const deleteMarks = window.mark.deleteMarks;
 
   const roomNumber = adForm.querySelector('#room_number'); // Количество комнат
   const capacity = adForm.querySelector('#capacity'); // Количество гостей
@@ -110,4 +107,5 @@
   // Валидация "Ваша фотография" и "Фотография жилья"
   avatar.setAttribute('accept', 'image/*');
   images.setAttribute('accept', 'image/*');
-  })();
+
+})();

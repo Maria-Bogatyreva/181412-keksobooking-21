@@ -82,9 +82,10 @@
     const marks = document.querySelectorAll('.map__pin');
 
     marks.forEach(function (element) {
-      if (!element.classList.contains('map__pin--main'))
-      element.remove();
-    })
+      if (!element.classList.contains('map__pin--main')) {
+        element.remove();
+      }
+    });
   };
 
   // Функция, если данные с сервера пришли успешно

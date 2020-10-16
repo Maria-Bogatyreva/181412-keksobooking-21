@@ -20,14 +20,14 @@
   // Действия при нажатии Esc на объявлени
   const onNoticeEscPress = function (evt) {
     if (evt.key === 'Escape') {
-     evt.preventDefault();
+      evt.preventDefault();
       if (successNotice) {
         successNotice.remove();
-      };
+      }
       if (errorNotice) {
         errorNotice.remove();
       }
-    };
+    }
   };
 
   // Функция для показа ошибочного объявления
@@ -46,7 +46,7 @@
     document.removeEventListener('keydown', onNoticeEscPress);
     document.removeEventListener('click', hideErrorNotice);
     errorNotice.querySelector('.error__button').removeEventListener('click', hideErrorNotice);
-  }
+  };
 
 
   // Функция для показа успешного объявления
@@ -73,11 +73,11 @@
   };
   const errorHandler = function () {
     showErrorNotice();
-  }
+  };
 
   const submitHandler = function (evt) {
-      evt.preventDefault();
-      save(saveHandler, errorHandler, new FormData(adForm));
+    evt.preventDefault();
+    save(saveHandler, errorHandler, new FormData(adForm));
   };
   //  ОТПРАВКА ДАННЫХ ФОРМЫ
   adForm.addEventListener('submit', submitHandler);
