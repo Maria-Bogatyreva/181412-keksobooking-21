@@ -17,7 +17,7 @@
   .querySelector('.error');
   const errorNotice = errorNoticeTemplate.cloneNode(true);
 
-  // Действия при нажатии Esc на объявлени
+  // Действия при нажатии Esc на сообщении
   const onNoticeEscPress = function (evt) {
     if (evt.key === 'Escape') {
       evt.preventDefault();
@@ -47,7 +47,6 @@
     document.removeEventListener('click', hideErrorNotice);
     errorNotice.querySelector('.error__button').removeEventListener('click', hideErrorNotice);
   };
-
 
   // Функция для показа успешного объявления
   const showSuccessNotice = function () {
