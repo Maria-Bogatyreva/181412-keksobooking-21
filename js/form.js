@@ -82,4 +82,13 @@
   //  ОТПРАВКА ДАННЫХ ФОРМЫ
   adForm.addEventListener('submit', submitHandler);
 
+  //  Обработчик кнопке очистки формы
+  const clearForm = adForm.querySelector('.ad-form__reset');
+  const onClearFormClick = function (evt) {
+    evt.preventDefault();
+    adForm.reset();
+  };
+
+  clearForm.addEventListener('click', onClearFormClick);
+
 })();
