@@ -65,6 +65,9 @@
     blockForm(adForm); // Заблокировали форму объявления
     blockForm(mapFilter); // Заблокировали фильтр на карте
 
+    mapPin.addEventListener('mousedown', onMapPinMousedown);
+    mapPin.addEventListener('keydown', onMapPinEnterPress);
+
     getDeactiveMapAdressValue();
   };
 
