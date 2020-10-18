@@ -65,8 +65,43 @@
     }
     map.insertBefore(cardElement, mapFiltersContainer);
   };
+    //  Открытие карточки
+  const openCard = function (pin) {
+    closeCard();
+    createCard(pin);
+    const card = map.querySelector('.map__card');
+    const cardClose = card.querySelector('.popup__close');
+    cardClose.addEventListener('click', onCardCloseClick);
+    document.addEventListener('keydown', onCardEscPress);
+  };
+
+  // Закрытие карточки
+  const closeCard = function () {
+    const card = map.querySelector('.map__card');
+    if (card) {
+      const cardClose = card.querySelector('.popup__close');
+      map.removeChild(card);
+      cardClose.removeEventListener('click', onCardCloseClick);
+      document.removeEventListener('keydown', onCardEscPress);
+    }
+  };
+
+  const onCardCloseClick = function () {
+      closeCard();
+    };
+
+ const onCardEscPress = function (evt) {
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
+    closeCard();
+  }
+};
+
 
   window.card = {
-    create: createCard
+    create: createCard,
+    open: openCard,
+    close: closeCard
+
   };
 })();
