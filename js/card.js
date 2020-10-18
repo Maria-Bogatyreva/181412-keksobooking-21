@@ -87,21 +87,20 @@
   };
 
   const onCardCloseClick = function () {
-      closeCard();
-    };
-
- const onCardEscPress = function (evt) {
-  if (evt.key === 'Escape') {
-    evt.preventDefault();
     closeCard();
-  }
-};
+  };
 
+  const onCardEscPress = function (evt) {
+    if (evt.key === 'Escape') {
+      evt.preventDefault();
+      closeCard();
+    }
+  };
 
   window.card = {
     create: createCard,
     open: openCard,
     close: closeCard
-
   };
+
 })();

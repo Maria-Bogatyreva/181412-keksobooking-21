@@ -1,10 +1,10 @@
 'use strict';
 (function () {
-  const map = window.constant.map;
   const adForm = window.constant.adForm;
   const deactivateMap = window.map.deactivate;
   const save = window.backend.save;
   const deleteMarks = window.mark.delete;
+  const closeCard = window.card.close;
 
   // Успешное сообщение
   const successNoticeTemplate = document.querySelector('#success')
@@ -66,16 +66,15 @@
 
   //  Действия, если данные отправились успешно
   const saveHandler = function () {
-    const card = map.querySelector('.map__card');
-    if (card) {
-      map.removeChild(card);
-    }
+    closeCard();
     deleteMarks(); // Удалили метки
     deactivateMap(); // Деактивировали карту
     adForm.reset(); // Очистили форму
     showSuccessNotice(); // Вывели успешное сообщение
   };
+  // Действия, если что-то пошло не так
   const errorHandler = function () {
+    closeCard();
     showErrorNotice();
   };
 

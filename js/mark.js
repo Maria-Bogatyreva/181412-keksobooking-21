@@ -3,11 +3,8 @@
 (function () {
   const PIN_HEIGHT = 70;
   const PIN_WIDTH = 50;
-  const map = window.constant.map;
 
-  const createCard = window.card.create;
   const openCard = window.card.open;
-  const closeCard = window.card.close;
 
   // Клонирование метки
   const getMark = function (pin) {
