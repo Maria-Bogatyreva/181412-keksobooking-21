@@ -3,9 +3,8 @@
 (function () {
   const PIN_HEIGHT = 70;
   const PIN_WIDTH = 50;
-  const map = window.constant.map;
 
-  const createCard = window.card.create;
+  const openCard = window.card.open;
 
   // Клонирование метки
   const getMark = function (pin) {
@@ -20,42 +19,12 @@
     mark.querySelector('img').src = pin.author.avatar;
     mark.querySelector('img').alt = pin.offer.title;
 
-    //  Открытие карточки
-    const openCard = function () {
-      closeCard();
-      createCard(pin);
-      const card = map.querySelector('.map__card');
-      const cardClose = card.querySelector('.popup__close');
-      cardClose.addEventListener('click', onCardCloseClick);
-      document.addEventListener('keydown', onCardEscPress);
-    };
-    // Закрытие карточки
-    const closeCard = function () {
-      const card = map.querySelector('.map__card');
-      if (card) {
-        const cardClose = card.querySelector('.popup__close');
-        map.removeChild(card);
-        cardClose.removeEventListener('click', onCardCloseClick);
-        document.removeEventListener('keydown', onCardEscPress);
-      }
-    };
-
-    const onCardCloseClick = function () {
-      closeCard();
-    };
-
-    const onCardEscPress = function (evt) {
-      if (evt.key === 'Escape') {
-        evt.preventDefault();
-        closeCard();
-      }
-    };
     const onMarkClick = function () {
-      openCard();
+      openCard(pin);
     };
     const onMarkEnterClick = function (evt) {
       if (evt.key === 'Enter') {
-        openCard();
+        openCard(pin);
       }
     };
 
@@ -77,6 +46,17 @@
     similarListPins.appendChild(fragment);
   };
 
+  // Функция для удаления меток с карты
+  const deleteMarks = function () {
+    const marks = document.querySelectorAll('.map__pin');
+
+    marks.forEach(function (element) {
+      if (!element.classList.contains('map__pin--main')) {
+        element.remove();
+      }
+    });
+  };
+
   // Функция, если данные с сервера пришли успешно
   const successHandler = function (pins) {
     addMarks(pins);
@@ -96,6 +76,8 @@
   };
 
   window.mark = {
+    add: addMarks,
+    delete: deleteMarks,
     successHandler: successHandler,
     errorHandler: errorHandler
   };

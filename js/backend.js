@@ -1,14 +1,13 @@
 'use strict';
 (function () {
-  const URL = 'https://21.javascript.pages.academy/keksobooking/data';
+  const URL_LOAD = 'https://21.javascript.pages.academy/keksobooking/data';
+  const URL_SAVE = 'https://21.javascript.pages.academy/keksobooking';
   const TIMEOUT_IN_MS = 10000;
   const StatusCode = {
     OK: 200
   };
 
-
-  //  Функция для ПОЛУЧЕНИЯ данных с сервера
-  const load = function (onSuccess, onError) {
+  const makeRequest = function (onSuccess, onError, data) {
     const xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -29,12 +28,29 @@
 
     xhr.timeout = TIMEOUT_IN_MS;
 
-    xhr.open('GET', URL);
-    xhr.send();
+    if (data) {
+      xhr.open('POST', URL_SAVE);
+      xhr.send(data);
+    } else {
+      xhr.open('GET', URL_LOAD);
+      xhr.send();
+    }
   };
 
+  //  Функция для ПОЛУЧЕНИЯ данных с сервера
+  const load = function (onSuccess, onError) {
+    makeRequest(onSuccess, onError);
+  };
+
+  // Функция для ОТПРАВКИ данных на сервер
+  const save = function (onSuccess, onError, data) {
+    makeRequest(onSuccess, onError, data);
+  };
+
+
   window.backend = {
-    load: load
+    load: load,
+    save: save
   };
 
 })();
