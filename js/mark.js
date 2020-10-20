@@ -3,6 +3,7 @@
 (function () {
   const PIN_HEIGHT = 70;
   const PIN_WIDTH = 50;
+  const AMOUNT_MARKS = 5;
 
   const openCard = window.card.open;
 
@@ -39,7 +40,7 @@
     const similarListPins = document.querySelector('.map__pins');
     const fragment = document.createDocumentFragment();
 
-    pins.forEach(function (element) {
+    pins.slice(0, AMOUNT_MARKS).forEach(function (element) {
       fragment.appendChild(getMark(element));
     });
 
@@ -57,8 +58,12 @@
     });
   };
 
+  let pins = [];
+  let selectedType;
+
   // Функция, если данные с сервера пришли успешно
-  const successHandler = function (pins) {
+  const successHandler = function (data) {
+    pins = data;
     addMarks(pins);
   };
 
