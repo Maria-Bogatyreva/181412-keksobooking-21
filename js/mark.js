@@ -6,6 +6,9 @@
   const AMOUNT_MARKS = 5;
 
   const openCard = window.card.open;
+  const closeCard = window.card.close;
+  const mapFilter = window.constant.mapFilter;
+  const filter = window.sort.filter;
 
   // Клонирование метки
   const getMark = function (pin) {
@@ -58,13 +61,25 @@
     });
   };
 
-  let pins = [];
-  let selectedType;
+  const housingType = mapFilter.querySelector('#housing-type');
+
+  //  Функция ОБНОВЛЕНИЯ меток после сортировки
+  const updateMarks = function () {
+    deleteMarks();
+    addMarks(filter(pins));
+    closeCard();
+  };
+
+  housingType.addEventListener('change', function () {
+    updateMarks();
+  });
+
+  let pins = []; // Сохраненный после загрузки массив пинов
 
   // Функция, если данные с сервера пришли успешно
   const successHandler = function (data) {
     pins = data;
-    addMarks(pins);
+    addMarks(data);
   };
 
   // Функция, если при загрузке произошла ошибка
@@ -83,6 +98,7 @@
   window.mark = {
     add: addMarks,
     delete: deleteMarks,
+    update: updateMarks,
     successHandler: successHandler,
     errorHandler: errorHandler
   };

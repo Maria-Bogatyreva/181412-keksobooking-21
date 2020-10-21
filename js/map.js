@@ -46,6 +46,7 @@
   const activateMap = function () {
     document.querySelector('.map').classList.remove('map--faded');
     document.querySelector('.ad-form').classList.remove('ad-form--disabled');
+
     //  Загрузка объявлений на карту
     load(successHandler, errorHandler);
 
