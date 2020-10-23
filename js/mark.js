@@ -61,8 +61,6 @@
     });
   };
 
-  const housingType = mapFilter.querySelector('#housing-type');
-
   //  Функция ОБНОВЛЕНИЯ меток после сортировки
   const updateMarks = function () {
     deleteMarks();
@@ -70,7 +68,7 @@
     closeCard();
   };
 
-  housingType.addEventListener('change', function () {
+  mapFilter.addEventListener('change', function () {
     updateMarks();
   });
 
