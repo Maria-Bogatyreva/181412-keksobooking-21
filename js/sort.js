@@ -8,12 +8,12 @@
   //  Функция для фильтрации меток по типу жилья
   const filter = function (pins) {
     let selectedType = housingType.value;
+
     return pins.filter(function (pin) {
       if (selectedType === 'any') {
-        return pins;
-      } else {
-        return pin.offer.type === selectedType;
+        return true;
       }
+      return pin.offer.type === selectedType;
     });
   };
 
