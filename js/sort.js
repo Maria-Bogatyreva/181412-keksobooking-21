@@ -34,19 +34,22 @@
 
   //  Функция для фильтрации по ЦЕНЕ
   const filterbyHousingPrice = function (pin) {
+    const lowPrice = 10000;
+    const highPrice = 50000;
     if (housingPrice.value === 'any') {
       return true;
     }
     if (housingPrice.value === 'low') {
-      return pin.offer.price < 10000;
+      return pin.offer.price < lowPrice;
     }
     if (housingPrice.value === 'middle') {
-      return pin.offer.price > 10000 && pin.offer.price < 50000;
+      return pin.offer.price > lowPrice && pin.offer.price < highPrice;
     }
     if (housingPrice.value === "high") {
-      return pin.offer.price > 50000;
+      return pin.offer.price > highPrice;
     }
   };
+  // Функция для фильтрации по УДОБСТВАМ
 
 
 
