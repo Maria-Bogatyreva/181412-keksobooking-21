@@ -9,6 +9,7 @@
   const closeCard = window.card.close;
   const mapFilter = window.constant.mapFilter;
   const filter = window.sort.filter;
+  const debounce = window.debounce.debounce;
 
   // Клонирование метки
   const getMark = function (pin) {
@@ -68,9 +69,11 @@
     closeCard();
   };
 
-  mapFilter.addEventListener('change', function () {
+  const onFilterChange = debounce(function () {
     updateMarks();
   });
+
+  mapFilter.addEventListener('change', onFilterChange);
 
   let pins = []; // Сохраненный после загрузки массив пинов
 
