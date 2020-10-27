@@ -1,7 +1,6 @@
 'use strict';
 (function () {
   const adForm = window.constant.adForm;
-  const mapPin = window.constant.mapPin;
   const deactivateMap = window.map.deactivate;
   const save = window.backend.save;
   const deleteMarks = window.mark.delete;
