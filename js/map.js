@@ -69,6 +69,9 @@
     mapPin.addEventListener('mousedown', onMapPinMousedown);
     mapPin.addEventListener('keydown', onMapPinEnterPress);
 
+    mapPin.style.left = "570px";
+    mapPin.style.top = "375px";
+
     getDeactiveMapAdressValue();
   };
 

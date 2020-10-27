@@ -5,8 +5,8 @@
   const address = window.constant.inputAdress;
   const adForm = window.constant.adForm;
 
-  const roomNumber = adForm.querySelector('#room_number'); // Количество комнат
-  const capacity = adForm.querySelector('#capacity'); // Количество гостей
+  const roomNumber = adForm.querySelector('#room_number');
+  const capacity = adForm.querySelector('#capacity');
   const title = adForm.querySelector('#title');
   const price = adForm.querySelector('#price');
   const type = adForm.querySelector('#type');

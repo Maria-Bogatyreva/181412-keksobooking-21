@@ -1,6 +1,7 @@
 'use strict';
 (function () {
   const adForm = window.constant.adForm;
+  const mapPin = window.constant.mapPin;
   const deactivateMap = window.map.deactivate;
   const save = window.backend.save;
   const deleteMarks = window.mark.delete;
@@ -85,11 +86,16 @@
   //  ОТПРАВКА ДАННЫХ ФОРМЫ
   adForm.addEventListener('submit', submitHandler);
 
-  //  Обработчик кнопке очистки формы
+  //  Действия при очистке формы
   const clearForm = adForm.querySelector('.ad-form__reset');
+
   const onClearFormClick = function (evt) {
     evt.preventDefault();
     adForm.reset();
+    deactivateMap();
+    deleteMarks();
+    closeCard();
+
   };
 
   clearForm.addEventListener('click', onClearFormClick);
