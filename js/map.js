@@ -13,6 +13,11 @@
   const successHandler = window.mark.successHandler;
   const errorHandler = window.mark.errorHandler;
 
+  const mapPinPosition = {
+    x: mapPin.offsetLeft,
+    y: mapPin.offsetTop
+  };
+
   //  Функция для блокировки формы
   const blockForm = function (form) {
     const formElements = Array.from(form.children);
@@ -69,8 +74,8 @@
     mapPin.addEventListener('mousedown', onMapPinMousedown);
     mapPin.addEventListener('keydown', onMapPinEnterPress);
 
-    mapPin.style.left = "570px";
-    mapPin.style.top = "375px";
+    mapPin.style.left = mapPinPosition.x + 'px';
+    mapPin.style.top = mapPinPosition.y + 'px';
 
     getDeactiveMapAdressValue();
   };
