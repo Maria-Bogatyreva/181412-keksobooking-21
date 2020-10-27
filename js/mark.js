@@ -47,7 +47,7 @@
       mark.addEventListener('keydown', onMarkEnterClick);
 
       return mark;
-    } else return false;
+    } return false;
   };
 
   //  Функция для добавления меток на карту
@@ -55,7 +55,9 @@
     const similarListPins = document.querySelector('.map__pins');
     const fragment = document.createDocumentFragment();
 
-    pins.slice(0, AMOUNT_MARKS).forEach(function (element) {
+    let count = (AMOUNT_MARKS < pins.length) ? AMOUNT_MARKS : pins.length;
+
+    pins.slice(0, count).forEach(function (element) {
       fragment.appendChild(getMark(element));
     });
 
