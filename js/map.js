@@ -13,10 +13,15 @@
   const successHandler = window.mark.successHandler;
   const errorHandler = window.mark.errorHandler;
 
+  const mapPinPosition = {
+    x: mapPin.offsetLeft,
+    y: mapPin.offsetTop
+  };
+
   //  Функция для блокировки формы
   const blockForm = function (form) {
     const formElements = Array.from(form.children);
-    formElements.forEach((element) => {
+    formElements.forEach(function (element) {
       element.setAttribute('disabled', 'disabled');
     });
   };
@@ -24,7 +29,7 @@
   //  Функция для РАЗблокировки формы
   const unblockForm = function (form) {
     const formElements = Array.from(form.children);
-    formElements.forEach((element) => {
+    formElements.forEach(function (element) {
       element.removeAttribute('disabled', 'disabled');
     });
   };
@@ -47,7 +52,6 @@
     document.querySelector('.map').classList.remove('map--faded');
     document.querySelector('.ad-form').classList.remove('ad-form--disabled');
 
-    //  Загрузка объявлений на карту
     load(successHandler, errorHandler);
 
     unblockForm(adForm);
@@ -59,15 +63,19 @@
     mapPin.addEventListener('mousedown', onMousedown);
   };
 
+  //  ФУНКЦИЯ ДЛЯ ДЕАКТИВАЦИИ СТРАНИЦЫ
   const deactivateMap = function () {
     document.querySelector('.map').classList.add('map--faded');
     document.querySelector('.ad-form').classList.add('ad-form--disabled');
 
-    blockForm(adForm); // Заблокировали форму объявления
-    blockForm(mapFilter); // Заблокировали фильтр на карте
+    blockForm(adForm);
+    blockForm(mapFilter);
 
     mapPin.addEventListener('mousedown', onMapPinMousedown);
     mapPin.addEventListener('keydown', onMapPinEnterPress);
+
+    mapPin.style.left = mapPinPosition.x + 'px';
+    mapPin.style.top = mapPinPosition.y + 'px';
 
     getDeactiveMapAdressValue();
   };

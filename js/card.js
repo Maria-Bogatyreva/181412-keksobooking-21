@@ -28,13 +28,12 @@
     cardElement.querySelector('.popup__description').textContent = templateCard.offer.description;
     cardElement.querySelector('.popup__avatar').src = templateCard.author.avatar;
 
-    //  Для добавления фото
     if (templateCard.offer.photos.length === 0) {
-      cardElement.querySelector(`.popup__photos`).style.display = "none";
+      cardElement.querySelector('.popup__photos').style.display = "none";
     } else {
-      const photosBlock = cardElement.querySelector('.popup__photos'); // Блок, куда вставляем фото
-      const photoItem = photosBlock.querySelector('.popup__photo'); // Фото
-      const photos = templateCard.offer.photos; // Массив вставляемых фото
+      const photosBlock = cardElement.querySelector('.popup__photos');
+      const photoItem = photosBlock.querySelector('.popup__photo');
+      const photos = templateCard.offer.photos;
 
       photosBlock.innerHTML = '';
       const fragmentPhotos = document.createDocumentFragment();
@@ -46,13 +45,13 @@
       });
       photosBlock.appendChild(fragmentPhotos);
     }
-    //  Для добавления удобств
+
     if (templateCard.offer.photos.length === 0) {
-      cardElement.querySelector(`.popup__features`).style.display = "none";
+      cardElement.querySelector('.popup__features').style.display = "none";
     } else {
-      const featuresBlock = cardElement.querySelector('.popup__features'); // Блок с преимуществами
-      const featuresItem = featuresBlock.querySelector('.popup__feature'); // Преимущество
-      const features = templateCard.offer.features; // Массив вставляемых удобств
+      const featuresBlock = cardElement.querySelector('.popup__features');
+      const featuresItem = featuresBlock.querySelector('.popup__feature');
+      const features = templateCard.offer.features;
       featuresBlock.innerHTML = '';
       const fragmentFeatures = document.createDocumentFragment();
 
@@ -69,6 +68,7 @@
   const openCard = function (pin) {
     closeCard();
     createCard(pin);
+
     const card = map.querySelector('.map__card');
     const cardClose = card.querySelector('.popup__close');
     cardClose.addEventListener('click', onCardCloseClick);
@@ -84,16 +84,19 @@
       cardClose.removeEventListener('click', onCardCloseClick);
       document.removeEventListener('keydown', onCardEscPress);
     }
+
   };
 
   const onCardCloseClick = function () {
     closeCard();
+    map.querySelector('.map__pin--active').classList.remove('map__pin--active');
   };
 
   const onCardEscPress = function (evt) {
     if (evt.key === 'Escape') {
       evt.preventDefault();
       closeCard();
+      map.querySelector('.map__pin--active').classList.remove('map__pin--active');
     }
   };
 

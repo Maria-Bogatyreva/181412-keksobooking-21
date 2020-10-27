@@ -3,18 +3,78 @@
 (function () {
 // Импортируемые данные
   const mapFilter = window.constant.mapFilter;
-  const housingType = mapFilter.querySelector('#housing-type');
+  const housingType = mapFilter.querySelector('#housing-type'); // Тип жилья
+  const housingGuests = mapFilter.querySelector('#housing-guests'); // Количество гостей
+  const housingRooms = mapFilter.querySelector('#housing-rooms'); // Количество комнат
+  const housingPrice = mapFilter.querySelector('#housing-price'); // Цена
+  const housingFeatures = mapFilter.querySelector('#housing-features'); // Удобства
 
-  //  Функция для фильтрации меток по типу жилья
-  const filter = function (pins) {
-    let selectedType = housingType.value;
+  // Функция для фильтрации меток по ТИПУ ЖИЛЬЯ
+  const filterByHousingType = function (pin) {
+    if (housingType.value === 'any') {
+      return true;
+    }
+    return pin.offer.type === housingType.value;
+  };
 
-    return pins.filter(function (pin) {
-      if (selectedType === 'any') {
-        return true;
-      }
-      return pin.offer.type === selectedType;
+  // Функция для фильтрации по КОЛИЧЕСТВУ ГОСТЕЙ
+  const filterByHousingQuests = function (pin) {
+    if (housingGuests.value === 'any') {
+      return true;
+    }
+    return pin.offer.guests === Number(housingGuests.value);
+  };
+
+  //  Функция для фильтрации по КОЛИЧЕСТВУ КОМНАТ
+  const filterByHousingRooms = function (pin) {
+    if (housingRooms.value === 'any') {
+      return true;
+    }
+    return pin.offer.rooms === Number(housingRooms.value);
+  };
+
+  //  Функция для фильтрации по ЦЕНЕ
+  const filterbyHousingPrice = function (pin) {
+    const lowPrice = 10000;
+    const highPrice = 50000;
+    if (housingPrice.value === 'any') {
+      return true;
+    }
+    if (housingPrice.value === 'low') {
+      return pin.offer.price < lowPrice;
+    }
+    if (housingPrice.value === 'middle') {
+      return pin.offer.price > lowPrice && pin.offer.price < highPrice;
+    }
+    return pin.offer.price > highPrice;
+  };
+
+  // Функция для фильтрации по УДОБСТВАМ
+  const filterByFeatures = function (pin) {
+    const checkedFeatures = housingFeatures.querySelectorAll('.map__checkbox:checked');
+
+    return Array.from(checkedFeatures).every(function (checkedFeature) {
+      return (pin.offer.features.includes(checkedFeature.value));
     });
+  };
+
+  //  Функция для фильтрации по ВСЕМУ
+  const filter = function (pins) {
+    let filteredPins = [];
+
+    pins.forEach(function (pin) {
+      if (filterByHousingType(pin)
+        && filterByHousingRooms(pin)
+        && filterByHousingQuests(pin)
+        && filterbyHousingPrice(pin)
+        && filterByFeatures(pin)
+
+      ) {
+
+        filteredPins.push(pin);
+      }
+    });
+    return filteredPins;
   };
 
   window.sort = {

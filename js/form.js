@@ -64,12 +64,16 @@
     document.removeEventListener('click', hideSuccessNotice);
   };
 
+  const resetForm = function () {
+    adForm.reset();
+    deleteMarks();
+    closeCard();
+    deactivateMap();
+  };
+
   //  Действия, если данные отправились успешно
   const saveHandler = function () {
-    closeCard();
-    deleteMarks(); // Удалили метки
-    deactivateMap(); // Деактивировали карту
-    adForm.reset(); // Очистили форму
+    resetForm();
     showSuccessNotice(); // Вывели успешное сообщение
   };
   // Действия, если что-то пошло не так
@@ -85,11 +89,12 @@
   //  ОТПРАВКА ДАННЫХ ФОРМЫ
   adForm.addEventListener('submit', submitHandler);
 
-  //  Обработчик кнопке очистки формы
+  //  Действия при очистке формы
   const clearForm = adForm.querySelector('.ad-form__reset');
+
   const onClearFormClick = function (evt) {
     evt.preventDefault();
-    adForm.reset();
+    resetForm();
   };
 
   clearForm.addEventListener('click', onClearFormClick);
