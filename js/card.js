@@ -29,7 +29,7 @@
     cardElement.querySelector('.popup__avatar').src = templateCard.author.avatar;
 
     if (templateCard.offer.photos.length === 0) {
-      cardElement.querySelector(`.popup__photos`).style.display = "none";
+      cardElement.querySelector('.popup__photos').style.display = "none";
     } else {
       const photosBlock = cardElement.querySelector('.popup__photos');
       const photoItem = photosBlock.querySelector('.popup__photo');
@@ -47,7 +47,7 @@
     }
 
     if (templateCard.offer.photos.length === 0) {
-      cardElement.querySelector(`.popup__features`).style.display = "none";
+      cardElement.querySelector('.popup__features').style.display = "none";
     } else {
       const featuresBlock = cardElement.querySelector('.popup__features');
       const featuresItem = featuresBlock.querySelector('.popup__feature');

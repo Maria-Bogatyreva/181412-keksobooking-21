@@ -5,6 +5,7 @@
   const PIN_WIDTH = 50;
   const AMOUNT_MARKS = 5;
 
+  const map = window.constant.map;
   const openCard = window.card.open;
   const closeCard = window.card.close;
   const mapFilter = window.constant.mapFilter;
@@ -25,6 +26,12 @@
     mark.querySelector('img').alt = pin.offer.title;
 
     const onMarkClick = function () {
+      let activeMark = map.querySelector('.map__pin--active');
+
+      if (activeMark) {
+        activeMark.classList.remove('map__pin--active');
+      }
+
       openCard(pin);
       mark.classList.add('map__pin--active');
     };

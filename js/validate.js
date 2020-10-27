@@ -30,8 +30,8 @@
     }
     roomNumber.reportValidity();
   };
-  capacity.addEventListener(`change`, onRoomNumberCapacityChange);
-  roomNumber.addEventListener(`change`, onRoomNumberCapacityChange);
+  capacity.addEventListener('change', onRoomNumberCapacityChange);
+  roomNumber.addEventListener('change', onRoomNumberCapacityChange);
 
   // Валидация Title
   title.setAttribute('required', 'required');

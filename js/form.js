@@ -70,7 +70,7 @@
     deleteMarks();
     closeCard();
     deactivateMap();
-  }
+  };
 
   //  Действия, если данные отправились успешно
   const saveHandler = function () {
