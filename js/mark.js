@@ -26,10 +26,12 @@
 
     const onMarkClick = function () {
       openCard(pin);
+      mark.classList.add('map__pin--active');
     };
     const onMarkEnterClick = function (evt) {
       if (evt.key === 'Enter') {
         openCard(pin);
+        mark.classList.add('map__pin--active');
       }
     };
 

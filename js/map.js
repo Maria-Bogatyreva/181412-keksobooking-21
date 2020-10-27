@@ -47,7 +47,6 @@
     document.querySelector('.map').classList.remove('map--faded');
     document.querySelector('.ad-form').classList.remove('ad-form--disabled');
 
-    //  Загрузка объявлений на карту
     load(successHandler, errorHandler);
 
     unblockForm(adForm);
@@ -59,12 +58,13 @@
     mapPin.addEventListener('mousedown', onMousedown);
   };
 
+  //  ФУНКЦИЯ ДЛЯ ДЕАКТИВАЦИИ СТРАНИЦЫ
   const deactivateMap = function () {
     document.querySelector('.map').classList.add('map--faded');
     document.querySelector('.ad-form').classList.add('ad-form--disabled');
 
-    blockForm(adForm); // Заблокировали форму объявления
-    blockForm(mapFilter); // Заблокировали фильтр на карте
+    blockForm(adForm);
+    blockForm(mapFilter);
 
     mapPin.addEventListener('mousedown', onMapPinMousedown);
     mapPin.addEventListener('keydown', onMapPinEnterPress);
