@@ -66,10 +66,10 @@
   };
 
   const resetForm = function () {
-    adForm.reset(); // Очистили форму
-    deleteMarks(); // Удалили метки
-    closeCard(); // Закрыли карточку объявления
-    deactivateMap(); // Деактивировали карту
+    adForm.reset();
+    deleteMarks();
+    closeCard();
+    deactivateMap();
   }
 
   //  Действия, если данные отправились успешно

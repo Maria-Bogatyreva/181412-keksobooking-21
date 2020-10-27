@@ -62,7 +62,7 @@
   const filter = function (pins) {
     let filteredPins = [];
 
-    pins.forEach((pin) => {
+    pins.forEach(function (pin) {
       if (filterByHousingType(pin)
         && filterByHousingRooms(pin)
         && filterByHousingQuests(pin)

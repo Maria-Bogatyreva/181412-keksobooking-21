@@ -16,7 +16,7 @@
   //  Функция для блокировки формы
   const blockForm = function (form) {
     const formElements = Array.from(form.children);
-    formElements.forEach((element) => {
+    formElements.forEach(function (element) {
       element.setAttribute('disabled', 'disabled');
     });
   };
@@ -24,7 +24,7 @@
   //  Функция для РАЗблокировки формы
   const unblockForm = function (form) {
     const formElements = Array.from(form.children);
-    formElements.forEach((element) => {
+    formElements.forEach(function (element) {
       element.removeAttribute('disabled', 'disabled');
     });
   };
