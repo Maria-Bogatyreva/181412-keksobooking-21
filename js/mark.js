@@ -10,7 +10,7 @@
   const closeCard = window.card.close;
   const mapFilter = window.constant.mapFilter;
   const filter = window.sort.filter;
-  const debounce = window.debounce.debounce;
+  const debounce = window.debounce;
 
   // Клонирование метки
   const getMark = function (pin) {
