@@ -65,12 +65,16 @@
     document.removeEventListener('click', hideSuccessNotice);
   };
 
+  const resetForm = function () {
+    adForm.reset(); // Очистили форму
+    deleteMarks(); // Удалили метки
+    closeCard(); // Закрыли карточку объявления
+    deactivateMap(); // Деактивировали карту
+  }
+
   //  Действия, если данные отправились успешно
   const saveHandler = function () {
-    closeCard();
-    deleteMarks(); // Удалили метки
-    deactivateMap(); // Деактивировали карту
-    adForm.reset(); // Очистили форму
+    resetForm();
     showSuccessNotice(); // Вывели успешное сообщение
   };
   // Действия, если что-то пошло не так
@@ -91,11 +95,7 @@
 
   const onClearFormClick = function (evt) {
     evt.preventDefault();
-    adForm.reset();
-    deactivateMap();
-    deleteMarks();
-    closeCard();
-
+    resetForm();
   };
 
   clearForm.addEventListener('click', onClearFormClick);
