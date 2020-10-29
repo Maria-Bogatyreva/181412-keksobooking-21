@@ -5,6 +5,9 @@ const deactivateMap = window.map.deactivate;
 const save = window.backend.save;
 const deleteMarks = window.mark.delete;
 const closeCard = window.card.close;
+const avatarPreview = window.validate.avatarPreview;
+const imagesPreview = window.validate.imagesPreview;
+const defaultAvatarUrl = window.validate.defaultAvatarUrl;
 
 // Успешное сообщение
 const successNoticeTemplate = document.querySelector('#success')
@@ -64,7 +67,10 @@ const hideSuccessNotice = function () {
   document.removeEventListener('click', hideSuccessNotice);
 };
 
+
 const resetForm = function () {
+  avatarPreview.src = defaultAvatarUrl;
+  imagesPreview.innerHTML = '';
   adForm.reset();
   deleteMarks();
   closeCard();

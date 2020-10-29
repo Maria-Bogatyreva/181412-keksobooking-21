@@ -791,6 +791,10 @@ fieldset {
   background-color: #e4e4de;
   border-radius: 5px;
 }
+.ad-form__photo-preview {
+  width: 70px;
+  height: 70px;
+}
 
 .ad-form__element--submit {
   -ms-flex-preferred-size: 100%;

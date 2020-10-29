@@ -13,7 +13,7 @@ const debounce = window.debounce;
 
 // Клонирование метки
 const getMark = function (pin) {
-  if ('offer' in pin) {
+  if (pin.offer !== undefined) {
     const similarPinTemplate = document.querySelector('#pin')
     .content
     .querySelector('.map__pin');

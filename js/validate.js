@@ -1,5 +1,7 @@
 'use strict';
 
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
 // Импортируемые данные
 const address = window.constant.inputAdress;
 const adForm = window.constant.adForm;
@@ -11,8 +13,11 @@ const price = adForm.querySelector('#price');
 const type = adForm.querySelector('#type');
 const timein = adForm.querySelector('#timein');
 const timeout = adForm.querySelector('#timeout');
-const avatar = adForm.querySelector('#avatar');
 const images = adForm.querySelector('#images');
+const avatar = adForm.querySelector('.ad-form__field input[type=file]');
+const avatarPreview = adForm.querySelector('.ad-form-header__preview img');
+const defaultAvatarUrl = 'img/muffin-grey.svg';
+const imagesPreview = adForm.querySelector('.ad-form__photo');
 
 // Валидация количество комнат - количество гостей
 const onRoomNumberCapacityChange = function () {
@@ -103,6 +108,60 @@ const onTimeoutChange = function () {
 timein.addEventListener('change', onTimeinChange);
 timeout.addEventListener('change', onTimeoutChange);
 
-// Валидация "Ваша фотография" и "Фотография жилья"
+// Валидация "Ваша фотография"
 avatar.setAttribute('accept', 'image/*');
+
+const onAvatarLoad = function () {
+  const file = avatar.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some(function (it) {
+    return fileName.endsWith(it);
+  });
+
+  if (matches) {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', function () {
+      avatarPreview.src = reader.result;
+    });
+
+    reader.readAsDataURL(file);
+  }
+};
+
+avatar.addEventListener('change', onAvatarLoad);
+
+// Валидация "Фотография жилья"
 images.setAttribute('accept', 'image/*');
+
+const onImagesLoad = function () {
+  const file = images.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some(function (it) {
+    return fileName.endsWith(it);
+  });
+
+  if (matches) {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', function () {
+      const imagePreview = document.createElement('img');
+
+      imagesPreview.innerHTML = '';
+      imagePreview.src = reader.result;
+      imagePreview.classList.add('ad-form__photo-preview');
+      imagesPreview.append(imagePreview);
+    });
+    reader.readAsDataURL(file);
+  }
+};
+
+images.addEventListener('change', onImagesLoad);
+
+window.validate = {
+  avatarPreview: avatarPreview,
+  imagesPreview: imagesPreview,
+  defaultAvatarUrl: defaultAvatarUrl
+};
