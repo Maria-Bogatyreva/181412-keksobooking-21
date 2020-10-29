@@ -13,40 +13,38 @@ const debounce = window.debounce;
 
 // Клонирование метки
 const getMark = function (pin) {
-  if (pin.offer !== undefined) {
-    const similarPinTemplate = document.querySelector('#pin')
-    .content
-    .querySelector('.map__pin');
+  const similarPinTemplate = document.querySelector('#pin')
+  .content
+  .querySelector('.map__pin');
 
-    const mark = similarPinTemplate.cloneNode(true);
+  const mark = similarPinTemplate.cloneNode(true);
 
-    mark.style.left = pin.location.x - (PIN_WIDTH / 2) + 'px';
-    mark.style.top = pin.location.y - PIN_HEIGHT + 'px';
-    mark.querySelector('img').src = pin.author.avatar;
-    mark.querySelector('img').alt = pin.offer.title;
+  mark.style.left = pin.location.x - (PIN_WIDTH / 2) + 'px';
+  mark.style.top = pin.location.y - PIN_HEIGHT + 'px';
+  mark.querySelector('img').src = pin.author.avatar;
+  mark.querySelector('img').alt = pin.offer.title;
 
-    const onMarkClick = function () {
-      let activeMark = map.querySelector('.map__pin--active');
+  const onMarkClick = function () {
+    let activeMark = map.querySelector('.map__pin--active');
 
-      if (activeMark) {
-        activeMark.classList.remove('map__pin--active');
-      }
+    if (activeMark) {
+      activeMark.classList.remove('map__pin--active');
+    }
 
+    openCard(pin);
+    mark.classList.add('map__pin--active');
+  };
+  const onMarkEnterClick = function (evt) {
+    if (evt.key === 'Enter') {
       openCard(pin);
       mark.classList.add('map__pin--active');
-    };
-    const onMarkEnterClick = function (evt) {
-      if (evt.key === 'Enter') {
-        openCard(pin);
-        mark.classList.add('map__pin--active');
-      }
-    };
+    }
+  };
 
-    mark.addEventListener('click', onMarkClick);
-    mark.addEventListener('keydown', onMarkEnterClick);
+  mark.addEventListener('click', onMarkClick);
+  mark.addEventListener('keydown', onMarkEnterClick);
 
-    return mark;
-  } return false;
+  return mark;
 };
 
 //  Функция для добавления меток на карту
@@ -56,7 +54,7 @@ const addMarks = function (pins) {
 
   let count = (AMOUNT_MARKS < pins.length) ? AMOUNT_MARKS : pins.length;
 
-  pins.slice(0, count).forEach(function (element) {
+  pins.filter((pin) => pin.offer).slice(0, count).forEach(function (element) {
     fragment.appendChild(getMark(element));
   });
 
