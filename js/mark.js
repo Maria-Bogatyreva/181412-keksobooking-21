@@ -8,7 +8,7 @@ const map = window.constant.map;
 const openCard = window.card.open;
 const closeCard = window.card.close;
 const mapFilter = window.constant.mapFilter;
-const filter = window.sort.filter;
+const filter = window.filter;
 const debounce = window.debounce;
 
 const getMark = (pin) => {
