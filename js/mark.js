@@ -11,8 +11,7 @@ const mapFilter = window.constant.mapFilter;
 const filter = window.sort.filter;
 const debounce = window.debounce;
 
-// Клонирование метки
-const getMark = function (pin) {
+const getMark = (pin) => {
   const similarPinTemplate = document.querySelector('#pin')
   .content
   .querySelector('.map__pin');
@@ -24,7 +23,7 @@ const getMark = function (pin) {
   mark.querySelector('img').src = pin.author.avatar;
   mark.querySelector('img').alt = pin.offer.title;
 
-  const onMarkClick = function () {
+  const onMarkClick = () => {
     let activeMark = map.querySelector('.map__pin--active');
 
     if (activeMark) {
@@ -34,7 +33,7 @@ const getMark = function (pin) {
     openCard(pin);
     mark.classList.add('map__pin--active');
   };
-  const onMarkEnterClick = function (evt) {
+  const onMarkEnterClick = (evt) => {
     if (evt.key === 'Enter') {
       openCard(pin);
       mark.classList.add('map__pin--active');
@@ -48,13 +47,13 @@ const getMark = function (pin) {
 };
 
 //  Функция для добавления меток на карту
-const addMarks = function (pins) {
+const addMarks = (pins) => {
   const similarListPins = document.querySelector('.map__pins');
   const fragment = document.createDocumentFragment();
 
   let count = (AMOUNT_MARKS < pins.length) ? AMOUNT_MARKS : pins.length;
 
-  pins.filter((pin) => pin.offer).slice(0, count).forEach(function (element) {
+  pins.filter((pin) => pin.offer).slice(0, count).forEach((element) => {
     fragment.appendChild(getMark(element));
   });
 
@@ -62,7 +61,7 @@ const addMarks = function (pins) {
 };
 
 // Функция для удаления меток с карты
-const deleteMarks = function () {
+const deleteMarks = () => {
   const marks = document.querySelectorAll('.map__pin');
 
   marks.forEach(function (element) {
@@ -73,13 +72,13 @@ const deleteMarks = function () {
 };
 
 //  Функция ОБНОВЛЕНИЯ меток после сортировки
-const updateMarks = function () {
+const updateMarks = () => {
   deleteMarks();
   addMarks(filter(pins));
   closeCard();
 };
 
-const onFilterChange = debounce(function () {
+const onFilterChange = debounce(() => {
   updateMarks();
 });
 
@@ -88,13 +87,13 @@ mapFilter.addEventListener('change', onFilterChange);
 let pins = []; // Сохраненный после загрузки массив пинов
 
 // Функция, если данные с сервера пришли успешно
-const successHandler = function (data) {
+const successHandler = (data) => {
   pins = data;
   addMarks(data);
 };
 
 // Функция, если при загрузке произошла ошибка
-const errorHandler = function (errorMessage) {
+const errorHandler = (errorMessage) => {
   const node = document.createElement('div');
   node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
   node.style.position = 'absolute';
