@@ -2,11 +2,11 @@
 
 // Импортируемые данные
 const mapFilter = window.constant.mapFilter;
-const housingType = mapFilter.querySelector('#housing-type'); // Тип жилья
-const housingGuests = mapFilter.querySelector('#housing-guests'); // Количество гостей
-const housingRooms = mapFilter.querySelector('#housing-rooms'); // Количество комнат
-const housingPrice = mapFilter.querySelector('#housing-price'); // Цена
-const housingFeatures = mapFilter.querySelector('#housing-features'); // Удобства
+const housingType = mapFilter.querySelector('#housing-type');
+const housingGuests = mapFilter.querySelector('#housing-guests');
+const housingRooms = mapFilter.querySelector('#housing-rooms');
+const housingPrice = mapFilter.querySelector('#housing-price');
+const housingFeatures = mapFilter.querySelector('#housing-features');
 
 // Функция для фильтрации меток по ТИПУ ЖИЛЬЯ
 const filterByHousingType = (pin) => {

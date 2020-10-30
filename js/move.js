@@ -2,10 +2,10 @@
 
 const MAP_PIN_WIDTH = window.constant.MAP_PIN_WIDTH;
 const MAP_PIN_HEIGHT = window.constant.MAP_PIN_HEIGHT;
-const MIN_Y = window.constant.MIN_Y; // 130
-const MAX_Y = window.constant.MAX_Y; // 630
-const MIN_X = window.constant.MIN_X; // 0
-const MAX_X = window.constant.MAX_X; // 1200
+const MIN_Y = window.constant.MIN_Y;
+const MAX_Y = window.constant.MAX_Y;
+const MIN_X = window.constant.MIN_X;
+const MAX_X = window.constant.MAX_X;
 const mapPin = window.constant.mapPin;
 const inputAdress = window.constant.inputAdress;
 
