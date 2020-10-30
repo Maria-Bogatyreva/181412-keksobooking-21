@@ -22,7 +22,7 @@ const errorNoticeTemplate = document.querySelector('#error')
 const errorNotice = errorNoticeTemplate.cloneNode(true);
 
 // Действия при нажатии Esc на сообщении
-const onNoticeEscPress = function (evt) {
+const onNoticeEscPress = (evt) => {
   if (evt.key === 'Escape') {
     evt.preventDefault();
     if (successNotice) {
@@ -35,7 +35,7 @@ const onNoticeEscPress = function (evt) {
 };
 
 // Функция для показа ошибочного объявления
-const showErrorNotice = function () {
+const showErrorNotice = () => {
   document.querySelector('main').insertAdjacentElement('afterbegin', errorNotice);
 
   document.addEventListener('keydown', onNoticeEscPress);
@@ -44,7 +44,7 @@ const showErrorNotice = function () {
 };
 
 // Функция для скрытия ошибочного объявления
-const hideErrorNotice = function () {
+const hideErrorNotice = () => {
   errorNotice.remove();
 
   document.removeEventListener('keydown', onNoticeEscPress);
@@ -53,7 +53,7 @@ const hideErrorNotice = function () {
 };
 
 // Функция для показа успешного объявления
-const showSuccessNotice = function () {
+const showSuccessNotice = () => {
   document.body.insertAdjacentElement('afterbegin', successNotice);
 
   document.addEventListener('keydown', onNoticeEscPress);
@@ -61,14 +61,14 @@ const showSuccessNotice = function () {
 };
 
 // Функция для скрытия успешного объявления
-const hideSuccessNotice = function () {
+const hideSuccessNotice = () => {
   successNotice.remove();
   document.removeEventListener('keydown', onNoticeEscPress);
   document.removeEventListener('click', hideSuccessNotice);
 };
 
 
-const resetForm = function () {
+const resetForm = () => {
   avatarPreview.src = defaultAvatarUrl;
   imagesPreview.innerHTML = '';
   adForm.reset();
@@ -78,17 +78,17 @@ const resetForm = function () {
 };
 
 //  Действия, если данные отправились успешно
-const saveHandler = function () {
+const saveHandler = () => {
   resetForm();
   showSuccessNotice(); // Вывели успешное сообщение
 };
 // Действия, если что-то пошло не так
-const errorHandler = function () {
+const errorHandler = () => {
   closeCard();
   showErrorNotice();
 };
 
-const submitHandler = function (evt) {
+const submitHandler = (evt) => {
   evt.preventDefault();
   save(saveHandler, errorHandler, new FormData(adForm));
 };
@@ -98,7 +98,7 @@ adForm.addEventListener('submit', submitHandler);
 //  Действия при очистке формы
 const clearForm = adForm.querySelector('.ad-form__reset');
 
-const onClearFormClick = function (evt) {
+const onClearFormClick = (evt) => {
   evt.preventDefault();
   resetForm();
 };
