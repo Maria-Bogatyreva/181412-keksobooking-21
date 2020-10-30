@@ -34,19 +34,19 @@ const unblockForm = (form) => {
 };
 //  Функция для получения значения адреса _активной_ карты
 const getActiveMapAdressValue = () => {
-  const mapPinX = parseInt(mapPin.style.left, 10); // Нач. коорд. X
-  const mapPinY = parseInt(mapPin.style.top, 10); // Нач. коорд. Y
+  const mapPinX = parseInt(mapPin.style.left, 10);
+  const mapPinY = parseInt(mapPin.style.top, 10);
   inputAdress.value = `${mapPinX + Math.round(MAP_PIN_WIDTH / 2)}, ${mapPinY + MAP_PIN_HEIGHT}`;
 };
 //  Функция для получения значения адреса _НЕактивной_ карты
 const getDeactiveMapAdressValue = () => {
-  const mapPinX = parseInt(mapPin.style.left, 10); // Нач. коорд. X
-  const mapPinY = parseInt(mapPin.style.top, 10); // Нач. коорд. Y
-  //  Адрес на неактивной карте- коорд. центра КРУГЛОЙ метки
+  const mapPinX = parseInt(mapPin.style.left, 10);
+  const mapPinY = parseInt(mapPin.style.top, 10);
+
   inputAdress.value = `${mapPinX + Math.round(MAP_PIN_WIDTH / 2)}, ${mapPinY + Math.round(MAP_PIN_WIDTH / 2)}`;
 };
 
-// ФУНКЦИЯ ДЛЯ АКТИВАЦИИ СТРАНИЦЫ (и отрисовки меток объявлений)
+// ФУНКЦИЯ ДЛЯ АКТИВАЦИИ СТРАНИЦЫ
 const activateMap = () => {
   document.querySelector('.map').classList.remove('map--faded');
   document.querySelector('.ad-form').classList.remove('ad-form--disabled');

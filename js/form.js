@@ -77,12 +77,11 @@ const resetForm = () => {
   deactivateMap();
 };
 
-//  Действия, если данные отправились успешно
 const saveHandler = () => {
   resetForm();
-  showSuccessNotice(); // Вывели успешное сообщение
+  showSuccessNotice();
 };
-// Действия, если что-то пошло не так
+
 const errorHandler = () => {
   closeCard();
   showErrorNotice();

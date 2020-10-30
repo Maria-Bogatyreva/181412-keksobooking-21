@@ -84,7 +84,7 @@ const onFilterChange = debounce(() => {
 
 mapFilter.addEventListener('change', onFilterChange);
 
-let pins = []; // Сохраненный после загрузки массив пинов
+let pins = [];
 
 // Функция, если данные с сервера пришли успешно
 const successHandler = (data) => {
