@@ -7,18 +7,18 @@ module.exports = {
 		"./js/backend.js",
 		"./js/debounce.js",
 		"./js/card.js",
-		"./js/sort.js",
+		"./js/filter.js",
 		"./js/mark.js",
 		"./js/move.js",
 		"./js/map.js",
 		"./js/main.js",
 		"./js/validate.js",
-		"./js/form.js"	
+		"./js/form.js"
 	],
 	output: {
 		filename: "bundle.js",
 		path: path.resolve(__dirname),
 		iife: true
 	},
-	devtool: false	
+	devtool: false
 };

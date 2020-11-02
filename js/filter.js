@@ -76,6 +76,4 @@ const filter = function (pins) {
   return filteredPins;
 };
 
-window.sort = {
-  filter: filter
-};
+window.filter = filter;
