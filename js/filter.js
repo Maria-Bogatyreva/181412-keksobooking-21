@@ -2,14 +2,14 @@
 
 // Импортируемые данные
 const mapFilter = window.constant.mapFilter;
-const housingType = mapFilter.querySelector('#housing-type'); // Тип жилья
-const housingGuests = mapFilter.querySelector('#housing-guests'); // Количество гостей
-const housingRooms = mapFilter.querySelector('#housing-rooms'); // Количество комнат
-const housingPrice = mapFilter.querySelector('#housing-price'); // Цена
-const housingFeatures = mapFilter.querySelector('#housing-features'); // Удобства
+const housingType = mapFilter.querySelector('#housing-type');
+const housingGuests = mapFilter.querySelector('#housing-guests');
+const housingRooms = mapFilter.querySelector('#housing-rooms');
+const housingPrice = mapFilter.querySelector('#housing-price');
+const housingFeatures = mapFilter.querySelector('#housing-features');
 
 // Функция для фильтрации меток по ТИПУ ЖИЛЬЯ
-const filterByHousingType = function (pin) {
+const filterByHousingType = (pin) => {
   if (housingType.value === 'any') {
     return true;
   }
@@ -17,7 +17,7 @@ const filterByHousingType = function (pin) {
 };
 
 // Функция для фильтрации по КОЛИЧЕСТВУ ГОСТЕЙ
-const filterByHousingQuests = function (pin) {
+const filterByHousingQuests = (pin) => {
   if (housingGuests.value === 'any') {
     return true;
   }
@@ -25,7 +25,7 @@ const filterByHousingQuests = function (pin) {
 };
 
 //  Функция для фильтрации по КОЛИЧЕСТВУ КОМНАТ
-const filterByHousingRooms = function (pin) {
+const filterByHousingRooms = (pin) => {
   if (housingRooms.value === 'any') {
     return true;
   }
@@ -33,7 +33,7 @@ const filterByHousingRooms = function (pin) {
 };
 
 //  Функция для фильтрации по ЦЕНЕ
-const filterbyHousingPrice = function (pin) {
+const filterbyHousingPrice = (pin) => {
   const lowPrice = 10000;
   const highPrice = 50000;
   if (housingPrice.value === 'any') {
@@ -49,7 +49,7 @@ const filterbyHousingPrice = function (pin) {
 };
 
 // Функция для фильтрации по УДОБСТВАМ
-const filterByFeatures = function (pin) {
+const filterByFeatures = (pin) => {
   const checkedFeatures = housingFeatures.querySelectorAll('.map__checkbox:checked');
 
   return Array.from(checkedFeatures).every(function (checkedFeature) {
@@ -58,7 +58,7 @@ const filterByFeatures = function (pin) {
 };
 
 //  Функция для фильтрации по ВСЕМУ
-const filter = function (pins) {
+const filter = (pins) => {
   let filteredPins = [];
 
   pins.forEach(function (pin) {

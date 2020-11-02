@@ -2,14 +2,14 @@
 
 const MAP_PIN_WIDTH = window.constant.MAP_PIN_WIDTH;
 const MAP_PIN_HEIGHT = window.constant.MAP_PIN_HEIGHT;
-const MIN_Y = window.constant.MIN_Y; // 130
-const MAX_Y = window.constant.MAX_Y; // 630
-const MIN_X = window.constant.MIN_X; // 0
-const MAX_X = window.constant.MAX_X; // 1200
+const MIN_Y = window.constant.MIN_Y;
+const MAX_Y = window.constant.MAX_Y;
+const MIN_X = window.constant.MIN_X;
+const MAX_X = window.constant.MAX_X;
 const mapPin = window.constant.mapPin;
 const inputAdress = window.constant.inputAdress;
 
-const onMousedown = function (evt) {
+const onMousedown = (evt) => {
   evt.preventDefault();
 
   let startCoords = {
@@ -17,7 +17,7 @@ const onMousedown = function (evt) {
     y: evt.clientY
   };
 
-  const onMouseMove = function (moveEvt) {
+  const onMouseMove = (moveEvt) => {
     moveEvt.preventDefault();
 
     const shift = {
@@ -49,7 +49,7 @@ const onMousedown = function (evt) {
     inputAdress.value = `${(parseInt(mapPin.style.left, 10)) + Math.round(MAP_PIN_WIDTH / 2)}, ${(parseInt(mapPin.style.top, 10)) + MAP_PIN_HEIGHT}`;
   };
 
-  const onMouseUp = function (upEvt) {
+  const onMouseUp = (upEvt) => {
     upEvt.preventDefault();
 
     document.removeEventListener('mousemove', onMouseMove);

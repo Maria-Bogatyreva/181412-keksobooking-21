@@ -7,11 +7,11 @@ const StatusCode = {
   OK: 200
 };
 
-const makeRequest = function (onSuccess, onError, data) {
+const makeRequest = (onSuccess, onError, data) => {
   const xhr = new XMLHttpRequest();
   xhr.responseType = 'json';
 
-  xhr.addEventListener('load', function () {
+  xhr.addEventListener('load', () => {
     if (xhr.status === StatusCode.OK) {
       onSuccess(xhr.response);
     } else {
@@ -19,10 +19,10 @@ const makeRequest = function (onSuccess, onError, data) {
     }
   });
 
-  xhr.addEventListener('error', function () {
+  xhr.addEventListener('error', () => {
     onError('Произошла ошибка соединения');
   });
-  xhr.addEventListener('timeout', function () {
+  xhr.addEventListener('timeout', () => {
     onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
   });
 
@@ -38,12 +38,12 @@ const makeRequest = function (onSuccess, onError, data) {
 };
 
 //  Функция для ПОЛУЧЕНИЯ данных с сервера
-const load = function (onSuccess, onError) {
+const load = (onSuccess, onError) => {
   makeRequest(onSuccess, onError);
 };
 
 // Функция для ОТПРАВКИ данных на сервер
-const save = function (onSuccess, onError, data) {
+const save = (onSuccess, onError, data) => {
   makeRequest(onSuccess, onError, data);
 };
 

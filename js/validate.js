@@ -1,5 +1,7 @@
 'use strict';
 
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
 // Импортируемые данные
 const address = window.constant.inputAdress;
 const adForm = window.constant.adForm;
@@ -11,11 +13,14 @@ const price = adForm.querySelector('#price');
 const type = adForm.querySelector('#type');
 const timein = adForm.querySelector('#timein');
 const timeout = adForm.querySelector('#timeout');
-const avatar = adForm.querySelector('#avatar');
 const images = adForm.querySelector('#images');
+const avatar = adForm.querySelector('.ad-form__field input[type=file]');
+const avatarPreview = adForm.querySelector('.ad-form-header__preview img');
+const defaultAvatarUrl = 'img/muffin-grey.svg';
+const imagesPreview = adForm.querySelector('.ad-form__photo');
 
 // Валидация количество комнат - количество гостей
-const onRoomNumberCapacityChange = function () {
+const onRoomNumberCapacityChange = () => {
   if ((roomNumber.value === '1') && (capacity.value !== '1')) {
     roomNumber.setCustomValidity('1 комната только для 1 гостя');
   } else if ((roomNumber.value === '2') && ((capacity.value === '3') || (capacity.value === '0'))) {
@@ -34,7 +39,7 @@ roomNumber.addEventListener('change', onRoomNumberCapacityChange);
 
 // Валидация Title
 title.setAttribute('required', 'required');
-const onTitleInput = function () {
+const onTitleInput = () => {
   const MIN_TITLE_LENGTH = 30;
   const MAX_TITLE_LENGTH = 100;
   let valueLength = title.value.length;
@@ -53,7 +58,7 @@ title.addEventListener('input', onTitleInput);
 // Валидация максимальной цены
 price.setAttribute('max', '1000000');
 price.setAttribute('required', 'required');
-const onPriceInput = function () {
+const onPriceInput = () => {
   const MAX_PRICE_VALUE = 1000000;
   if (price.value > MAX_PRICE_VALUE) {
     price.setCustomValidity('Максимальная цена ' + MAX_PRICE_VALUE);
@@ -65,12 +70,13 @@ const onPriceInput = function () {
 price.addEventListener('input', onPriceInput);
 
 // Валидация тип жилья - цена
-const onTypePriceChange = function () {
+const onTypePriceChange = () => {
   const PRICES = {
     low: 1000,
     middle: 5000,
     high: 5000
   }
+
   if ((type.value === `bungalow`) && (price.value < 0)) {
     price.setCustomValidity('Для бунгало минимальная цена за ночь 0р');
     price.setAttribute('placeholder', '0');
@@ -99,15 +105,69 @@ type.addEventListener('change', onTypePriceChange);
 address.setAttribute('readonly', 'readonly');
 
 // Валидация Время заезда - Время выезда
-const onTimeinChange = function () {
+const onTimeinChange = () => {
   timeout.value = timein.value;
 };
-const onTimeoutChange = function () {
+const onTimeoutChange = () => {
   timein.value = timeout.value;
 };
 timein.addEventListener('change', onTimeinChange);
 timeout.addEventListener('change', onTimeoutChange);
 
-// Валидация "Ваша фотография" и "Фотография жилья"
+// Валидация "Ваша фотография"
 avatar.setAttribute('accept', 'image/*');
+
+const onAvatarLoad = () => {
+  const file = avatar.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some(function (it) {
+    return fileName.endsWith(it);
+  });
+
+  if (matches) {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => {
+      avatarPreview.src = reader.result;
+    });
+
+    reader.readAsDataURL(file);
+  }
+};
+
+avatar.addEventListener('change', onAvatarLoad);
+
+// Валидация "Фотография жилья"
 images.setAttribute('accept', 'image/*');
+
+const onImagesLoad = () => {
+  const file = images.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some(function (it) {
+    return fileName.endsWith(it);
+  });
+
+  if (matches) {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => {
+      const imagePreview = document.createElement('img');
+
+      imagesPreview.innerHTML = '';
+      imagePreview.src = reader.result;
+      imagePreview.classList.add('ad-form__photo-preview');
+      imagesPreview.append(imagePreview);
+    });
+    reader.readAsDataURL(file);
+  }
+};
+
+images.addEventListener('change', onImagesLoad);
+
+window.validate = {
+  avatarPreview: avatarPreview,
+  imagesPreview: imagesPreview,
+  defaultAvatarUrl: defaultAvatarUrl
+};

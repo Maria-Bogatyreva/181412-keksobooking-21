@@ -10,7 +10,7 @@ const typesListRus = {
   palace: 'Дворец'
 };
 
-const createCard = function (templateCard) {
+const createCard = (templateCard) => {
   const mapFiltersContainer = map.querySelector('.map__filters-container');
   const similarCardTemplate = document.querySelector('#card')
   .content
@@ -37,7 +37,7 @@ const createCard = function (templateCard) {
     photosBlock.innerHTML = '';
     const fragmentPhotos = document.createDocumentFragment();
 
-    photos.forEach(function (element) {
+    photos.forEach((element) => {
       const copyPhotoItem = photoItem.cloneNode(true);
       copyPhotoItem.src = element;
       fragmentPhotos.appendChild(copyPhotoItem);
@@ -54,7 +54,7 @@ const createCard = function (templateCard) {
     featuresBlock.innerHTML = '';
     const fragmentFeatures = document.createDocumentFragment();
 
-    features.forEach(function (value) {
+    features.forEach((value) => {
       const copyFeaturesItem = featuresItem.cloneNode(true);
       copyFeaturesItem.classList.add(`popup__feature--${value}`);
       fragmentFeatures.appendChild(copyFeaturesItem);
@@ -64,7 +64,7 @@ const createCard = function (templateCard) {
   map.insertBefore(cardElement, mapFiltersContainer);
 };
   //  Открытие карточки
-const openCard = function (pin) {
+const openCard = (pin) => {
   closeCard();
   createCard(pin);
 
@@ -75,7 +75,7 @@ const openCard = function (pin) {
 };
 
 // Закрытие карточки
-const closeCard = function () {
+const closeCard = () => {
   const card = map.querySelector('.map__card');
   if (card) {
     const cardClose = card.querySelector('.popup__close');
@@ -86,12 +86,12 @@ const closeCard = function () {
 
 };
 
-const onCardCloseClick = function () {
+const onCardCloseClick = () => {
   closeCard();
   map.querySelector('.map__pin--active').classList.remove('map__pin--active');
 };
 
-const onCardEscPress = function (evt) {
+const onCardEscPress = (evt) => {
   if (evt.key === 'Escape') {
     evt.preventDefault();
     closeCard();

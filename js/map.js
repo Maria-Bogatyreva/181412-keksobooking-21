@@ -18,36 +18,36 @@ const mapPinPosition = {
 };
 
 //  Функция для блокировки формы
-const blockForm = function (form) {
+const blockForm = (form) => {
   const formElements = Array.from(form.children);
-  formElements.forEach(function (element) {
+  formElements.forEach((element) => {
     element.setAttribute('disabled', 'disabled');
   });
 };
 
 //  Функция для РАЗблокировки формы
-const unblockForm = function (form) {
+const unblockForm = (form) => {
   const formElements = Array.from(form.children);
-  formElements.forEach(function (element) {
+  formElements.forEach((element) => {
     element.removeAttribute('disabled', 'disabled');
   });
 };
 //  Функция для получения значения адреса _активной_ карты
-const getActiveMapAdressValue = function () {
-  const mapPinX = parseInt(mapPin.style.left, 10); // Нач. коорд. X
-  const mapPinY = parseInt(mapPin.style.top, 10); // Нач. коорд. Y
+const getActiveMapAdressValue = () => {
+  const mapPinX = parseInt(mapPin.style.left, 10);
+  const mapPinY = parseInt(mapPin.style.top, 10);
   inputAdress.value = `${mapPinX + Math.round(MAP_PIN_WIDTH / 2)}, ${mapPinY + MAP_PIN_HEIGHT}`;
 };
 //  Функция для получения значения адреса _НЕактивной_ карты
-const getDeactiveMapAdressValue = function () {
-  const mapPinX = parseInt(mapPin.style.left, 10); // Нач. коорд. X
-  const mapPinY = parseInt(mapPin.style.top, 10); // Нач. коорд. Y
-  //  Адрес на неактивной карте- коорд. центра КРУГЛОЙ метки
+const getDeactiveMapAdressValue = () => {
+  const mapPinX = parseInt(mapPin.style.left, 10);
+  const mapPinY = parseInt(mapPin.style.top, 10);
+
   inputAdress.value = `${mapPinX + Math.round(MAP_PIN_WIDTH / 2)}, ${mapPinY + Math.round(MAP_PIN_WIDTH / 2)}`;
 };
 
-// ФУНКЦИЯ ДЛЯ АКТИВАЦИИ СТРАНИЦЫ (и отрисовки меток объявлений)
-const activateMap = function () {
+// ФУНКЦИЯ ДЛЯ АКТИВАЦИИ СТРАНИЦЫ
+const activateMap = () => {
   document.querySelector('.map').classList.remove('map--faded');
   document.querySelector('.ad-form').classList.remove('ad-form--disabled');
 
@@ -63,7 +63,7 @@ const activateMap = function () {
 };
 
 //  ФУНКЦИЯ ДЛЯ ДЕАКТИВАЦИИ СТРАНИЦЫ
-const deactivateMap = function () {
+const deactivateMap = () => {
   document.querySelector('.map').classList.add('map--faded');
   document.querySelector('.ad-form').classList.add('ad-form--disabled');
 
@@ -80,13 +80,13 @@ const deactivateMap = function () {
 };
 
 //  Функция для включения карты по движению мыши
-const onMapPinMousedown = function (evt) {
+const onMapPinMousedown = (evt) => {
   if (evt.button === 0) {
     activateMap();
   }
 };
 //  Функция для включения карты по нажатию Enter
-const onMapPinEnterPress = function (evt) {
+const onMapPinEnterPress = (evt) => {
   if (evt.key === "Enter") {
     activateMap();
   }
