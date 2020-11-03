@@ -21,7 +21,7 @@ const mapPinPosition = {
 const blockForm = (form) => {
   const formElements = Array.from(form.children);
   formElements.forEach((element) => {
-    element.setAttribute('disabled', 'disabled');
+    element.setAttribute(`disabled`, `disabled`);
   });
 };
 
@@ -29,7 +29,7 @@ const blockForm = (form) => {
 const unblockForm = (form) => {
   const formElements = Array.from(form.children);
   formElements.forEach((element) => {
-    element.removeAttribute('disabled', 'disabled');
+    element.removeAttribute(`disabled`, `disabled`);
   });
 };
 //  Функция для получения значения адреса _активной_ карты
@@ -48,8 +48,8 @@ const getDeactiveMapAdressValue = () => {
 
 // ФУНКЦИЯ ДЛЯ АКТИВАЦИИ СТРАНИЦЫ
 const activateMap = () => {
-  document.querySelector('.map').classList.remove('map--faded');
-  document.querySelector('.ad-form').classList.remove('ad-form--disabled');
+  document.querySelector(`.map`).classList.remove(`map--faded`);
+  document.querySelector(`.ad-form`).classList.remove(`ad-form--disabled`);
 
   load(successHandler, errorHandler);
 
@@ -57,24 +57,24 @@ const activateMap = () => {
   unblockForm(mapFilter);
   getActiveMapAdressValue();
 
-  mapPin.removeEventListener('mousedown', onMapPinMousedown);
-  mapPin.removeEventListener('keydown', onMapPinEnterPress);
-  mapPin.addEventListener('mousedown', onMousedown);
+  mapPin.removeEventListener(`mousedown`, onMapPinMousedown);
+  mapPin.removeEventListener(`keydown`, onMapPinEnterPress);
+  mapPin.addEventListener(`mousedown`, onMousedown);
 };
 
 //  ФУНКЦИЯ ДЛЯ ДЕАКТИВАЦИИ СТРАНИЦЫ
 const deactivateMap = () => {
-  document.querySelector('.map').classList.add('map--faded');
-  document.querySelector('.ad-form').classList.add('ad-form--disabled');
+  document.querySelector(`.map`).classList.add(`map--faded`);
+  document.querySelector(`.ad-form`).classList.add(`ad-form--disabled`);
 
   blockForm(adForm);
   blockForm(mapFilter);
 
-  mapPin.addEventListener('mousedown', onMapPinMousedown);
-  mapPin.addEventListener('keydown', onMapPinEnterPress);
+  mapPin.addEventListener(`mousedown`, onMapPinMousedown);
+  mapPin.addEventListener(`keydown`, onMapPinEnterPress);
 
-  mapPin.style.left = mapPinPosition.x + 'px';
-  mapPin.style.top = mapPinPosition.y + 'px';
+  mapPin.style.left = mapPinPosition.x + `px`;
+  mapPin.style.top = mapPinPosition.y + `px`;
 
   getDeactiveMapAdressValue();
 };
@@ -87,7 +87,7 @@ const onMapPinMousedown = (evt) => {
 };
 //  Функция для включения карты по нажатию Enter
 const onMapPinEnterPress = (evt) => {
-  if (evt.key === "Enter") {
+  if (evt.key === `Enter`) {
     activateMap();
   }
 };

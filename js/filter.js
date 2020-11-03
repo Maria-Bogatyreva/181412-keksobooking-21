@@ -2,15 +2,15 @@
 
 // Импортируемые данные
 const mapFilter = window.constant.mapFilter;
-const housingType = mapFilter.querySelector('#housing-type');
-const housingGuests = mapFilter.querySelector('#housing-guests');
-const housingRooms = mapFilter.querySelector('#housing-rooms');
-const housingPrice = mapFilter.querySelector('#housing-price');
-const housingFeatures = mapFilter.querySelector('#housing-features');
+const housingType = mapFilter.querySelector(`#housing-type`);
+const housingGuests = mapFilter.querySelector(`#housing-guests`);
+const housingRooms = mapFilter.querySelector(`#housing-rooms`);
+const housingPrice = mapFilter.querySelector(`#housing-price`);
+const housingFeatures = mapFilter.querySelector(`#housing-features`);
 
 // Функция для фильтрации меток по ТИПУ ЖИЛЬЯ
 const filterByHousingType = (pin) => {
-  if (housingType.value === 'any') {
+  if (housingType.value === `any`) {
     return true;
   }
   return pin.offer.type === housingType.value;
@@ -18,7 +18,7 @@ const filterByHousingType = (pin) => {
 
 // Функция для фильтрации по КОЛИЧЕСТВУ ГОСТЕЙ
 const filterByHousingQuests = (pin) => {
-  if (housingGuests.value === 'any') {
+  if (housingGuests.value === `any`) {
     return true;
   }
   return pin.offer.guests === Number(housingGuests.value);
@@ -26,7 +26,7 @@ const filterByHousingQuests = (pin) => {
 
 //  Функция для фильтрации по КОЛИЧЕСТВУ КОМНАТ
 const filterByHousingRooms = (pin) => {
-  if (housingRooms.value === 'any') {
+  if (housingRooms.value === `any`) {
     return true;
   }
   return pin.offer.rooms === Number(housingRooms.value);
@@ -36,13 +36,13 @@ const filterByHousingRooms = (pin) => {
 const filterbyHousingPrice = (pin) => {
   const lowPrice = 10000;
   const highPrice = 50000;
-  if (housingPrice.value === 'any') {
+  if (housingPrice.value === `any`) {
     return true;
   }
-  if (housingPrice.value === 'low') {
+  if (housingPrice.value === `low`) {
     return pin.offer.price < lowPrice;
   }
-  if (housingPrice.value === 'middle') {
+  if (housingPrice.value === `middle`) {
     return pin.offer.price > lowPrice && pin.offer.price < highPrice;
   }
   return pin.offer.price > highPrice;
@@ -50,7 +50,7 @@ const filterbyHousingPrice = (pin) => {
 
 // Функция для фильтрации по УДОБСТВАМ
 const filterByFeatures = (pin) => {
-  const checkedFeatures = housingFeatures.querySelectorAll('.map__checkbox:checked');
+  const checkedFeatures = housingFeatures.querySelectorAll(`.map__checkbox:checked`);
 
   return Array.from(checkedFeatures).every(function (checkedFeature) {
     return (pin.offer.features.includes(checkedFeature.value));

@@ -3,7 +3,7 @@
 const DEBOUNCE_INTERVAL = 500; // ms
 
 const debounce = (cb) => {
-  var lastTimeout = null;
+  let lastTimeout = null;
 
   return (...parameters) => {
     if (lastTimeout) {

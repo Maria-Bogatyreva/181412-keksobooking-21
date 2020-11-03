@@ -7,6 +7,6 @@ const onMapPinMousedown = window.map.onMousedown;
 const onMapPinEnterPress = window.map.onPinEnterPress;
 
 deactivateMap();
-mapPin.addEventListener('mousedown', onMapPinMousedown);
-mapPin.addEventListener('keydown', onMapPinEnterPress);
+mapPin.addEventListener(`mousedown`, onMapPinMousedown);
+mapPin.addEventListener(`keydown`, onMapPinEnterPress);
 

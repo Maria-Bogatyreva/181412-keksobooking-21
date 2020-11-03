@@ -10,20 +10,20 @@ const imagesPreview = window.validate.imagesPreview;
 const defaultAvatarUrl = window.validate.defaultAvatarUrl;
 
 // Успешное сообщение
-const successNoticeTemplate = document.querySelector('#success')
+const successNoticeTemplate = document.querySelector(`#success`)
 .content
-.querySelector('.success');
+.querySelector(`.success`);
 const successNotice = successNoticeTemplate.cloneNode(true);
 
 // Ошибочное сообщение
-const errorNoticeTemplate = document.querySelector('#error')
+const errorNoticeTemplate = document.querySelector(`#error`)
 .content
-.querySelector('.error');
+.querySelector(`.error`);
 const errorNotice = errorNoticeTemplate.cloneNode(true);
 
 // Действия при нажатии Esc на сообщении
 const onNoticeEscPress = (evt) => {
-  if (evt.key === 'Escape') {
+  if (evt.key === `Escape`) {
     evt.preventDefault();
     if (successNotice) {
       successNotice.remove();
@@ -36,41 +36,41 @@ const onNoticeEscPress = (evt) => {
 
 // Функция для показа ошибочного объявления
 const showErrorNotice = () => {
-  document.querySelector('main').insertAdjacentElement('afterbegin', errorNotice);
+  document.querySelector(`main`).insertAdjacentElement(`afterbegin`, errorNotice);
 
-  document.addEventListener('keydown', onNoticeEscPress);
-  document.addEventListener('click', hideErrorNotice);
-  errorNotice.querySelector('.error__button').addEventListener('click', hideErrorNotice);
+  document.addEventListener(`keydown`, onNoticeEscPress);
+  document.addEventListener(`click`, hideErrorNotice);
+  errorNotice.querySelector(`.error__button`).addEventListener(`click`, hideErrorNotice);
 };
 
 // Функция для скрытия ошибочного объявления
 const hideErrorNotice = () => {
   errorNotice.remove();
 
-  document.removeEventListener('keydown', onNoticeEscPress);
-  document.removeEventListener('click', hideErrorNotice);
-  errorNotice.querySelector('.error__button').removeEventListener('click', hideErrorNotice);
+  document.removeEventListener(`keydown`, onNoticeEscPress);
+  document.removeEventListener(`click`, hideErrorNotice);
+  errorNotice.querySelector(`.error__button`).removeEventListener(`click`, hideErrorNotice);
 };
 
 // Функция для показа успешного объявления
 const showSuccessNotice = () => {
-  document.body.insertAdjacentElement('afterbegin', successNotice);
+  document.body.insertAdjacentElement(`afterbegin`, successNotice);
 
-  document.addEventListener('keydown', onNoticeEscPress);
-  document.addEventListener('click', hideSuccessNotice);
+  document.addEventListener(`keydown`, onNoticeEscPress);
+  document.addEventListener(`click`, hideSuccessNotice);
 };
 
 // Функция для скрытия успешного объявления
 const hideSuccessNotice = () => {
   successNotice.remove();
-  document.removeEventListener('keydown', onNoticeEscPress);
-  document.removeEventListener('click', hideSuccessNotice);
+  document.removeEventListener(`keydown`, onNoticeEscPress);
+  document.removeEventListener(`click`, hideSuccessNotice);
 };
 
 
 const resetForm = () => {
   avatarPreview.src = defaultAvatarUrl;
-  imagesPreview.innerHTML = '';
+  imagesPreview.innerHTML = ``;
   adForm.reset();
   deleteMarks();
   closeCard();
@@ -92,14 +92,14 @@ const submitHandler = (evt) => {
   save(saveHandler, errorHandler, new FormData(adForm));
 };
 //  ОТПРАВКА ДАННЫХ ФОРМЫ
-adForm.addEventListener('submit', submitHandler);
+adForm.addEventListener(`submit`, submitHandler);
 
 //  Действия при очистке формы
-const clearForm = adForm.querySelector('.ad-form__reset');
+const clearForm = adForm.querySelector(`.ad-form__reset`);
 
 const onClearFormClick = (evt) => {
   evt.preventDefault();
   resetForm();
 };
 
-clearForm.addEventListener('click', onClearFormClick);
+clearForm.addEventListener(`click`, onClearFormClick);
