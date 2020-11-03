@@ -109,6 +109,6 @@ window.mark = {
   add: addMarks,
   delete: deleteMarks,
   update: updateMarks,
-  successHandler: successHandler,
-  errorHandler: errorHandler
+  successHandler,
+  errorHandler
 };

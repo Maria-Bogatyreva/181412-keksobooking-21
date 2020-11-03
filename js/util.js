@@ -26,7 +26,7 @@ const getRandomArray = (primaryElements) => {
 };
 
 window.util = {
-  getRandomNumber: getRandomNumber,
-  getRandomElement: getRandomElement,
-  getRandomArray: getRandomArray
+  getRandomNumber,
+  getRandomElement,
+  getRandomArray
 };

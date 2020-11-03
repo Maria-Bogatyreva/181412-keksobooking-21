@@ -167,7 +167,7 @@ const onImagesLoad = () => {
 images.addEventListener('change', onImagesLoad);
 
 window.validate = {
-  avatarPreview: avatarPreview,
-  imagesPreview: imagesPreview,
-  defaultAvatarUrl: defaultAvatarUrl
+  avatarPreview,
+  imagesPreview,
+  defaultAvatarUrl
 };

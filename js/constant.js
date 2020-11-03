@@ -14,16 +14,16 @@ const inputAdress = adForm.querySelector('#address'); // Адрес в форм�
 const map = document.querySelector('.map');
 
 window.constant = {
-  adForm: adForm,
-  MIN_Y: MIN_Y,
-  MAX_Y: MAX_Y,
-  MIN_X: MIN_X,
-  MAX_X: MAX_X,
-  mapPin: mapPin,
-  mapFilter: mapFilter,
-  inputAdress: inputAdress,
-  map: map,
+  adForm,
+  MIN_Y,
+  MAX_Y,
+  MIN_X,
+  MAX_X,
+  mapPin,
+  mapFilter,
+  inputAdress,
+  map,
 
-  MAP_PIN_WIDTH: MAP_PIN_WIDTH,
-  MAP_PIN_HEIGHT: MAP_PIN_HEIGHT
+  MAP_PIN_WIDTH,
+  MAP_PIN_HEIGHT
 };

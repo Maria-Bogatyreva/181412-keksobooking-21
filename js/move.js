@@ -61,5 +61,5 @@ const onMousedown = (evt) => {
 };
 
 window.move = {
-  onMousedown: onMousedown
+  onMousedown
 };

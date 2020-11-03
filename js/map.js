@@ -96,6 +96,6 @@ window.map = {
   deactivate: deactivateMap,
   onMousedown: onMapPinMousedown,
   onEnterPress: onMapPinEnterPress,
-  inputAdress: inputAdress
+  inputAdress
 };
 

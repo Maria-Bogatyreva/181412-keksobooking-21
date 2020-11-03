@@ -49,7 +49,7 @@ const save = (onSuccess, onError, data) => {
 
 
 window.backend = {
-  load: load,
-  save: save
+  load,
+  save
 };
 
