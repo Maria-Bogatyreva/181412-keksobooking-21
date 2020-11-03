@@ -74,7 +74,7 @@ const onTypePriceChange = () => {
   const PRICES = {
     low: 1000,
     middle: 5000,
-    high: 5000
+    high: 10000
   };
 
   if ((type.value === `bungalow`) && (price.value < 0)) {
